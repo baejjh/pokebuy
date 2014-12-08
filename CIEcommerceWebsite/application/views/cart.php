@@ -14,6 +14,7 @@
 	</style>
 </head>
 <body>
+	<? require('include/shopping_header.php')	?>
 	<table>
 	<thead>
 		<th>Item</th>

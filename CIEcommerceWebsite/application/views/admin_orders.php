@@ -14,6 +14,7 @@
 	</style>
 </head>
 <body>
+	<? require('include/dashboard_header.php')	?>
 	<input type="text" placeholder="Search">
 	<select>
 		<option>$statuses</option>

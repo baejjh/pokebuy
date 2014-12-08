@@ -12,6 +12,8 @@
 	</style>
 </head>
 <body>
+	<? require('include/shopping_header.php')	?>
+
 	<div class="side_bar">
 		<form>
 			<input type="text" placeholder="Product Name">

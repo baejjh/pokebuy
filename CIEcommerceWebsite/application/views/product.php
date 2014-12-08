@@ -12,6 +12,7 @@
 	</style>
 </head>
 <body>
+	<? require('include/shopping_header.php')	?>
 	<a href="#">Go Back</a>
 	<h1>$products['name'];</h1>
 	<div class="left_div">

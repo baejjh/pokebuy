@@ -40,6 +40,7 @@
 	</style>
 </head>
 <body>
+	<? require('include/dashboard_header.php')	?>
 	<div class="left">
 		<h1>Order ID: $orders['id'];</h1>
 

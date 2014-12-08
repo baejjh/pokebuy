@@ -9,6 +9,7 @@
 	</style>
 </head>
 <body>
+	<? require('include/dashboard_header.php')	?>
 	<form>
 	<fieldset>
 	<legend>Admin Login Page</legend>
