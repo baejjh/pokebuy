@@ -76,6 +76,10 @@ class Admins extends CI_Controller
 	{
 		$this->load->view('admin/register');
 	}
+	public function redirect_to_dashboard()
+	{
+		$this->load->view('admin/dashboard'); //problem: $email on dashboard is undefined
+	}
 	public function redirect_to_login()
 	{
 		$this->load->view('admin/login');
