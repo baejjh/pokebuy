@@ -3,25 +3,28 @@
 <head>
 	<meta charset="utf-8">
 	<title>Admin | Gotta Code 'Em All</title>
-
+	
+	<!-- need to move this into a separate file named "store_style"
+	<link rel="stylesheet" type="text/css" href="store_style.css"> -->
 	<style type="text/css">
-	.header-cont
+	*{
+		margin: 0px auto;
+		font-family: arial;
+	}
+	.admin_header
 	{
+	    color: white;
+	    background:red; /*need to echo different colors depending on admin vs. user*/
+	    height: 30px; /*should change .content margin-top to this value + padding-top*/
+	    padding-top: 10px;
 	    width:100%;
 	    position:fixed;
-	    top:0px;
-	}
-	.header
-	{
-	    height:50px;
-	    background:red; /*need to echo different colors depending on admin vs. user*/
-	    width:960px;
-	    margin:0px auto;
+	    top: 0px;
 	}
 	.content
 	{
-	    width:960px;
-	    background: #F0F0F0;
+	    margin-top: 40px; /* .header's height + padding-top*/
+	    width:100%;
 	    height: auto;
 	}
 	table
@@ -31,6 +34,10 @@
  	tbody tr:nth-child(odd)
  	{
 	   background-color: silver;
+	}
+	li {
+		display: inline-block;
+		list-style-type: none;
 	}
 	.dashboard_left
 	{
@@ -69,14 +76,11 @@
 
 
 <body>
-<div class="header-cont">
-    <div></div>
-</div>
- 
+
 <div class="content">
-	<div class="header">
-		<h1>Dashboard</h1>
-		<a href="#">Orders</a>
-		<a href="#">Products</a>
-		<a href="#">Log Off</a>
-	</div>
+	<ul class="admin_header">
+		<li>Dashboard</li>
+		<li><a href="/orders">Orders</a></li>
+		<li><a href="/products">Products</a></li>
+		<li><a href="/logoff">Log Off</a></li>
+	</ul>

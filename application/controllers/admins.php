@@ -2,10 +2,11 @@
 
 class Admins extends CI_Controller
 {
-	public function template()
+	public function __construct()
 	{
-		$this->load->view('template/admin_header');
-	}	
+    	parent::__construct();
+  		$this->load->view('template/admin_header');
+  	}	
 	public function admin_register()
 	{	
 		$post_data = $this->input->post();
@@ -82,5 +83,18 @@ class Admins extends CI_Controller
 	public function continue_as_guest()
 	{
 		$this->load->view('store');
+	}
+	public function redirect_to_orders()
+	{
+		$this->load->view('admin/orders');
+	}
+	public function redirect_to_products()
+	{
+		$this->load->view('admin/products');
+	}
+	public function admin_logoff()
+	{
+		//unset session and then you have to:
+		$this->load->view('store'); //doesn't go to the store. it goes back to admin
 	}
 }

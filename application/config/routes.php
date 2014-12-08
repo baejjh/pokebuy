@@ -40,7 +40,12 @@
 
 $route['default_controller'] = "dashboards";
 $route['404_override'] = '';
-$route['register'] = "admins/admin_register";
+$route['register'] = "admins/redirect_to_register";
+$route['orders'] = "admins/redirect_to_orders";
+$route['guest'] = "admins/continue_as_guest";
+$route['orders'] = "admins/redirect_to_orders";
+$route['products'] = "admins/redirect_to_products";
+$route['logoff'] = "admins/admin_logoff";
 
 
 /* End of file routes.php */

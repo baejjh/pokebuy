@@ -6,8 +6,8 @@
 			<input type="submit" value="Login">
 	</form>
 
-		Don't have an account? <a href="/admins/redirect_to_register">Register</a>.
-		Don't want an account? <a href="/admins/continue_as_guest">Continue as Guest</a>.
+		Don't have an account? <a href="/register">Register</a>.
+		Don't want an account? <a href="/guest">Continue as Guest</a>.
 	</fieldset>
 </div><!-- close content div -->
 </body>
