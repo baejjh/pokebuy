@@ -2,7 +2,7 @@
 
 class Dashboard extends CI_Model {
 
-	public function index()
+	public function check_admin()
 	{
 		
 	}
