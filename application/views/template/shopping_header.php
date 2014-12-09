@@ -5,7 +5,7 @@
 	<title>Shop | Gotta Code 'Em All</title>
 	<link rel="stylesheet" type="text/css" href="/assets/css/store_style.css">
 </head>
-
+<body>
 <div class="content">
 	<ul class="shopping_header">
 		<li>Dojo eCommerce</li>

@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "dashboards";
+$route['default_controller'] = "store";
 $route['404_override'] = '';
 $route['register'] = "admins/redirect_to_register";
 $route['new_admin'] = "admins/admin_register";
@@ -47,6 +47,8 @@ $route['guest'] = "admins/continue_as_guest";
 $route['orders'] = "admins/redirect_to_orders";
 $route['products'] = "admins/redirect_to_products";
 $route['logoff'] = "admins/admin_logoff";
+
+$route['store'] = "stores/index";
 
 
 /* End of file routes.php */

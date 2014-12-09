@@ -1,11 +1,10 @@
 <!-- Not sure where to place this, does it go in the header? - KS -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
 </script>
 <script type="text/javascript">
-</script>
+</script> -->
 <!-- End of code in that statement -->
-
-	<div class="side_bar">
+		<div class="side_bar">
 		<form>
 			<input type="text" placeholder="Product Name">
 			<input type="submit" value="Search">
@@ -22,27 +21,24 @@
 	</div>
 
 	<div class="products">
-<?php if(!empty($products)) { ?>
-		<h1><?php echo $products[0]['category'] ?> (page $page)</h1>
+<?php 	if(!empty($products[0]['category'])) { ?>
+		<h1><?php echo $products[0]['category'] ?></h1>
+<?php	} ?>
+		<h1>$page:$page</h1>
+
 		<select>
 		    <option value="volvo">Low Price</option>
 		    <option value="saab">High Price</option>
 		    <option value="mercedes">Most Popular</option>
 		</select>
-		*pagination
 
-<?php }
-	  if(!empty($products)) {
-	  	foreach($products as $product) { ?>
+<?php 	if(!empty($products)) { 
+			foreach($products as $product) { ?>
 	  	<div class="each_product">
-			<!-- $products['main_image'] -->
-			<?=$product['name']?>
-			<?=$product['price']?><br><br>
-			<?=$product['description']?>
-			
+			<p><a href="<?php echo $product['id'] ?>"><?php echo $product['name'] ?></a></p>
 		</div>
-		}
-<?php } ?>
+<?php		}
+		} ?>
 	</div>
 </div><!-- close content div -->
 </body>
