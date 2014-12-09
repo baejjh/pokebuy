@@ -42,12 +42,13 @@ $route['default_controller'] 	= "stores";
 $route['404_override'] 			= '';
 
 //admin/login
-$route['old_admin'] 			= "admins/admin_login";
-$route['login'] 				= "admins/redirect_to_login";
+$route['login'] 				= "admins/admin_login";
+$route['login_page'] 			= "admins/redirect_to_login";
 $route['new_admin'] 			= "admins/admin_register";
 $route['register'] 				= "admins/redirect_to_register";
 $route['guest'] 				= "stores";
 $route['store'] 				= "stores";
+$route['admin']					= "admins/redirect_to_login";
 
 // header
 $route['dashboard'] 			= "admins/redirect_to_dashboard";

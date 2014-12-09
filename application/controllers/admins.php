@@ -5,7 +5,8 @@ class Admins extends CI_Controller
 	public function __construct()
 	{
     	parent::__construct();
-  		$this->load->view('template/admin_header');
+    	$data['loggedin'] = $this->session->userdata('loggedin');
+  		$this->load->view('template/admin_header', $data);
   	}
 
 //Guest enters the link from the store, they get directed to the register page:
@@ -33,6 +34,9 @@ class Admins extends CI_Controller
 			$this->session->set_flashdata('errors', validation_errors());
 			redirect('register');
 		}
+		else {
+
+		}
 		$post_data = $this->input->post();
 		$this->load->model('admin_info');
 		$this->admin_info->admin_register($post_data);
@@ -40,7 +44,7 @@ class Admins extends CI_Controller
 
 //When Admin Logs In
 	public function admin_login()
-	{	
+	{
 		$post_data = $this->input->post();
 
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
@@ -53,12 +57,16 @@ class Admins extends CI_Controller
 			redirect('admin/login');
 		}
 		else //if validation is correct
-		{	
+		{
 			$user = $post_data["email"];
 
-			$this->load->model('admin_info');
-			$admin = $this->admin_info->check_admin($user);	
-			$this->load->view('admin/dashboard', $admin);		
+			$this->load->model('Admin_info');
+			$admin = $this->Admin_info->check_admin($user);
+
+			if($admin['password'] == $post_data['password']) {
+				redirect('dashboard', $admin);	
+			}	
+				
 		}
 	}
 
