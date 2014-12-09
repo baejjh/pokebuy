@@ -52,9 +52,9 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','session', 'form_validation', 'pagination');
-
-
+$autoload['libraries'] = array('upload', 'database',
+							   'session', 'form_validation',
+							   'pagination', 'pagination');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Helper Files

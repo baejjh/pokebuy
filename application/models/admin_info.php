@@ -20,6 +20,12 @@ class Admin_info extends CI_Model {
 	{
 		return $this->db->query("SELECT * FROM products")->result_array();
 	}
+	public function add_new_product($new_product)
+	{
+		$query = "INSERT INTO products (name, description, price, inventory_count, main_image, created_at, updated_at) VALUES (?,?,?,?,?,?,?)";
+	    $values = array($new_product['name'], $new_product['description'],$new_product['price'],$new_product['inventory_count'], $new_product['main_image'], date("M j Y, g:iA"), date("M j Y, g:iA")); 
+	    return $this->db->query($query, $values);
+	}
 }
 
 ?>

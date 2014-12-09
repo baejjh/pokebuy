@@ -1,5 +1,5 @@
 	<input type="text" placeholder="Search">
-	<a href="#">Add New Product</a>
+	<a href="/add_product">Add New Product</a>
 
 	<table id ="admin_products_table">
 	<thead>
@@ -21,7 +21,7 @@
 			<td><?= $each_product['quantity_sold']; ?></td>
 			<td>
 				<a href="#">Edit</a>
-				<a href="#">Delete</a>
+				<a href="/delete">Delete</a>
 			</td>
 		</tr>
 	<?php } ?>

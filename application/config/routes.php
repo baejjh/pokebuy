@@ -39,14 +39,24 @@
 */
 
 $route['default_controller'] = "dashboards";
-$route['404_override'] = '';
-$route['register'] = "admins/redirect_to_register";
-$route['new_admin'] = "admins/admin_register";
+$route['404_override'] = 'add_new_product';
+
+// header
 $route['dashboard'] = "admins/redirect_to_dashboard";
-$route['guest'] = "admins/continue_as_guest";
 $route['orders'] = "admins/redirect_to_orders";
 $route['products'] = "admins/redirect_to_products";
 $route['logoff'] = "admins/admin_logoff";
+
+//products view
+$route['register'] = "admins/redirect_to_register";
+$route['new_admin'] = "admins/admin_register";
+$route['add_product'] = "admins/redirect_to_new_product";
+
+//new_products view
+$route['new_product'] = "admins/add_new_product";
+
+//admin/login
+$route['guest'] = "admins/continue_as_guest";
 
 
 /* End of file routes.php */
