@@ -84,8 +84,8 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -284,8 +284,8 @@ CREATE TABLE `products` (
   `inventory_count` int(11) DEFAULT '10',
   `quantity_sold` int(11) DEFAULT '0',
   `main_image` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -314,7 +314,7 @@ CREATE TABLE `states` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -323,6 +323,7 @@ CREATE TABLE `states` (
 
 LOCK TABLES `states` WRITE;
 /*!40000 ALTER TABLE `states` DISABLE KEYS */;
+INSERT INTO `states` VALUES (1,'AL','Alabama','2014-12-08 15:42:01','2014-12-08 15:42:01'),(2,'AK','Alaska','2014-12-08 15:42:01','2014-12-08 15:42:01'),(3,'AZ','Arizona','2014-12-08 15:42:01','2014-12-08 15:42:01'),(4,'AR','Arkansas','2014-12-08 15:42:01','2014-12-08 15:42:01'),(5,'CA','California','2014-12-08 15:42:01','2014-12-08 15:42:01'),(6,'CO','Colorado','2014-12-08 15:42:01','2014-12-08 15:42:01'),(7,'CT','Connecticut','2014-12-08 15:42:01','2014-12-08 15:42:01'),(8,'DE','Delaware','2014-12-08 15:42:01','2014-12-08 15:42:01'),(9,'FL','Florida','2014-12-08 15:42:01','2014-12-08 15:42:01'),(10,'GA','Georgia','2014-12-08 15:42:01','2014-12-08 15:42:01'),(11,'HI','Hawaii','2014-12-08 15:42:01','2014-12-08 15:42:01'),(12,'ID','Idaho','2014-12-08 15:42:01','2014-12-08 15:42:01'),(13,'IL','Illinois','2014-12-08 15:42:01','2014-12-08 15:42:01'),(14,'IN','Indiana','2014-12-08 15:42:01','2014-12-08 15:42:01'),(15,'IA','Iowa','2014-12-08 15:42:01','2014-12-08 15:42:01'),(16,'KS','Kansas','2014-12-08 15:42:01','2014-12-08 15:42:01'),(17,'KY','Kentucky','2014-12-08 15:42:01','2014-12-08 15:42:01'),(18,'LA','Louisiana','2014-12-08 15:42:01','2014-12-08 15:42:01'),(19,'ME','Maine','2014-12-08 15:42:01','2014-12-08 15:42:01'),(20,'MD','Maryland','2014-12-08 15:42:01','2014-12-08 15:42:01'),(21,'MA','Massachusetts','2014-12-08 15:42:01','2014-12-08 15:42:01'),(22,'MI','Michigan','2014-12-08 15:42:01','2014-12-08 15:42:01'),(23,'MN','Minnesota','2014-12-08 15:42:01','2014-12-08 15:42:01'),(24,'MS','Mississippi','2014-12-08 15:42:01','2014-12-08 15:42:01'),(25,'MO','Missouri','2014-12-08 15:42:01','2014-12-08 15:42:01'),(26,'MT','Montana','2014-12-08 15:42:01','2014-12-08 15:42:01'),(27,'NE','Nebraska','2014-12-08 15:42:01','2014-12-08 15:42:01'),(28,'NH','New Hampshire','2014-12-08 15:42:01','2014-12-08 15:42:01'),(29,'NJ','New Jersey','2014-12-08 15:42:01','2014-12-08 15:42:01'),(30,'NM','New Mexico','2014-12-08 15:42:01','2014-12-08 15:42:01'),(31,'NY','New York','2014-12-08 15:42:01','2014-12-08 15:42:01'),(32,'NC','North Carolina','2014-12-08 15:42:01','2014-12-08 15:42:01'),(33,'ND','North Dakota','2014-12-08 15:42:01','2014-12-08 15:42:01'),(34,'OH','Ohio','2014-12-08 15:42:01','2014-12-08 15:42:01'),(35,'OK','Oklahoma','2014-12-08 15:42:01','2014-12-08 15:42:01'),(36,'OR','Oregon','2014-12-08 15:42:01','2014-12-08 15:42:01'),(37,'PA','Pennsylvania','2014-12-08 15:42:01','2014-12-08 15:42:01'),(38,'RI','Rhode Island','2014-12-08 15:42:01','2014-12-08 15:42:01'),(39,'SC','South Carolina','2014-12-08 15:42:01','2014-12-08 15:42:01'),(40,'SD','South Dakota','2014-12-08 15:42:01','2014-12-08 15:42:01'),(41,'TN','Tennessee','2014-12-08 15:42:01','2014-12-08 15:42:01'),(42,'TX','Texas','2014-12-08 15:42:01','2014-12-08 15:42:01'),(43,'UT','Utah','2014-12-08 15:42:01','2014-12-08 15:42:01'),(44,'VT','Vermont','2014-12-08 15:42:01','2014-12-08 15:42:01'),(45,'VA','Virginia','2014-12-08 15:42:01','2014-12-08 15:42:01'),(46,'WA','Washington','2014-12-08 15:42:01','2014-12-08 15:42:01'),(47,'WV','West Virginia','2014-12-08 15:42:01','2014-12-08 15:42:01'),(48,'WI','Wisconsin','2014-12-08 15:42:01','2014-12-08 15:42:01'),(49,'WY','Wyoming','2014-12-08 15:42:01','2014-12-08 15:42:01');
 /*!40000 ALTER TABLE `states` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,4 +363,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-08 15:08:52
+-- Dump completed on 2014-12-08 16:59:41
