@@ -39,18 +39,23 @@
 */
 
 $route['default_controller'] 	= "stores";
-$route['404_override'] 			= 'add_new_product';
-$route['login'] 				= 'admins/admin_login';
+$route['404_override'] 			= '';
+
+//admin/login
+$route['old_admin'] 			= "admins/admin_login";
+$route['login'] 				= "admins/redirect_to_login";
+$route['new_admin'] 			= "admins/admin_register";
+$route['register'] 				= "admins/redirect_to_register";
+$route['guest'] 				= "admins/continue_as_guest";
+$route['store'] 				= "stores/index";
 
 // header
 $route['dashboard'] 			= "admins/redirect_to_dashboard";
 $route['orders']				= "admins/redirect_to_orders";
-$route['products/(:num)'] 		= "admins/redirect_to_products/$1";
+$route['products']				= "admins/redirect_to_products";
 $route['logoff'] 				= "admins/admin_logoff";
 
 //products view
-$route['register'] 				= "admins/redirect_to_register";
-$route['new_admin'] 			= "admins/admin_register";
 $route['add_product'] 			= "admins/redirect_to_new_product";
 
 //new_products view
@@ -58,11 +63,6 @@ $route['new_product'] 			= "admins/add_new_product";
 $route['edit_product/(:num)'] 	= "admins/edit_product/$1";
 $route['delete_product/(:num)'] = "admins/delete_product/$1";
 
-//admin/login
-$route['guest'] 				= "admins/continue_as_guest";
-
-//stores
-$route['store'] 				= "stores/index";
 $route['categories/(:num)'] 			= "stores/category_store/$1";
 $route['products/(:num)'] 			= "stores/product_store/$1";
 

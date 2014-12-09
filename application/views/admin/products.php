@@ -2,7 +2,7 @@
 	<a href="/add_product">Add New Product</a>
 	
 	<!-- pagination starts here -->
-	<?= "<div class='pagination'>" . $this->pagination->create_links(). "</div>"; ?>
+	"<div class='pagination'>" . $this->pagination->create_links(). "</div>";
 
 	<table id ="admin_products_table">
 	<thead>

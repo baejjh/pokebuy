@@ -10,7 +10,8 @@
 			<input type="submit" value="Search">
 		</form>
 
-		<a href="register">Login as Admin</a>
+		<a href="register">Register as Admin</a>
+		<a href="login">Login as Admin</a>
 
 		<h2>Categories</h2>
 <?php if(!empty($categories)) {?>
