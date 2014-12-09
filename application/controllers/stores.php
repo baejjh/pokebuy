@@ -10,6 +10,8 @@ class Stores extends CI_Controller {
 	public function index()
 	{
 		$display['products'] = $this->Store->get_all_products();
+		var_dump($display);
+		die();
 		$display['category'] = $this->Store->get_all_categories();
 		$this->load->view('store', $display);
 	}
