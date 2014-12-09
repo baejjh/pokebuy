@@ -41,6 +41,7 @@
 $route['default_controller'] 	= "stores";
 $route['404_override'] 			= 'add_new_product';
 $route['login'] 				= 'admins/admin_login';
+$route['admin']					= "admins/redirect_to_login";
 
 // header
 $route['dashboard'] 			= "admins/redirect_to_dashboard";

@@ -11,8 +11,10 @@
 
 <div class="content">
 	<ul class="admin_header">
+<?php if(!empty($loggedin)) {	?>	
 		<li><a href="/dashboard">Dashboard</a></li>
 		<li><a href="/orders">Orders</a></li>
 		<li><a href="/products">Products</a></li>
 		<li><a href="/logoff">Log Off</a></li>
+<?php } ?>
 	</ul>
