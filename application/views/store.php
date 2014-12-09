@@ -4,6 +4,8 @@
 			<input type="submit" value="Search">
 		</form>
 
+		<a href="register">Login as Admin</a>
+
 		<h2>Categories</h2>
 		<ul>
 			<li>$category['name']</li>
