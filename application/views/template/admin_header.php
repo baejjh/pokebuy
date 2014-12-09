@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Admin | Gotta Code 'Em All</title>
-	<link rel="stylesheet" type="text/css" href="/assets/css/store_style.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/admin_style.css">
 </head>
 
 

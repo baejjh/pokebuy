@@ -15,6 +15,12 @@ class Stores extends CI_Controller {
 		$this->load->view('store', $display);
 	}
 	public function category_store($id) {
+		$this->load->model('Store');
+		// $display['category'] = $id;
+		$display['products'] = $this->Store->get_all_in_category($id);
+		$this->load->view('store', $display);
+	}
+	public function product_store($id) {
 		// pagination, with explanation @ https://ellislab.com/codeigniter/user-guide/libraries/pagination.html
 		//  more pagination tips https://github.com/soyosolution/CodeIgniter-pagination-library
 		// more more pagination tips http://www.storycon.us/ci3/libraries/pagination.html
@@ -33,8 +39,9 @@ class Stores extends CI_Controller {
 		echo $this->pagination->create_links();
 		//end of pagination code
 		$this->load->model('Store');
-		$this->Store->get_all_categories();
-		$display['category'] = $id;
+		$this->Store->get_all_by_categories();
+		// $display['category'] = $id;
+		
 		$display['products'] = $this->Store->get_all_by_category($id);
 		$this->load->view('store', $display);
 	}
