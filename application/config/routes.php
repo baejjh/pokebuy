@@ -46,14 +46,9 @@ $route['login'] 				= "admins/admin_login";
 $route['login_page'] 			= "admins/redirect_to_login";
 $route['new_admin'] 			= "admins/admin_register";
 $route['register'] 				= "admins/redirect_to_register";
-<<<<<<< HEAD
 $route['guest'] 				= "stores";
 $route['store'] 				= "stores";
 $route['admin']					= "admins/redirect_to_login";
-=======
-$route['guest'] 				= "admins/continue_as_guest";
-$route['store'] 				= "stores/index";
->>>>>>> 6d59e22aff697114df73dd5bc43ad4cd9d4fcfea
 
 // header
 $route['dashboard'] 			= "admins/redirect_to_dashboard";
@@ -69,11 +64,9 @@ $route['new_product'] 			= "admins/add_new_product";
 $route['edit_product/(:num)'] 	= "admins/edit_product/$1";
 $route['delete_product/(:num)'] = "admins/delete_product/$1";
 
-<<<<<<< HEAD
-=======
-$route['categories/(:num)'] 			= "stores/category_store/$1";
-$route['products/(:num)'] 			= "stores/product_store/$1";
 
->>>>>>> 6d59e22aff697114df73dd5bc43ad4cd9d4fcfea
+$route['categories/(:num)'] 	= "stores/category_store/$1";
+$route['products/(:num)'] 		= "stores/product_store/$1";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
