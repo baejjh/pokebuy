@@ -29,14 +29,14 @@ CREATE TABLE `addresses` (
   `address` varchar(45) DEFAULT NULL,
   `address2` varchar(45) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
-  `states_id` int(11) NOT NULL,
+  `state_id` int(11) NOT NULL,
   `zip_code` varchar(10) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`,`states_id`),
-  KEY `fk_addresses_states1_idx` (`states_id`),
-  CONSTRAINT `fk_addresses_states1` FOREIGN KEY (`states_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`,`state_id`),
+  KEY `fk_addresses_states1_idx` (`state_id`),
+  CONSTRAINT `fk_addresses_states1` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +45,7 @@ CREATE TABLE `addresses` (
 
 LOCK TABLES `addresses` WRITE;
 /*!40000 ALTER TABLE `addresses` DISABLE KEYS */;
+INSERT INTO `addresses` VALUES (1,'123 rainbow drive',NULL,'Oahu',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(2,'123 rainbow drive',NULL,'Honolulu',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(3,'123 rainbow drive',NULL,'Big Island',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(4,'123 rainbow drive',NULL,'Maui',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(5,'123 rainbow drive',NULL,'Kauai',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(6,'123 rainbow drive',NULL,'Molokai',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(7,'123 rainbow drive',NULL,'Niihau',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(8,'123 rainbow drive',NULL,'Lanai',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(9,'321 Rainy Daze Rd.',NULL,'Seattle',46,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(10,'321 Rainy Daze Rd.',NULL,'Tri-Citeis',46,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(11,'321 Rainy Daze Rd.',NULL,'Spokane',46,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(12,'321 Rainy Daze Rd.',NULL,'Olympia',46,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(13,'321 Rainy Daze Rd.',NULL,'Vancouver',46,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14');
 /*!40000 ALTER TABLE `addresses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,15 +164,15 @@ DROP TABLE IF EXISTS `images_has_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `images_has_products` (
-  `images_id` int(11) NOT NULL,
-  `products_id` int(11) NOT NULL,
+  `image_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`images_id`,`products_id`),
-  KEY `fk_images_has_products_products1_idx` (`products_id`),
-  KEY `fk_images_has_products_images1_idx` (`images_id`),
-  CONSTRAINT `fk_images_has_products_images1` FOREIGN KEY (`images_id`) REFERENCES `images` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_images_has_products_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`image_id`,`product_id`),
+  KEY `fk_images_has_products_products1_idx` (`product_id`),
+  KEY `fk_images_has_products_images1_idx` (`image_id`),
+  CONSTRAINT `fk_images_has_products_images1` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_images_has_products_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -219,22 +220,28 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(11) NOT NULL,
-  `addresses_id` int(11) NOT NULL,
+  `billing_customer_id` int(11) NOT NULL,
+  `billing_address_id` int(11) NOT NULL,
   `order_date` datetime DEFAULT NULL,
   `status_id` int(11) NOT NULL,
   `subtotal` decimal(10,2) DEFAULT NULL,
   `shipping_price` decimal(10,2) DEFAULT NULL,
   `total` decimal(10,2) DEFAULT NULL,
+  `shipping_customer_id` int(11) NOT NULL,
+  `shipping_address_id` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_orders_customers_idx` (`customer_id`),
+  KEY `fk_orders_customers_idx` (`billing_customer_id`),
   KEY `fk_orders_statuses1_idx` (`status_id`),
-  KEY `fk_orders_addresses1_idx` (`addresses_id`),
-  CONSTRAINT `fk_orders_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_addresses1` FOREIGN KEY (`addresses_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_statuses1` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_orders_addresses1_idx` (`billing_address_id`),
+  KEY `fk_orders_customers1_idx` (`shipping_customer_id`),
+  KEY `fk_orders_addresses2_idx` (`shipping_address_id`),
+  CONSTRAINT `fk_orders_statuses1` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_addresses1` FOREIGN KEY (`billing_address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_addresses2` FOREIGN KEY (`shipping_address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_customers` FOREIGN KEY (`billing_customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_customers1` FOREIGN KEY (`shipping_customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -255,17 +262,17 @@ DROP TABLE IF EXISTS `orders_has_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders_has_products` (
-  `orders_id` int(11) NOT NULL,
-  `products_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   `quantity_ordered` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`orders_id`,`products_id`),
-  KEY `fk_orders_has_products_products1_idx` (`products_id`),
-  KEY `fk_orders_has_products_orders1_idx` (`orders_id`),
-  CONSTRAINT `fk_orders_has_products_orders1` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_has_products_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`order_id`,`product_id`),
+  KEY `fk_orders_has_products_products1_idx` (`product_id`),
+  KEY `fk_orders_has_products_orders1_idx` (`order_id`),
+  CONSTRAINT `fk_orders_has_products_orders1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_has_products_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -318,7 +325,7 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `description` varchar(45) DEFAULT NULL,
+  `description` text,
   `price` decimal(7,2) DEFAULT NULL,
   `inventory_count` int(11) DEFAULT NULL,
   `quantity_sold` int(11) DEFAULT NULL,
@@ -407,4 +414,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-09  6:51:13
+-- Dump completed on 2014-12-09 10:29:47
