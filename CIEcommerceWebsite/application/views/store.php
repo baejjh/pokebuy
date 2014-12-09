@@ -21,13 +21,18 @@
 		</form>
 
 		<h2>Categories</h2>
+<?php if(!empty($categories)) {?>
 		<ul>
-			<li>$category['name']</li>
+<?php 	foreach($categories as $category) {	?>	
+			<li><a href="category/<?php echo $category['id'] ?>"><?php echo $category['name'] ?></a></li>
+<?php	} ?>
 		</ul>
+<?php } ?>
 	</div>
 
 	<div class="products">
-		<h1>$category['name'] (page $page)</h1>
+<?php if(!empty($products)) { ?>
+		<h1><?php echo $products[0]['category'] ?> (page $page)</h1>
 		<select>
 		    <option value="volvo">Low Price</option>
 		    <option value="saab">High Price</option>
@@ -35,6 +40,10 @@
 		</select>
 		*pagination
 
+<?php }
+	  foreach($products as $product) {
+	var_dump($product);
+} ?>
 		<div class="each_product">
 			$products['main_image'];
 			$products['price'];

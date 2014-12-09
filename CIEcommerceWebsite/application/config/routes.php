@@ -38,7 +38,8 @@
 |
 */
 
-$route['default_controller'] = "dashboards";
+$route['default_controller'] = "stores/index";
+$route['category/(:num)'] = "stores/category_store/$1";
 $route['404_override'] = '';
 
 
