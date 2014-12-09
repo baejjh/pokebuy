@@ -64,6 +64,7 @@ class Admins extends CI_Controller
 			$admin = $this->Admin_info->check_admin($user);
 
 			if($admin['password'] == $post_data['password']) {
+				$this->session->set_userdata('loggedin', TRUE);
 				redirect('dashboard', $admin);	
 			}	
 				
