@@ -10,7 +10,7 @@
 				<input type="password" name="confirm_password">
 				<input type="submit" value="Register" name="login">
 		</form>
-		Already have an account? <a href="/admins/redirect_to_login">Login</a>.
+		Already have an account? <a href="/admin">Login</a>.
 	</div>
 </div><!-- close content div -->
 </body>

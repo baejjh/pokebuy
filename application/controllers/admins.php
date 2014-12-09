@@ -5,22 +5,30 @@ class Admins extends CI_Controller
 	public function __construct()
 	{
     	parent::__construct();
-  		$this->load->view('template/admin_header');
+    	$data['loggedin'] = $this->session->userdata('loggedin');
+  		$this->load->view('template/admin_header', $data);
   	}	
 	public function admin_register()
-	{		
+	{
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[password]');
 		
 		if($this->form_validation->run() === FALSE)
 		{
+			var_dump(validation_errors());
+			die('errors');
 			$this->session->set_flashdata('errors', validation_errors());
 			redirect('register');
+		} 
+		else 
+		{
+			die('here');
+			$post_data = $this->input->post();
+
+			$this->load->model('Admin_info');
+			$this->Admin_info->admin_register($post_data);
 		}
-		$post_data = $this->input->post();
-		$this->load->model('admin_info');
-		$this->admin_info->admin_register($post_data);
 	}
 	public function redirect_to_register()
 	{
@@ -31,6 +39,7 @@ class Admins extends CI_Controller
 	public function admin_login()
 	{	
 		$post_data = $this->input->post();
+		var_dump($post_data['password']);
 
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
@@ -46,8 +55,13 @@ class Admins extends CI_Controller
 			$user = $post_data["email"];
 
 			$this->load->model('admin_info');
-			$admin = $this->admin_info->check_admin($user);	
-			$this->load->view('admin/dashboard', $admin);		
+			$admin = $this->admin_info->check_admin($user);
+			var_dump($admin['password']);
+
+			if($admin['password'] == $post_data['password']) {
+				redirect('dashboard', $admin);
+			}	
+			die('still in this function');	
 		}
 	}
 	public function redirect_to_login()
