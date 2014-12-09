@@ -29,10 +29,10 @@ CREATE TABLE `addresses` (
   `address` varchar(45) DEFAULT NULL,
   `address2` varchar(45) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
-  `zip_code` varchar(45) DEFAULT NULL,
+  `states_id` int(11) NOT NULL,
+  `zip_code` varchar(10) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `states_id` int(11) NOT NULL,
   PRIMARY KEY (`id`,`states_id`),
   KEY `fk_addresses_states1_idx` (`states_id`),
   CONSTRAINT `fk_addresses_states1` FOREIGN KEY (`states_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -57,6 +57,8 @@ DROP TABLE IF EXISTS `admins`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -135,9 +137,12 @@ DROP TABLE IF EXISTS `images`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `images` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `location` varchar(45) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,6 +151,7 @@ CREATE TABLE `images` (
 
 LOCK TABLES `images` WRITE;
 /*!40000 ALTER TABLE `images` DISABLE KEYS */;
+INSERT INTO `images` VALUES (1,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/001.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(2,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/002.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(3,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/003.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(4,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/004.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(5,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/005.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(6,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/006.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(7,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/007.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(8,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/008.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(9,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/009.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(10,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/010.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(11,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/011.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(12,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/012.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(13,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/013.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(14,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/014.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(15,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/015.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(16,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/016.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(17,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/017.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(18,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/018.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(19,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/019.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(20,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/020.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(21,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/021.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(22,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/022.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(23,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/023.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(24,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/024.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(25,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/025.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(26,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/026.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(27,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/027.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(28,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/028.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(29,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/029.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(30,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/030.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(31,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/031.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(32,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/032.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(33,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/033.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(34,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/034.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(35,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/035.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(36,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/036.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(37,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/037.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(38,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/038.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(39,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/039.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(40,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/040.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(41,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/041.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(42,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/042.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(43,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/043.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(44,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/044.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(45,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/045.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(46,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/046.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(47,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/047.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(48,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/048.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(49,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/049.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(50,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/050.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(51,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/051.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(52,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/052.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(53,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/053.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32'),(54,'http://assets22.pokemon.com/assets/cms2/img/pokedex/full/054.png',NULL,'2014-12-09 06:50:32','2014-12-09 06:50:32');
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,6 +165,8 @@ DROP TABLE IF EXISTS `images_has_products`;
 CREATE TABLE `images_has_products` (
   `images_id` int(11) NOT NULL,
   `products_id` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`images_id`,`products_id`),
   KEY `fk_images_has_products_products1_idx` (`products_id`),
   KEY `fk_images_has_products_images1_idx` (`images_id`),
@@ -211,24 +219,22 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `dates` datetime DEFAULT NULL,
   `customer_id` int(11) NOT NULL,
-  `subtotal` decimal(2,0) DEFAULT NULL,
-  `total` decimal(2,0) DEFAULT NULL,
-  `statuses_id` int(11) NOT NULL,
-  `shipping_price` decimal(2,0) DEFAULT NULL,
-  `orderscol` varchar(45) DEFAULT NULL,
+  `addresses_id` int(11) NOT NULL,
+  `order_date` datetime DEFAULT NULL,
+  `status_id` int(11) NOT NULL,
+  `subtotal` decimal(10,2) DEFAULT NULL,
+  `shipping_price` decimal(10,2) DEFAULT NULL,
+  `total` decimal(10,2) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `addresses_id` int(11) NOT NULL,
-  `addresses_states_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_orders_customers_idx` (`customer_id`),
-  KEY `fk_orders_statuses1_idx` (`statuses_id`),
-  KEY `fk_orders_addresses1_idx` (`addresses_id`,`addresses_states_id`),
+  KEY `fk_orders_statuses1_idx` (`status_id`),
+  KEY `fk_orders_addresses1_idx` (`addresses_id`),
   CONSTRAINT `fk_orders_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_statuses1` FOREIGN KEY (`statuses_id`) REFERENCES `statuses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_addresses1` FOREIGN KEY (`addresses_id`, `addresses_states_id`) REFERENCES `addresses` (`id`, `states_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_orders_addresses1` FOREIGN KEY (`addresses_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_statuses1` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -242,6 +248,37 @@ LOCK TABLES `orders` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `orders_has_products`
+--
+
+DROP TABLE IF EXISTS `orders_has_products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orders_has_products` (
+  `orders_id` int(11) NOT NULL,
+  `products_id` int(11) NOT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `quantity_ordered` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`orders_id`,`products_id`),
+  KEY `fk_orders_has_products_products1_idx` (`products_id`),
+  KEY `fk_orders_has_products_orders1_idx` (`orders_id`),
+  CONSTRAINT `fk_orders_has_products_orders1` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_has_products_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders_has_products`
+--
+
+LOCK TABLES `orders_has_products` WRITE;
+/*!40000 ALTER TABLE `orders_has_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders_has_products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `product_categories`
 --
 
@@ -251,6 +288,8 @@ DROP TABLE IF EXISTS `product_categories`;
 CREATE TABLE `product_categories` (
   `product_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`product_id`,`category_id`),
   KEY `fk_categories_has_products_products1_idx` (`product_id`),
   KEY `fk_categories_has_products_categories1_idx` (`category_id`),
@@ -265,7 +304,7 @@ CREATE TABLE `product_categories` (
 
 LOCK TABLES `product_categories` WRITE;
 /*!40000 ALTER TABLE `product_categories` DISABLE KEYS */;
-INSERT INTO `product_categories` VALUES (1,7),(1,8),(2,7),(2,8),(3,7),(3,8);
+INSERT INTO `product_categories` VALUES (1,7,'2014-12-09 06:14:29','2014-12-09 06:14:29'),(1,8,'2014-12-09 06:14:29','2014-12-09 06:14:29'),(2,7,'2014-12-09 06:14:29','2014-12-09 06:14:29'),(2,8,'2014-12-09 06:14:29','2014-12-09 06:14:29'),(3,7,'2014-12-09 06:14:29','2014-12-09 06:14:29'),(3,8,'2014-12-09 06:14:29','2014-12-09 06:14:29'),(4,1,'2014-12-09 06:14:29','2014-12-09 06:14:29'),(5,1,'2014-12-09 06:14:29','2014-12-09 06:14:29'),(6,1,'2014-12-09 06:14:29','2014-12-09 06:14:29'),(6,9,'2014-12-09 06:14:29','2014-12-09 06:14:29'),(7,2,'2014-12-09 06:20:19','2014-12-09 06:20:19'),(8,2,'2014-12-09 06:20:19','2014-12-09 06:20:19'),(9,2,'2014-12-09 06:20:19','2014-12-09 06:20:19'),(10,6,'2014-12-09 06:21:07','2014-12-09 06:21:07'),(11,6,'2014-12-09 06:21:07','2014-12-09 06:21:07'),(12,6,'2014-12-09 06:21:07','2014-12-09 06:21:07'),(12,9,'2014-12-09 06:21:07','2014-12-09 06:21:07'),(13,6,'2014-12-09 06:22:19','2014-12-09 06:22:19'),(13,7,'2014-12-09 06:22:19','2014-12-09 06:22:19'),(14,6,'2014-12-09 06:22:19','2014-12-09 06:22:19'),(14,7,'2014-12-09 06:22:20','2014-12-09 06:22:20'),(15,6,'2014-12-09 06:22:20','2014-12-09 06:22:20'),(15,7,'2014-12-09 06:22:20','2014-12-09 06:22:20'),(16,3,'2014-12-09 06:22:20','2014-12-09 06:22:20'),(16,9,'2014-12-09 06:22:20','2014-12-09 06:22:20'),(17,3,'2014-12-09 06:22:48','2014-12-09 06:22:48'),(17,9,'2014-12-09 06:22:48','2014-12-09 06:22:48'),(18,3,'2014-12-09 06:22:48','2014-12-09 06:22:48'),(18,9,'2014-12-09 06:22:48','2014-12-09 06:22:48'),(19,3,'2014-12-09 06:22:48','2014-12-09 06:22:48'),(20,3,'2014-12-09 06:22:48','2014-12-09 06:22:48'),(21,3,'2014-12-09 06:24:31','2014-12-09 06:24:31'),(21,9,'2014-12-09 06:24:31','2014-12-09 06:24:31'),(22,3,'2014-12-09 06:24:31','2014-12-09 06:24:31'),(22,9,'2014-12-09 06:24:31','2014-12-09 06:24:31'),(23,7,'2014-12-09 06:24:31','2014-12-09 06:24:31'),(24,7,'2014-12-09 06:24:31','2014-12-09 06:24:31'),(25,11,'2014-12-09 06:25:48','2014-12-09 06:25:48'),(26,11,'2014-12-09 06:25:48','2014-12-09 06:25:48'),(27,5,'2014-12-09 06:25:48','2014-12-09 06:25:48'),(28,5,'2014-12-09 06:25:48','2014-12-09 06:25:48'),(29,7,'2014-12-09 06:27:50','2014-12-09 06:27:50'),(30,7,'2014-12-09 06:27:50','2014-12-09 06:27:50'),(31,5,'2014-12-09 06:27:50','2014-12-09 06:27:50'),(31,7,'2014-12-09 06:27:50','2014-12-09 06:27:50'),(32,7,'2014-12-09 06:27:50','2014-12-09 06:27:50'),(33,7,'2014-12-09 06:27:50','2014-12-09 06:27:50'),(34,5,'2014-12-09 06:27:50','2014-12-09 06:27:50'),(34,7,'2014-12-09 06:27:50','2014-12-09 06:27:50'),(35,10,'2014-12-09 06:27:50','2014-12-09 06:27:50'),(36,10,'2014-12-09 06:27:50','2014-12-09 06:27:50'),(37,1,'2014-12-09 06:30:14','2014-12-09 06:30:14'),(38,1,'2014-12-09 06:30:14','2014-12-09 06:30:14'),(39,3,'2014-12-09 06:30:14','2014-12-09 06:30:14'),(39,10,'2014-12-09 06:30:14','2014-12-09 06:30:14'),(40,3,'2014-12-09 06:30:14','2014-12-09 06:30:14'),(40,10,'2014-12-09 06:30:14','2014-12-09 06:30:14'),(41,7,'2014-12-09 06:31:24','2014-12-09 06:31:24'),(41,9,'2014-12-09 06:31:24','2014-12-09 06:31:24'),(42,7,'2014-12-09 06:31:24','2014-12-09 06:31:24'),(42,9,'2014-12-09 06:31:25','2014-12-09 06:31:25'),(43,7,'2014-12-09 06:31:25','2014-12-09 06:31:25'),(43,8,'2014-12-09 06:31:25','2014-12-09 06:31:25'),(44,7,'2014-12-09 06:31:25','2014-12-09 06:31:25'),(44,8,'2014-12-09 06:31:25','2014-12-09 06:31:25'),(45,7,'2014-12-09 06:32:39','2014-12-09 06:32:39'),(45,8,'2014-12-09 06:32:39','2014-12-09 06:32:39'),(46,6,'2014-12-09 06:32:39','2014-12-09 06:32:39'),(46,8,'2014-12-09 06:32:39','2014-12-09 06:32:39'),(47,6,'2014-12-09 06:32:39','2014-12-09 06:32:39'),(47,8,'2014-12-09 06:32:39','2014-12-09 06:32:39'),(48,6,'2014-12-09 06:32:39','2014-12-09 06:32:39'),(48,7,'2014-12-09 06:32:39','2014-12-09 06:32:39'),(49,6,'2014-12-09 06:33:31','2014-12-09 06:33:31'),(49,7,'2014-12-09 06:33:31','2014-12-09 06:33:31'),(50,5,'2014-12-09 06:33:31','2014-12-09 06:33:31'),(51,5,'2014-12-09 06:33:31','2014-12-09 06:33:31'),(52,3,'2014-12-09 06:33:31','2014-12-09 06:33:31'),(53,3,'2014-12-09 06:33:31','2014-12-09 06:33:31');
 /*!40000 ALTER TABLE `product_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,12 +320,14 @@ CREATE TABLE `products` (
   `name` varchar(45) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
   `price` decimal(7,2) DEFAULT NULL,
-  `inventory_count` int(11) DEFAULT '10',
-  `quantity_sold` int(11) DEFAULT '0',
-  `main_image` int(11) DEFAULT NULL,
+  `inventory_count` int(11) DEFAULT NULL,
+  `quantity_sold` int(11) DEFAULT NULL,
+  `main_image_id` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_products_images1_idx` (`main_image_id`),
+  CONSTRAINT `fk_products_images1` FOREIGN KEY (`main_image_id`) REFERENCES `images` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -296,7 +337,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Bulbasaur',NULL,9.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(2,'Ivysaur',NULL,22.67,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(3,'Venusaur',NULL,77.89,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(4,'Charmander',NULL,88.00,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(5,'Charmeleon',NULL,99.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(6,'Charizard',NULL,123.23,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(7,'Squirtle',NULL,987.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(8,'Wartortle',NULL,234.45,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(9,'Blastoise',NULL,678.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(10,'Caterpie',NULL,0.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(11,'Metapod',NULL,11.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(12,'Butterfree',NULL,12.89,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(13,'Weedle',NULL,0.98,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(14,'Kakuna',NULL,9.90,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(15,'Beedrill',NULL,12.90,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(16,'Pidgey',NULL,23.23,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(17,'Pidgeotto',NULL,34.09,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(18,'Pidgeot',NULL,45.56,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(19,'Rattata',NULL,23.09,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(20,'Raticate',NULL,34.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(21,'Spearow',NULL,56.56,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(22,'Fearow',NULL,0.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(23,'Ekans',NULL,34.44,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(24,'Arbok',NULL,67.77,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(25,'Pikachu',NULL,12.22,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(26,'Raichu',NULL,23.33,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(27,'Sandshrew',NULL,33.44,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(28,'Sandslash',NULL,44.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(29,'Nidoran',NULL,22.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(30,'Nidorina',NULL,99.00,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(31,'Nidoqueen',NULL,1.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(32,'Nidoran',NULL,88.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(33,'Nidorino',NULL,33.56,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(34,'Nidoking',NULL,56.90,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(35,'Clefairy',NULL,123.23,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(36,'Clefable',NULL,234.34,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(37,'Vulpix',NULL,45.55,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(38,'Ninetales',NULL,66.90,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(39,'Jigglypuff',NULL,33.78,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(40,'Wigglypuff',NULL,44.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(41,'Zubat',NULL,999.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(42,'Golbat',NULL,22.22,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(43,'Oddish',NULL,77.88,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(44,'Gloom',NULL,99.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(45,'Vileplume',NULL,14.45,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(46,'Paras',NULL,556.65,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(47,'Parasect',NULL,89.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(48,'Venonat',NULL,34.34,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(49,'Venomoth',NULL,54.45,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(50,'Diglett',NULL,76.89,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(51,'Dugtrio',NULL,65.65,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(52,'Meowth',NULL,54.54,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(53,'Persian',NULL,999.99,10,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52');
+INSERT INTO `products` VALUES (1,'Bulbasaur',NULL,9.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(2,'Ivysaur',NULL,22.67,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(3,'Venusaur',NULL,77.89,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(4,'Charmander',NULL,88.00,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(5,'Charmeleon',NULL,99.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(6,'Charizard',NULL,123.23,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(7,'Squirtle',NULL,987.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(8,'Wartortle',NULL,234.45,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(9,'Blastoise',NULL,678.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(10,'Caterpie',NULL,0.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(11,'Metapod',NULL,11.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(12,'Butterfree',NULL,12.89,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(13,'Weedle',NULL,0.98,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(14,'Kakuna',NULL,9.90,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(15,'Beedrill',NULL,12.90,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(16,'Pidgey',NULL,23.23,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(17,'Pidgeotto',NULL,34.09,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(18,'Pidgeot',NULL,45.56,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(19,'Rattata',NULL,23.09,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(20,'Raticate',NULL,34.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(21,'Spearow',NULL,56.56,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(22,'Fearow',NULL,0.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(23,'Ekans',NULL,34.44,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(24,'Arbok',NULL,67.77,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(25,'Pikachu',NULL,12.22,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(26,'Raichu',NULL,23.33,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(27,'Sandshrew',NULL,33.44,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(28,'Sandslash',NULL,44.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(29,'Nidoran',NULL,22.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(30,'Nidorina',NULL,99.00,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(31,'Nidoqueen',NULL,1.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(32,'Nidoran',NULL,88.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(33,'Nidorino',NULL,33.56,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(34,'Nidoking',NULL,56.90,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(35,'Clefairy',NULL,123.23,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(36,'Clefable',NULL,234.34,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(37,'Vulpix',NULL,45.55,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(38,'Ninetales',NULL,66.90,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(39,'Jigglypuff',NULL,33.78,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(40,'Wigglypuff',NULL,44.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(41,'Zubat',NULL,999.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(42,'Golbat',NULL,22.22,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(43,'Oddish',NULL,77.88,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(44,'Gloom',NULL,99.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(45,'Vileplume',NULL,14.45,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(46,'Paras',NULL,556.65,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(47,'Parasect',NULL,89.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(48,'Venonat',NULL,34.34,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(49,'Venomoth',NULL,54.45,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(50,'Diglett',NULL,76.89,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(51,'Dugtrio',NULL,65.65,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(52,'Meowth',NULL,54.54,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(53,'Persian',NULL,999.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,7 +350,7 @@ DROP TABLE IF EXISTS `states`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `states` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `abbreviation` varchar(45) DEFAULT NULL,
+  `abbreviation` varchar(2) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -337,8 +378,10 @@ DROP TABLE IF EXISTS `statuses`;
 CREATE TABLE `statuses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(45) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,6 +390,7 @@ CREATE TABLE `statuses` (
 
 LOCK TABLES `statuses` WRITE;
 /*!40000 ALTER TABLE `statuses` DISABLE KEYS */;
+INSERT INTO `statuses` VALUES (1,'Pending','2014-12-09 06:15:57','2014-12-09 06:15:57'),(2,'Ordered','2014-12-09 06:16:08','2014-12-09 06:16:08'),(3,'Shipped','2014-12-09 06:16:16','2014-12-09 06:16:16'),(4,'Returned','2014-12-09 06:16:21','2014-12-09 06:16:21');
 /*!40000 ALTER TABLE `statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -363,4 +407,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-08 16:59:41
+-- Dump completed on 2014-12-09  6:51:13
