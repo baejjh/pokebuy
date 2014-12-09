@@ -9,10 +9,6 @@
 			<input type="text" placeholder="Product Name">
 			<input type="submit" value="Search">
 		</form>
-
-		<a href="register">Register as Admin</a>
-		<a href="login">Login as Admin</a>
-
 		<h2>Categories</h2>
 <?php if(!empty($categories)) {?>
 		<ul>
@@ -27,14 +23,12 @@
 <?php 	if(!empty($products[0]['category'])) { ?>
 		<h1><?php echo $products[0]['category'] ?></h1>
 <?php	} ?>
-		<h1>$page:$page</h1>
-
 		<select>
 		    <option value="volvo">Low Price</option>
 		    <option value="saab">High Price</option>
 		    <option value="mercedes">Most Popular</option>
 		</select>
-
+	</div>
 <?php 	if(!empty($products)) { 
 			foreach($products as $product) { ?>
 	  	<div class="each_product">
@@ -46,7 +40,6 @@
 		</div>
 <?php		}
 		} ?>
-	</div>
 </div><!-- close content div -->
 </body>
 </html>

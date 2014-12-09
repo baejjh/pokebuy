@@ -1,7 +1,14 @@
+*
+{
+	font-family: sans-serif;
+	margin: 5px auto;
+}
 .each_product
 {
 	display: inline-block;
 	vertical-align: top;
 	width: 200px;
+	height: 300px;
 	border: 1px solid red;
+	padding: 5px;
 }
