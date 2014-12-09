@@ -1,4 +1,4 @@
-	<form class="login_admin_form" method="post" action="admins/admin_login">
+	<form class="login_admin_form" method="post" action="login">
 		<fieldset>
 		<legend>Admin Login Page</legend>
 			Email: <input type="text" name="email"><br>

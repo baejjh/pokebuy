@@ -59,10 +59,7 @@ $route['edit_product/(:num)'] 	= "admins/edit_product/$1";
 $route['delete_product/(:num)'] = "admins/delete_product/$1";
 
 //admin/login
-$route['guest'] 				= "admins/continue_as_guest";
-
-//stores
-$route['store'] 				= "stores/index";
+$route['guest'] = "admins/continue_as_guest";
 
 
 /* End of file routes.php */

@@ -1,5 +1,8 @@
 	<input type="text" placeholder="Search">
-	<a href="#">Add New Product</a>
+	<a href="/add_product">Add New Product</a>
+	
+	<!-- pagination starts here -->
+	<?= "<div class='pagination'>" . $this->pagination->create_links(). "</div>"; ?>
 
 	<table id ="admin_products_table">
 	<thead>
@@ -10,8 +13,7 @@
 		<th>Quantity Sold</th>
 		<th>Action</th>
 	</thead>
-	<tbody>
-		
+	<tbody>	
 	<?php foreach($products as $each_product) {?>
 		<tr>
 			<td><?= $each_product['main_image']; ?></td>
@@ -20,15 +22,14 @@
 			<td><?= $each_product['inventory_count']; ?></td>
 			<td><?= $each_product['quantity_sold']; ?></td>
 			<td>
-				<a href="#">Edit</a>
-				<a href="#">Delete</a>
+				<a href="edit_product/<?= $each_product['id']; ?>">Edit</a>
+				<a href="delete_product/<?= $each_product['id']; ?>">Delete</a>
 			</td>
 		</tr>
 	<?php } ?>
 
 	</tbody>
 	</table>
-	*pagination
 </div><!-- close content div -->
 </body>
 </html>
