@@ -16,7 +16,8 @@ class Admins extends CI_Controller
 	}
 	public function redirect_to_login()
 	{
-		$this->load->view('admin/login');
+		$data['errors'] = $this->session->flashdata('errors');
+		$this->load->view('admin/login', $data);
 	}
 
 //Once Guest gets to the page, they have the option of 
@@ -52,9 +53,8 @@ class Admins extends CI_Controller
 		
 		if($this->form_validation->run() === FALSE)
 		{
-			$data['status'] = FALSE;
-			$data['error_message'] = validation_errors();
-			redirect('admin/login');
+			$this->session->set_flashdata('errors', validation_errors());
+			redirect('login_page');
 		}
 		else //if validation is correct
 		{
@@ -66,8 +66,12 @@ class Admins extends CI_Controller
 			if($admin['password'] == $post_data['password']) {
 				$this->session->set_userdata('loggedin', TRUE);
 				redirect('dashboard', $admin);	
+			} 
+			else 
+			{
+				$this->session->set_flashdata('errors', '<p>The email and password combination do not match our </p>');
+				redirect('login_page');
 			}	
-				
 		}
 	}
 
