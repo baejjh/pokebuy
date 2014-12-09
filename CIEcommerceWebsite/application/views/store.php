@@ -4,16 +4,36 @@
 	<meta charset="utf-8">
 	<title>Store | Dojo eCommerce</title>
 
-	<style type="text/css">
-		.each_product {
-			display: inline-block;
-			vertical-align: top;
-		}
-	</style>
+<style type="text/css">
+* {
+	font-family: sans-serif;
+	vertical-align: top;
+	margin: 5px auto;
+}
+.each_product {
+	display: inline-block;
+	vertical-align: top;
+	height: 200px;
+	width: 200px;
+	border: 3px solid blue;
+}
+.pagination_links {
+	border: 1px solid black;
+	border-radius: 2px;
+}
+.side_bar {
+	width: 25%;
+}
+.products {
+	width: 75%;
+}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+</script>
 </head>
 <body>
-	<? require('include/shopping_header.php')	?>
-
 	<div class="side_bar">
 		<form>
 			<input type="text" placeholder="Product Name">
@@ -41,16 +61,15 @@
 		*pagination
 
 <?php }
-	  foreach($products as $product) {
-	var_dump($product);
-} ?>
-		<div class="each_product">
-			$products['main_image'];
-			$products['price'];
-			$products['name'];
+	  foreach($products as $product) { ?>
+	  	<div class="each_product">
+			<!-- $products['main_image'] -->
+			<?=$product['name']?>
+			<?=$product['price']?><br><br>
+			<?=$product['description']?>
+			
 		</div>
-
-		*pagination
+<?php } ?>
 	</div>
 </body>
 </html>
