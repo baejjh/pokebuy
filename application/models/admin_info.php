@@ -14,7 +14,7 @@ class Admin_info extends CI_Model {
 	}
 	public function check_admin($email)
 	{
-		return $this->db->query("SELECT * FROM admins WHERE email = ?", $email)->row();
+		return $this->db->query("SELECT * FROM admins WHERE email = ?", $email)->row_array();
 	}	
 	public function get_all_products()
 	{
