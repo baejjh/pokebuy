@@ -1,3 +1,10 @@
+<!-- Not sure where to place this, does it go in the header? - KS -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+</script>
+<!-- End of code in that statement -->
+
 	<div class="side_bar">
 		<form>
 			<input type="text" placeholder="Product Name">
@@ -5,28 +12,38 @@
 		</form>
 
 		<h2>Categories</h2>
+<?php if(!empty($categories)) {?>
 		<ul>
-			<li>$category['name']</li>
+<?php 	foreach($categories as $category) {	?>	
+			<li><a href="category/<?php echo $category['id'] ?>"><?php echo $category['name'] ?></a></li>
+<?php	} ?>
 		</ul>
+<?php } ?>
 	</div>
 
 	<div class="products">
-		<h1>$category['name'] (page $page)</h1>
+<?php if(!empty($products)) { ?>
+		<h1><?php echo $products[0]['category'] ?> (page $page)</h1>
 		<select>
-		    <option value="">Lowest Price</option>
-		    <option value="">Highest Price</option>
-		    <option value="">Most Popular</option>
+		    <option value="volvo">Low Price</option>
+		    <option value="saab">High Price</option>
+		    <option value="mercedes">Most Popular</option>
 		</select>
 		*pagination
 
-		<div class="each_product">
-			$products['main_image'];
-			$products['price'];
-			$products['name'];
+<?php }
+	  if(!empty($products)) {
+	  	foreach($products as $product) { ?>
+	  	<div class="each_product">
+			<!-- $products['main_image'] -->
+			<?=$product['name']?>
+			<?=$product['price']?><br><br>
+			<?=$product['description']?>
+			
 		</div>
-
-		*pagination
+		}
+<?php } ?>
 	</div>
-</div><!-- close content div -->	
+</div><!-- close content div -->
 </body>
 </html>
