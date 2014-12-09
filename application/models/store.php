@@ -11,7 +11,7 @@ class Store extends CI_Model {
 		$query = "SELECT * FROM products";
 		return $this->db->query($query)->result_array();
 	}
-	public function get_all_by_category($id) 
+	public function get_all_in_category($id) 
 	{
 		$query = "SELECT products.name, products.price, products.description, products.main_image_id, categories.name AS category FROM products
 				  LEFT JOIN product_categories

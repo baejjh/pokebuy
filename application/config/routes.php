@@ -63,7 +63,8 @@ $route['guest'] 				= "admins/continue_as_guest";
 
 //stores
 $route['store'] 				= "stores/index";
-
+$route['categories/(:num)'] 			= "stores/category_store/$1";
+$route['products/(:num)'] 			= "stores/product_store/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
