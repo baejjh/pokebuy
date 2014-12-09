@@ -13,9 +13,9 @@
 	<div class="products">
 		<h1>$category['name'] (page $page)</h1>
 		<select>
-		    <option value="volvo">Low Price</option>
-		    <option value="saab">High Price</option>
-		    <option value="mercedes">Most Popular</option>
+		    <option value="">Lowest Price</option>
+		    <option value="">Highest Price</option>
+		    <option value="">Most Popular</option>
 		</select>
 		*pagination
 

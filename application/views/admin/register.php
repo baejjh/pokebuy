@@ -1,5 +1,6 @@
+	<?php echo $this->session->flashdata('errors'); ?>
 	<div class="container">
-		<form id="admin_register_form" action="/register" method="post">
+		<form id="admin_register_form" action="/new_admin" method="post">
 			<h3>Register</h3>
 				<label for="email">Email Address:</label>
 				<input type="text" name="email">
@@ -13,3 +14,4 @@
 	</div>
 </div><!-- close content div -->
 </body>
+</html>

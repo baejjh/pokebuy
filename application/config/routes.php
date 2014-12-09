@@ -41,6 +41,7 @@
 $route['default_controller'] = "dashboards";
 $route['404_override'] = '';
 $route['register'] = "admins/redirect_to_register";
+$route['new_admin'] = "admins/admin_register";
 $route['dashboard'] = "admins/redirect_to_dashboard";
 $route['guest'] = "admins/continue_as_guest";
 $route['orders'] = "admins/redirect_to_orders";

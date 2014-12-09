@@ -2,7 +2,12 @@
 
 class Stores extends CI_Controller {
 
-	public function index()
+	public function __construct()
+	{
+    	parent::__construct();
+  		$this->load->view('template/shopping_header');
+  	}	
+  	public function index()
 	{
 		$this->load->view('store');
 	}

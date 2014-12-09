@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<title>Shop | Gotta Code 'Em All</title>
-	</style>
+	<link rel="stylesheet" type="text/css" href="/assets/css/store_style.css">
 </head>
 
 <div class="content">
-	<div class="shopping_header">
-		<h1>Dojo eCommerce</h1>
-		<a href="#">Shopping Cart ($cart_quantity)</a>
-	</div>
+	<ul class="shopping_header">
+		<li>Dojo eCommerce</li>
+		<li><a href="#">Shopping Cart ($cart_quantity)</a></li>
+	</ul>
