@@ -13,7 +13,7 @@
 <?php if(!empty($categories)) {?>
 		<ul>
 <?php 	foreach($categories as $category) {	?>	
-			<li><a href="categories/<?php echo $category['id'] ?>"><?php echo $category['name'] ?></a></li>
+			<li><a href="/categories/<?php echo $category['id'] ?>"><?php echo $category['name'] ?></a></li>
 <?php	} ?>
 		</ul>
 <?php } ?>
@@ -32,11 +32,14 @@
 <?php 	if(!empty($products)) { 
 			foreach($products as $product) { ?>
 	  	<div class="each_product">
-			<p><a href="products/<?= $product['id'] ?>">
+			<p><a href="/products_view/<?= $product['id'] ?>">
 				<?= $product['name'] ?></a></p>
 			<p><?= $product['price'] ?></p>
 			 <!-- <p> $product['location'] </p>    <-*image?*    -->
 			 <p><?= $product['description'] ?></p>
+			 <form action="/buy/<?= $product['id']?>" method="post">
+				<input type="submit" value="Buy">
+			 </form>
 		</div>
 <?php		}
 		} ?>

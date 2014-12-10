@@ -66,7 +66,9 @@ $route['delete_product/(:num)'] = "admins/delete_product/$1";
 
 
 $route['categories/(:num)'] 	= "stores/category_store/$1";
-$route['products/(:num)'] 		= "stores/product_store/$1";
+$route['products_view/(:num)'] 	= "stores/product_store/$1";
+$route['buy/(:num)'] 			= "stores/product_buy/$1";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
