@@ -1,4 +1,4 @@
-	<table>
+<table>
 	<thead>
 		<th>Item</th>
 		<th>Price</th>
@@ -6,15 +6,23 @@
 		<th>Total</th>
 	</thead>
 	<tbody>
+<?php 	if(!empty($products)) {
+		var_dump($products);
+			foreach($products as $product) { ?>
 		<tr>
-			<td></td>
+			<td><?php echo $product['name'] ?></td>
+			<td><?php echo $product['price'] ?></td>
+			<td><?php echo $product['qty'] ?></td>
+			<td><?php echo $product['subtotal'] ?></td>
 		</tr>
+<?php		}
+		} ?>
 	</tbody>
 	<tfoot>
 		<td></td>
 	</tfoot>
 	</table>
-	<a href="#">Continue Shopping</a>
+	<a href="store">Continue Shopping</a>
 
 	<h1>Shipping Information</h1>
 	<form>

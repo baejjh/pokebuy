@@ -5,7 +5,8 @@ class Stores extends CI_Controller {
 	public function __construct()
 	{
     	parent::__construct();
-  		$this->load->view('template/shopping_header');
+    	$display['cart_num'] = $this->cart->total_items();
+  		$this->load->view('template/shopping_header', $display);
   	}	
 	public function index()
 	{
@@ -18,6 +19,7 @@ class Stores extends CI_Controller {
 		$this->load->model('Store');
 		// $display['category'] = $id;
 		$display['products'] = $this->Store->get_all_in_category($id);
+		$
 		$this->load->view('store', $display);
 	}
 	public function product_store($id) {
@@ -44,5 +46,22 @@ class Stores extends CI_Controller {
 		
 		$display['products'] = $this->Store->get_all_by_category($id);
 		$this->load->view('store', $display);
+	}
+
+	public function show_cart() {
+		$data['products'] = $this->cart->contents();
+		$this->load->view('cart', $data);
+	}
+
+	public function add_to_cart() {
+		//This is just a tempory hard coded data, until products page is live.  For testing purposes.
+		$data = array(
+               'id'      => 'sku_123ABC',
+               'qty'     => 1,
+               'price'   => 39.95,
+               'name'    => 'T-Shirt'
+            );
+		// End of testing code.
+		$this->cart->insert($data);
 	}
 }//end of Controller curly
