@@ -49,7 +49,7 @@
 		<? } //end the foreach loop of orders ?>
 	</tbody>
 	</table>
-	*pagination
+	<!-- *pagination -->
 </div><!-- close content div -->	
 </body>
 </html>

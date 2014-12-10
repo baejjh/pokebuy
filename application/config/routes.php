@@ -79,6 +79,7 @@ $route['search_product'] 		= "stores/search_product";
 $route['cart']					= "stores/show_cart";
 $route['add_cart/(:num)'] 		= "stores/add_to_cart/$1";
 $route['delete']				= "stores/delete_from_cart";
+$route['update_quantity']		= "stores/update_cart_quantity";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
