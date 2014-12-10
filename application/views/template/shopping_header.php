@@ -7,7 +7,13 @@
 </head>
 <html>
 <body>
-<div class="header_content">
-		<h1 class="title">Pokemon, I Be Buyin'</h2>
-		<h3 class="cart_amount"><a href="cart">Shopping Cart (<?php echo $cart_num ?>)</a></h3>
-</div>
+<div class="content">
+	<ul class="shopping_header">
+		<li>Dojo eCommerce</li>
+		<li><a href="cart">Shopping Cart (
+<?php 	if(!empty($cart_num)) {
+			echo $cart_num;
+		} else {
+			echo 'Empty';
+		} ?>)</a></li>
+	</ul>

@@ -25,7 +25,7 @@ class Store extends CI_Model {
 	public function product_buy($id) 
 	{
 		$query = "SELECT * FROM products WHERE id = {$id}";
-		return $this->db->query($query)->result_array();
+		return $this->db->query($query)->row_array();
 	}
 	public function get_product_by_name($name) 
 	{

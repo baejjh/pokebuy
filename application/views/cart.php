@@ -8,10 +8,6 @@
 	<tbody>
 <?php 	if(!empty($products)) {
 			$sum = 0;
-
-			//var_dump for testing only
-			var_dump($products);
-
 			foreach($products as $product) { 
 				$sum += $product['subtotal']; ?>
 		<tr>

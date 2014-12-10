@@ -5,7 +5,8 @@ class Stores extends CI_Controller {
 	public function __construct()
 	{
     	parent::__construct();
-  		$this->load->view('template/shopping_header');
+    	$display['cart_num'] = $this->cart->total_items();
+  		$this->load->view('template/shopping_header', $display);
   	}	
 	public function index()
 	{
@@ -57,17 +58,15 @@ class Stores extends CI_Controller {
 	}
 
 	public function add_to_cart($id) {
-		var_dump($id);
-		die('here');
-		//This is just a tempory hard coded data, until products page is live.  For testing purposes.
+		$this->load->model('Store');
+		$product = $this->Store->product_buy($id);
 		$data[] = array(
-               'id'      => 'sku_123DEF',
-               'qty'     => 2,
-               'price'   => 29.95,
-               'name'    => 'Headband'
-            );
-		// End of testing code.
+			 	'id'      => $product['id'],
+            	'qty'     => 1,
+             	'price'   => $product['price'],
+              	'name'    => $product['name']);
 		$this->cart->insert($data);
+		redirect('cart');
 	}
 
 	public function delete_from_cart() {
