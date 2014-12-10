@@ -27,8 +27,7 @@ class Admins extends CI_Controller
 // 3. Enter as a Guest (back to Store)
 	public function admin_register()
 	{		
-
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[admins.email]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[password]');
 		
@@ -40,8 +39,18 @@ class Admins extends CI_Controller
 		else 
 		{
 			$post_data = $this->input->post();
-			$this->load->model('admin_info');
-			$this->admin_info->admin_register($post_data);
+			$this->load->model('Admin_info');
+			$result = $this->Admin_info->admin_register($post_data);
+			if($result > 0) {
+				$this->session->set_userdata('admin_id', $result);
+				$this->session->set_userdata('loggedin', TRUE);
+				redirect('dashboard');
+			}
+			else
+			{
+				$this->session->set_flashdata('errors', '<p>There was an error</p>');
+				redirect('register');
+			}
 		}
 		
 	}
