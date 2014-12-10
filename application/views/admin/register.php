@@ -12,7 +12,7 @@
 			<td><input type="password" name="password"></td>
 		</tr>
 		<tr>
-			<td><label for="conf_password">Password Confirmation:</label></td>
+			<td><label for="confirm_password">Password Confirmation:</label></td>
 			<td><input type="password" name="confirm_password"></td>
 		</tr>
 		<tr>

@@ -6,15 +6,16 @@ class Admin_info extends CI_Model {
 	{
 		parent::__construct();
 	}
-	public function admin_register($admins)
+	public function admin_register($admin)
 	{
-	    $query = "INSERT INTO admins (email, password, created_at, updated_at) VALUES (?,?,?,?)";
-	    $values = array($admins['email'], $admins['password'], date("M j Y, g:iA"), date("M j Y, g:iA")); 
-	    return $this->db->query($query, $values);
+	    $query = "INSERT INTO admins (email, password, created_at, updated_at) VALUES (?,?,NOW(),NOW())";
+	    $values = array($admin['email'], $admin['password']); 
+	    $this->db->query($query, $values);
+	    return $this->db->insert_id();
 	}
 	public function check_admin($email)
 	{
-		return $this->db->query("SELECT * FROM admins WHERE email = ?", $email)->row();
+		return $this->db->query("SELECT * FROM admins WHERE email = ?", $email)->row_array();
 	}	
 	public function get_all_products()
 	{

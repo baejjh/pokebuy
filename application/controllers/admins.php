@@ -6,17 +6,20 @@ class Admins extends CI_Controller
 	{
     	parent::__construct();
     	$this->load->model('admin_info');
-  		$this->load->view('template/admin_header');
+    	$data['loggedin'] = $this->session->userdata('loggedin');
+  		$this->load->view('template/admin_header', $data);
   	}
 
 //Guest enters the link from the store, they get directed to the register page:
   	public function redirect_to_register()
 	{
-		$this->load->view('admin/register');
+		$data['errors'] = $this->session->flashdata('errors');
+		$this->load->view('admin/register', $data);
 	}
 	public function redirect_to_login()
 	{
-		$this->load->view('admin/login');
+		$data['errors'] = $this->session->flashdata('errors');
+		$this->load->view('admin/login', $data);
 	}
 
 //Once Guest gets to the page, they have the option of 
@@ -25,7 +28,7 @@ class Admins extends CI_Controller
 // 3. Enter as a Guest (back to Store)
 	public function admin_register()
 	{		
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[admins.email]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[password]');
 		
@@ -37,13 +40,24 @@ class Admins extends CI_Controller
 		else 
 		{
 			$post_data = $this->input->post();
-			$this->admin_info->admin_register($post_data);
+			$this->load->model('Admin_info');
+			$result = $this->Admin_info->admin_register($post_data);
+			if($result > 0) {
+				$this->session->set_userdata('admin_id', $result);
+				$this->session->set_userdata('loggedin', TRUE);
+				redirect('dashboard');
+			}
+			else
+			{
+				$this->session->set_flashdata('errors', '<p>There was an error</p>');
+				redirect('register');
+			}
 		}
 	}
 
 //When Admin Logs In
 	public function admin_login()
-	{	
+	{
 		$post_data = $this->input->post();
 
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
@@ -51,15 +65,24 @@ class Admins extends CI_Controller
 		
 		if($this->form_validation->run() === FALSE)
 		{
-			$data['status'] = FALSE;
-			$data['error_message'] = validation_errors();
-			redirect('admin/login');
+			$this->session->set_flashdata('errors', validation_errors());
+			redirect('login_page');
 		}
 		else //if validation is correct
-		{	
+		{
 			$user = $post_data["email"];
-			$admin = $this->admin_info->check_admin($user);	
-			$this->load->view('admin/dashboard', $admin);		
+			$this->load->model('Admin_info');
+			$admin = $this->Admin_info->check_admin($user);
+
+			if($admin['password'] == $post_data['password']) {
+				$this->session->set_userdata('loggedin', TRUE);
+				redirect('dashboard', $admin);	
+			} 
+			else 
+			{
+				$this->session->set_flashdata('errors', '<p>The email and password combination do not match our </p>');
+				redirect('login_page');
+			}	
 		}
 	}
 
