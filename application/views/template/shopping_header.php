@@ -10,8 +10,8 @@
 	<ul class="shopping_header">
 		<li>Dojo eCommerce</li>
 		<li><a href="cart">Shopping Cart (
-<?php 	if(!empty($cart_name)) {
-			echo $cart_name;
+<?php 	if(!empty($cart_num)) {
+			echo $cart_num;
 		} else {
 			echo 'Empty';
 		} ?>)</a></li>
