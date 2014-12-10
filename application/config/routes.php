@@ -80,6 +80,8 @@ $route['cart']					= "stores/show_cart";
 $route['add_cart/(:num)'] 		= "stores/add_to_cart/$1";
 $route['delete']				= "stores/delete_from_cart";
 $route['update_quantity']		= "stores/update_cart_quantity";
+$route['submit_order']			= "stores/submit_order";
+$route['success']				= "stores/order_success";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

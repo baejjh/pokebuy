@@ -54,6 +54,8 @@ class Stores extends CI_Controller {
 	}
 	public function show_cart() {
 		$data['products'] = $this->cart->contents();
+		$this->load->model('Store');
+		$data['states'] = $this->Store->get_states();
 		$this->load->view('cart', $data);
 	}
 	public function add_to_cart($id) {
@@ -90,4 +92,13 @@ class Stores extends CI_Controller {
 		$display['products'] = $this->Store->get_product_by_name($name);
 		$this->load->view('product', $display);
 	}
+	public function submit_order() {
+		$data['products'] = $this->cart->contents();
+		$data['customer'] = $this->input->post();
+		$this->load->model('Store');
+		$test = $this->Store->submit_order($data);
+		$this->cart->destroy();
+		redirect('cart');
+	}
+
 }//end of Controller curly
