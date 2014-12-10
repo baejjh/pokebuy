@@ -94,12 +94,11 @@ class Stores extends CI_Controller {
 	}
 	public function submit_order() {
 		$data['products'] = $this->cart->contents();
-		$customer = $this->input->post();
-		// foreach($products as $product) {
-		// 	$data['products'] = array($product['id'], $product['price'], $product['qty']);
-		// }
+		$data['customer'] = $this->input->post();
 		$this->load->model('Store');
 		$test = $this->Store->submit_order($data);
-		var_dump($test);
+		$this->cart->destroy();
+		redirect('cart');
 	}
+
 }//end of Controller curly

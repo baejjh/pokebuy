@@ -6,8 +6,8 @@
 			<th>Total</th>
 		</thead>
 		<tbody>
-<?php	if(!empty($products)) {
-			$sum = 0;
+<?php	$sum = NULL;
+		if(!empty($products)) {
 			foreach($products as $product) { 
 				$sum += $product['subtotal']; ?>
 			<tr>
@@ -16,9 +16,9 @@
 				<td>
 					<form action="update_quantity" method="post">
 						<select name="qty">
-<?php 			for($i=1; $i<=$product['inventory']; $i++) { ?>
+<?php 					for($i=1; $i<=$product['inventory']; $i++) { ?>
 							<option value="<?php echo $i ?>" <?php if($i == $product['qty']){echo 'selected'; } ?>><?php echo $i ?></option>
-<?php			} ?>
+<?php					} ?>
 						</select>
 						<input type="hidden" name="rowid" value="<?php echo $product['rowid'] ?>">
 						<input type="submit" value="Update Quantity">
@@ -38,9 +38,9 @@
 		<tfoot>
 			<tr>
 				<th id="total" colspan="3" >Subtotal (Before Shipping and Tax):</th>
-<?php 	if(!empty($products)) { ?>
+<?php 		if(!empty($products)) { ?>
 				<th><?php echo $sum ?></th>
-<?php 	} ?>
+<?php 		} ?>
 			</tr>
 		</tfoot>
 	</table>
@@ -73,9 +73,9 @@
 				<td>State</td>
 				<td>
 					<select name="state">
-<?php 	foreach($states as $state) { ?>
+<?php 				foreach($states as $state) { ?>
 						<option value="<?php echo $state['id'] ?>"><?php echo $state['abbreviation'] ?></option>
-<?php 	} ?>
+<?php 				} ?>
 					</select>
 				</td>
 			</tr>
@@ -122,6 +122,7 @@
 				<td><input type="text" name="billing_zip_code"></td>
 			</tr>
 		</table> -->
+		<input type = "hidden" name="total" value="<?php echo $sum ?>">
 		<input type="submit" name="order" value="Order">
 	</form>
 </div><!-- close content div -->
