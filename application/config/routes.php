@@ -64,14 +64,11 @@ $route['new_product'] 			= "admins/add_new_product";
 $route['edit_product/(:num)'] 	= "admins/edit_product/$1";
 $route['delete_product/(:num)'] = "admins/delete_product/$1";
 
-
 $route['categories/(:num)'] 	= "stores/category_store/$1";
 $route['products_view/(:num)'] 	= "stores/product_store/$1";
 $route['buy/(:num)'] 			= "stores/product_buy/$1";
-$route['add_cart/(:num)'] 			= "stores/add_to_cart/$1";
-
-
-
+$route['add_cart/(:num)'] 		= "stores/add_to_cart/$1";
+$route['search_product'] 		= "stores/search_product";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -78,4 +78,11 @@ class Stores extends CI_Controller {
 		$this->cart->update($data);
 		redirect('cart');
 	}
+	public function search_product()
+	{
+		$name = $this->input->post('name');
+		$this->load->model('Store');
+		$display['products'] = $this->Store->get_product_by_name($name);
+		$this->load->view('product', $display);
+	}
 }//end of Controller curly

@@ -2,6 +2,11 @@
 {
 	font-family: sans-serif;
 	margin: 5px auto;
+	clear: both;
+}
+body
+{
+	width: 1200px;
 }
 .each_product
 {
@@ -11,4 +16,32 @@
 	height: 300px;
 	border: 1px solid red;
 	padding: 5px;
+}
+.header_content
+{
+	border: 1px solid purple;
+	display: block;
+}
+.title
+{
+	border: 1px solid blue;
+	float: left;
+}
+.cart_amount
+{
+	border: 1px solid green;
+	float: right;
+}
+.side_bar
+{
+	float: left;
+	width: 30%;
+	border: 1px solid black;	
+	display: inline-block;
+}
+.products
+{
+	float: right;
+	width: 60%;
+	border: 1px solid purple;
 }
