@@ -33,4 +33,13 @@ class Store extends CI_Model {
 		$value = array($name);
 		return $this->db->query($query, $value)->result_array();
 	}
+	public function submit_order($order) {
+		$query = "INSERT INTO orders_has_products (order_id, product_id, price, quantity_ordered) VALUES (1,?,?,?)";
+		$values = $order;
+		$result = $this->db->query($query, $values);
+		var_dump($result);
+	}
+	public function get_states() {
+		return $this->db->query("SELECT id, abbreviation FROM states")->result_array();
+	}
 }
