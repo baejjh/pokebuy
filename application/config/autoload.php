@@ -53,7 +53,7 @@ $autoload['packages'] = array();
 */
 
 $autoload['libraries'] = array('upload', 'database',
-							   'session', 'form_validation',
+							   'cart', 'form_validation',
 							   'pagination');
 /*
 | -------------------------------------------------------------------
