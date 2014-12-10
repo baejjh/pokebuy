@@ -64,7 +64,8 @@ class Stores extends CI_Controller {
 			 	'id'      => $product['id'],
             	'qty'     => 1,
              	'price'   => $product['price'],
-              	'name'    => $product['name']);
+              	'name'    => $product['name'],
+				'inventory' => $product['inventory_count']);
 		$this->cart->insert($data);
 		redirect('cart');
 	}
@@ -74,6 +75,15 @@ class Stores extends CI_Controller {
 		$data = array(
                'rowid' => $rowid,
                'qty'   => 0);
+		$this->cart->update($data);
+		redirect('cart');
+	}
+
+	public function update_cart_quantity() {
+		$product = $this->input->post();
+		$data = array(
+      			'rowid' => $product['rowid'],
+               	'qty'   => $product['qty']);
 		$this->cart->update($data);
 		redirect('cart');
 	}
