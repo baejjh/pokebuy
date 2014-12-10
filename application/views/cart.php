@@ -89,28 +89,28 @@
 		<table>
 			<tr>
 				<td>First Name</td>
-				<td><input type="text" name="first_name"></td>
+				<td><input type="text" name="billing_first_name"></td>
 			</tr>
 			<tr>
 				<td>Last Name</td>
-				<td><input type="text" name="last_name"></td>
+				<td><input type="text" name="billing_last_name"></td>
 			</tr>
 			<tr>
 				<td>Address</td>
-				<td><input type="text" name="address"></td>
+				<td><input type="text" name="billing_address"></td>
 			</tr>
 			<tr>
 				<td>Address 2</td>
-				<td><input type="text" name="address2"></td>
+				<td><input type="text" name="billing_address2"></td>
 			</tr>
 			<tr>
 				<td>City</td>
-				<td><input type="text" name="city"></td>
+				<td><input type="text" name="billing_city"></td>
 			</tr>
 			<tr>
 				<td>State</td>
 				<td>
-					<select name="state">
+					<select name="billing_state">
 <?php 	foreach($states as $state) { ?>
 						<option value="<?php echo $state['id'] ?>"><?php echo $state['abbreviation'] ?></option>
 <?php 	} ?>
@@ -119,7 +119,7 @@
 			</tr>
 			<tr>
 				<td>Zipcode</td>
-				<td><input type="text" name="zip_code"></td>
+				<td><input type="text" name="billing_zip_code"></td>
 			</tr>
 		</table>
 		<input type="submit" name="order" value="Order">
