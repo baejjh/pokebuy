@@ -56,7 +56,6 @@ class Stores extends CI_Controller {
 		$data['products'] = $this->cart->contents();
 		$this->load->view('cart', $data);
 	}
-
 	public function add_to_cart($id) {
 		$this->load->model('Store');
 		$product = $this->Store->product_buy($id);
@@ -64,11 +63,11 @@ class Stores extends CI_Controller {
 			 	'id'      => $product['id'],
             	'qty'     => 1,
              	'price'   => $product['price'],
-              	'name'    => $product['name']);
+              	'name'    => $product['name'],
+				'inventory' => $product['inventory_count']);
 		$this->cart->insert($data);
 		redirect('cart');
 	}
-
 	public function delete_from_cart() {
 		$rowid = $this->input->post('rowid');
 		$data = array(
@@ -77,8 +76,15 @@ class Stores extends CI_Controller {
 		$this->cart->update($data);
 		redirect('cart');
 	}
-	public function search_product()
-	{
+	public function update_cart_quantity() {
+		$product = $this->input->post();
+		$data = array(
+      			'rowid' => $product['rowid'],
+               	'qty'   => $product['qty']);
+		$this->cart->update($data);
+		redirect('cart');
+	}
+	public function search_product() {
 		$name = $this->input->post('name');
 		$this->load->model('Store');
 		$display['products'] = $this->Store->get_product_by_name($name);
