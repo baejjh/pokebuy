@@ -59,18 +59,17 @@ class Store extends CI_Model {
 		// $this->db->query($query2);
 		// $result2 = $this->db->insert_id();
 
-		$result2 = 2;
-		$query4 = "INSERT INTO orders_has_products (order_id, product_id) VALUES (?,?)";
-		$values4;
+		$result2 = 1;
 		$what = NULL;
+		var_dump($data['products']);
 		foreach($data['products'] as $product) {
-			$values4 = array($result2, (int)$product['id']);
-			$what += implode($values4);
+			$values4 = "(".$result2.", ".$product['id'].")";
+			$what[] = $values4;
 		}
-		$test = implode($values4);
 		var_dump($values4);
-		die();
-		return $this->db->query($query4, $values4);
+		$query4 = "INSERT INTO orders_has_products (order_id, product_id) VALUES ".implode(',',$what);
+		// die();
+		return $this->db->query($query4);
 
 	}
 

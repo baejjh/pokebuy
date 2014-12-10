@@ -85,7 +85,7 @@
 			</tr>
 		</table>
 
-	<h1>Billing Information</h1>
+	<!-- <h1>Billing Information</h1>
 		<table>
 			<tr>
 				<td>First Name</td>
@@ -121,7 +121,7 @@
 				<td>Zipcode</td>
 				<td><input type="text" name="billing_zip_code"></td>
 			</tr>
-		</table>
+		</table> -->
 		<input type="submit" name="order" value="Order">
 	</form>
 </div><!-- close content div -->
