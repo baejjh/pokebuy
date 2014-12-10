@@ -129,6 +129,7 @@ class Stores extends CI_Controller {
 		$this->load->model('Store');
 		$test = $this->Store->submit_order($data);
 		$this->cart->destroy();
+		//Need to either send a message or redirect to success page, will come back to this:
 		redirect('cart');
 	}
 
