@@ -9,15 +9,11 @@
 			<input type="text" placeholder="Product Name">
 			<input type="submit" value="Search">
 		</form>
-
-		<a href="register">Register as Admin</a>
-		<a href="login">Login as Admin</a>
-
 		<h2>Categories</h2>
 <?php if(!empty($categories)) {?>
 		<ul>
 <?php 	foreach($categories as $category) {	?>	
-			<li><a href="categories/<?php echo $category['id'] ?>"><?php echo $category['name'] ?></a></li>
+			<li><a href="/categories/<?php echo $category['id'] ?>"><?php echo $category['name'] ?></a></li>
 <?php	} ?>
 		</ul>
 <?php } ?>
@@ -27,26 +23,26 @@
 <?php 	if(!empty($products[0]['category'])) { ?>
 		<h1><?php echo $products[0]['category'] ?></h1>
 <?php	} ?>
-		<h1>$page:$page</h1>
-
 		<select>
 		    <option value="volvo">Low Price</option>
 		    <option value="saab">High Price</option>
 		    <option value="mercedes">Most Popular</option>
 		</select>
-
+	</div>
 <?php 	if(!empty($products)) { 
 			foreach($products as $product) { ?>
 	  	<div class="each_product">
-			<p><a href="products/<?= $product['id'] ?>">
+			<p><a href="/products_view/<?= $product['id'] ?>">
 				<?= $product['name'] ?></a></p>
 			<p><?= $product['price'] ?></p>
 			 <!-- <p> $product['location'] </p>    <-*image?*    -->
 			 <p><?= $product['description'] ?></p>
+			 <form action="/add_cart/<?= $product['id']?>" method="post">
+				<input type="submit" value="Buy">
+			 </form>
 		</div>
 <?php		}
 		} ?>
-	</div>
 </div><!-- close content div -->
 </body>
 </html>
