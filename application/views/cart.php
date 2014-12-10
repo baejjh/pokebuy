@@ -48,6 +48,9 @@
 
 	<form action="/submit_order" method="post">
 		<h1>Shipping Information</h1>
+<?php 	if(!empty($errors)) {
+		echo $errors;
+} ?>
 		<table>
 			<tr>
 				<td>First Name</td>
@@ -85,7 +88,9 @@
 			</tr>
 		</table>
 
-	<!-- <h1>Billing Information</h1>
+		<p>Billing address is the same as shipping: <input type="checkbox" name="billing" value="same"></p>
+
+		<h1>Billing Information</h1>
 		<table>
 			<tr>
 				<td>First Name</td>
@@ -121,7 +126,7 @@
 				<td>Zipcode</td>
 				<td><input type="text" name="billing_zip_code"></td>
 			</tr>
-		</table> -->
+		</table>
 		<input type = "hidden" name="total" value="<?php echo $sum ?>">
 		<input type="submit" name="order" value="Order">
 	</form>

@@ -39,18 +39,25 @@ class Store extends CI_Model {
 	}
 	public function submit_order($data)
 	{
-		var_dump($data);
-		// die();
 		$customer = $data['customer'];
+		$result = NULL;
+		if($customer['billing'] == "different") {
+			$query = "INSERT INTO addresses (address, address2, city, state_id, zip_code, created_at, updated_at) VALUES (?,?,?,?,?,NOW(),NOW())";
+			$values = array($customer['billing_address'], $customer['billing_address2'], $customer['billing_city'], $customer['billing_state'], $customer['billing_zip_code']);
+			$this->db->query($query, $values);
+			$result = $this->db->insert_id();
+		} 
 		$query1 = "INSERT INTO addresses (address, address2, city, state_id, zip_code, created_at, updated_at) VALUES (?,?,?,?,?,NOW(),NOW())";
-		$values = array($customer['address'], $customer['address2'], $customer['city'], $customer['state'], $customer['zip_code']);
-		$this->db->query($query1, $values);
+		$values1 = array($customer['address'], $customer['address2'], $customer['city'], $customer['state'], $customer['zip_code']);
+		$this->db->query($query1, $values1);
 		$result1 = $this->db->insert_id();
 
-		$query2 = "INSERT INTO customers (first_name, last_name, created_at, updated_at) VALUES (?,?,NOW(), NOW())";
-		$values2 = array($customer['first_name'], $customer['last_name']);
-		$this->db->query($query2, $values2);
-		$result2 = $this->db->insert_id();
+		if(empty($customer['billing'])) {
+			$query2 = "INSERT INTO customers (first_name, last_name, created_at, updated_at) VALUES (?,?,NOW(), NOW())";
+			$values2 = array($customer['first_name'], $customer['last_name']);
+			$this->db->query($query2, $values2);
+			$result2 = $this->db->insert_id();
+		}
 
 		$query3 = "INSERT INTO orders (billing_address_id, shipping_address_id, billing_customer_id, shipping_customer_id, status_id, subtotal, total, created_at, updated_at) 
 				   VALUES ($result1, $result1, $result2, $result2, 1, ".$customer['total'].", ".$customer['total'].", NOW(), NOW())";
