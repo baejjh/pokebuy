@@ -53,6 +53,7 @@ class Stores extends CI_Controller {
 		$this->load->view('cart', $display);
 	}
 	public function show_cart() {
+		$data['errors'] = $this->session->flashdata('errors');
 		$data['products'] = $this->cart->contents();
 		$this->load->model('Store');
 		$data['states'] = $this->Store->get_states();
@@ -93,11 +94,42 @@ class Stores extends CI_Controller {
 		$this->load->view('product', $display);
 	}
 	public function submit_order() {
+		$post = $this->input->post();
+
+		$this->form_validation->set_rules('first_name', 'First Name', 'required|alpha|min_length[2]');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required|alpha|min_length[2]');
+		$this->form_validation->set_rules('address', 'Address', 'required|min_length[3]');
+		$this->form_validation->set_rules('address2', 'Address 2', 'min_length[2]]');
+		$this->form_validation->set_rules('city', 'City', 'required|min_length[2]');
+		$this->form_validation->set_rules('zip_code', 'Zipcode', 'required|min_length[5]|max_length[10]');
+
+		if(empty($post['billing'])) {
+			$this->form_validation->set_rules('billing_first_name', 'Billing First Name', 'required|alpha|min_length[2]');
+			$this->form_validation->set_rules('billing_last_name', 'Billing Last Name', 'required|alpha|min_length[2]');
+			$this->form_validation->set_rules('billing_address', 'Billing Address', 'required|min_length[3]');
+			$this->form_validation->set_rules('billing_address2', 'Billing Address 2', 'min_length[2]');
+			$this->form_validation->set_rules('billing_city', 'Billing City', 'required|min_length[2]');
+			$this->form_validation->set_rules('billing_zip_code', 'Billing Zipcode', 'required|min_length[5]|max_length[10]');
+			$post['billing'] = 'different';
+		} else {
+			$post['billing_first_name'] = $post['first_name'];
+			$post['billing_last_name'] = $post['last_name'];
+			$post['billing_address'] = $post['address'];
+			$post['billing_address2'] = $post['address2'];
+			$post['billing_city'] = $post['city'];
+			$post['billing_state'] = $post['state'];
+			$post['billing_zip_code'] = $post['zip_code'];
+		}
+		if($this->form_validation->run() === FALSE) {
+			$this->session->set_flashdata('errors', validation_errors());
+			redirect('cart');
+		}
 		$data['products'] = $this->cart->contents();
 		$data['customer'] = $this->input->post();
 		$this->load->model('Store');
 		$test = $this->Store->submit_order($data);
 		$this->cart->destroy();
+		//Need to either send a message or redirect to success page, will come back to this:
 		redirect('cart');
 	}
 
