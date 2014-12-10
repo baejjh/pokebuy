@@ -22,6 +22,9 @@ class Admins extends CI_Controller
 		$this->load->view('admin/login', $data);
 	}
 
+
+//ADMIN REGISTER
+
 //Once Guest gets to the page, they have the option of 
 // 1. Registering as Admin
 // 2. Redirect to Login Page if Guest = Admin
@@ -55,7 +58,9 @@ class Admins extends CI_Controller
 		}
 	}
 
-//When Admin Logs In
+
+
+//ADMIN LOGIN
 	public function admin_login()
 	{
 		$post_data = $this->input->post();
@@ -92,6 +97,9 @@ class Admins extends CI_Controller
 	{
 		$this->load->view('admin/dashboard'); //problem: $email on dashboard is undefined
 	}
+
+
+
 //GO BACK TO THE ORDERS
 	public function redirect_to_orders()
 	{
@@ -100,6 +108,18 @@ class Admins extends CI_Controller
 		$var['orders'] = $this->admin_info->get_all_orders();
 		$this->load->view('admin/orders', $var);
 	}
+		public function redirect_to_one_order($id)
+		{
+			$var['one_order'] = $this->admin_info->get_order_by_id();
+			//THIS FUNCTION NEEDS TO CALL:
+				$var['statuses'] = 
+				$var['billing'] = 
+				$var['orders_has_products'] = 
+				$var['customers'] = 
+				$var['addresses'] =
+
+			$this->load->view('admin/one_order', $var);
+		}
 		public function sort_orders_by_status($status_name)
 		{
 			$var['statuses'] = $this->admin_info->get_all_status();
@@ -110,6 +130,9 @@ class Admins extends CI_Controller
 		{
 
 		}
+
+
+
 //GO BACK TO THE PRODUCTS
 	public function show_products()
 	{	
@@ -131,24 +154,35 @@ class Admins extends CI_Controller
 		
 		$this->pagination->initialize($config);
 //PROBLEM
-//no links are created!
+//no links are created! 
 		$this->view_data['pagination_links'] 	= $this->pagination->create_links();
 		$this->view_data['products'] 		 	= $this->admin_info->get_all_products_limit($start_row, $per_page);
+		$this->view_data['categories'] 			= $this->admin_info->get_all_categories();
+
+		//conditions need to be set i.e.- if modal is opened
+		// $this->view_data['categories'] 			= $this->admin_info->edit_categories_by_id($id, $new_name);
+		// $this->view_data['categories'] 			= $this->admin_info->delete_category_by_id($id);
+		// $this->view_data['categories'] 			= $this->admin_info->add_new_category($category_name);
 
 		$this->load->view('admin/products', $this->view_data);
 	} 
 	//As Admin, you can edit, delete, add products inside admin/products view
 		public function edit_product($id)
 		{
-			//MODAL GOES HERE!
+			//MODAL INFO GOES HERE
+			
+			//$var = $this->admin_info->edit_product_by_id($user);
+			//redirect('admin/products');
+
 			// $this->load->model('admin_info');
-			// $var = $this->admin_info->edit_product_by_id($user);	
+			// $var['products'] = $this->admin_info->edit_product_by_id($user);	
 			// $this->load->view('admin/products', $var);	
 		}
 		public function delete_product($id)
 		{
-			//you delete, and get all product loaded again before load->view
-			$var = $this->admin_info->delete_product_by_id($user);	
+			$this->admin_info->delete_product_by_id($id);
+
+			$var['products'] = $this->admin_info->get_all_products();
 			$this->load->view('admin/products', $var);	
 		}
 		//When Admin wants to add a product, they get directed to a new page
@@ -160,36 +194,39 @@ class Admins extends CI_Controller
 			//back to admin/product upon product submission succcess
 			public function add_new_product()
 			{
-				// //image upload for product
-				// $config = array(
-				// 	'upload_path' => "./uploads/",
-				// 	'allowed_types' => "gif|jpg|png|jpeg|pdf",
-				// 	'overwrite' => TRUE,
-				// 	'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-				// 	'max_height' => "768",
-				// 	'max_width' => "1024"
-				// );
-				// $this->load->library('upload', $config);
-				// if($this->upload->do_upload())
-				// {
-				// $data = array('upload_data' => $this->upload->data());
-				// $this->load->view('upload_success',$data);
-				// }
-				// else
-				// {
-				// $error = array('error' => $this->upload->display_errors());
-				// $this->load->view('file_view', $error);
-				// }
+				//add new db
+				$this->form_validation->set_rules('name', 'Name', 'trim|required');
+				$this->form_validation->set_rules('description', 'description', 'trim|optional');
+				$this->form_validation->set_rules('price', 'Price', 'trim|required');
+				$this->form_validation->set_rules('inventory_count', 'Inventory Count', 'trim|required');
+				//set rule for image
 
-				// //add new db
-				// $post_data = $this->input->post();
-				// $this->load->model('admin_info');
-				// $this->admin_info->add_new_product($post_data);
-
-				$this->load->view('admin/new_product', $new_product);
-				//load a success message
+				if($this->form_validation->run() === FALSE)
+				{
+					$this->session->set_flashdata('errors', validation_errors());
+					redirect('new_product');
+				}
+				else 
+				{
+					$post_data = $this->input->post();
+					$this->load->model('Admin_info');
+					$result = $this->Admin_info->add_new_product($post_data);
+					if($result > 0) {
+						$this->session->set_userdata('product_id', $result);
+						$this->session->set_userdata('add_products', TRUE);
+						redirect('products');
+					}
+					else
+					{
+						$this->session->set_flashdata('errors', '<p>There was an error</p>');
+						redirect('new_product');
+					}
+				}
 			}
-//GO BACK TO THE STORE AFTER A LOGOFF
+
+
+
+//BACK TO THE STORE AFTER A LOGOFF
 	public function admin_logoff()
 	{
 		$this->session->sess_destroy();
