@@ -37,7 +37,7 @@
 			<p><?= $product['price'] ?></p>
 			 <!-- <p> $product['location'] </p>    <-*image?*    -->
 			 <p><?= $product['description'] ?></p>
-			 <form action="/buy/<?= $product['id']?>" method="post">
+			 <form action="/add_cart/<?= $product['id']?>" method="post">
 				<input type="submit" value="Buy">
 			 </form>
 		</div>

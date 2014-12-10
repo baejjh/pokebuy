@@ -56,7 +56,9 @@ class Stores extends CI_Controller {
 		$this->load->view('cart', $data);
 	}
 
-	public function add_to_cart() {
+	public function add_to_cart($id) {
+		var_dump($id);
+		die('here');
 		//This is just a tempory hard coded data, until products page is live.  For testing purposes.
 		$data[] = array(
                'id'      => 'sku_123DEF',
@@ -75,4 +77,5 @@ class Stores extends CI_Controller {
                'qty'   => 0);
 		$this->cart->update($data);
 		redirect('cart');
+	}
 }//end of Controller curly
