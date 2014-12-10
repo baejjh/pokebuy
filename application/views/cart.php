@@ -7,19 +7,35 @@
 	</thead>
 	<tbody>
 <?php 	if(!empty($products)) {
-		var_dump($products);
-			foreach($products as $product) { ?>
+			$sum = 0;
+
+			//var_dump for testing only
+			var_dump($products);
+
+			foreach($products as $product) { 
+				$sum += $product['subtotal']; ?>
 		<tr>
 			<td><?php echo $product['name'] ?></td>
 			<td><?php echo $product['price'] ?></td>
 			<td><?php echo $product['qty'] ?></td>
 			<td><?php echo $product['subtotal'] ?></td>
+			<td> 
+				<form action="delete" method="post">
+					<input type="submit" name="delete" value="Delete">
+					<input type="hidden" name="rowid" value="<?php echo $product['rowid'] ?>">
+				</form>
+			</td>
 		</tr>
 <?php		}
 		} ?>
 	</tbody>
 	<tfoot>
-		<td></td>
+		<tr>
+			<th id="total" colspan="3" >Subtotal (Before Shipping and Tax):</th>
+<?php if(!empty($products)) { ?>
+			<th><?php echo $sum ?></th>
+<?php } ?>
+		</tr>
 	</tfoot>
 	</table>
 	<a href="store">Continue Shopping</a>
