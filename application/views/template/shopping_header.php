@@ -9,5 +9,10 @@
 <div class="content">
 	<ul class="shopping_header">
 		<li>Dojo eCommerce</li>
-		<li><a href="cart">Shopping Cart (<?php echo $cart_num ?>)</a></li>
+		<li><a href="cart">Shopping Cart (
+<?php 	if(!empty($cart_name)) {
+			echo $cart_name;
+		} else {
+			echo 'Empty';
+		} ?>)</a></li>
 	</ul>
