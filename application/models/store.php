@@ -56,7 +56,7 @@ class Store extends CI_Model {
 
 		if($customer['billing'] == "different") {
 			$query2 = "INSERT INTO customers (first_name, last_name, created_at, updated_at) VALUES (?,?,NOW(), NOW())";
-			$values2 = array($customer['first_name'], $customer['last_name']);
+			$values2 = array($customer['billing_first_name'], $customer['billing_last_name']);
 			$this->db->query($query2, $values2);
 			$result2 = $this->db->insert_id();
 		}
@@ -79,7 +79,7 @@ class Store extends CI_Model {
 		$this->db->query($query5);
 
 		foreach($data['products'] as $product) {
-			$query6 = "UPDATE products SET inventory_count = inventory_count-".$product['qty'].", quantity_sold = quantity_sold+".$product['qty']." WHERE id = ".$product['id'];
+			$query6 = "UPDATE products SET inventory_count = inventory_count-".$product['qty'].", quantity_sold = quantity_sold+".$product['qty'].", updated_at = NOW() WHERE id = ".$product['id'];
 			$result6 = $this->db->query($query6);
 		}
 

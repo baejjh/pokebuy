@@ -95,7 +95,7 @@ class Stores extends CI_Controller {
 	}
 	public function submit_order() {
 		$post = $this->input->post();
-
+		
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|alpha|min_length[2]');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|alpha|min_length[2]');
 		$this->form_validation->set_rules('address', 'Address', 'required|min_length[3]');
@@ -125,7 +125,9 @@ class Stores extends CI_Controller {
 			redirect('cart');
 		}
 		$data['products'] = $this->cart->contents();
-		$data['customer'] = $this->input->post();
+		$data['customer'] = $post;
+		// var_dump($data);
+		// die();
 		$this->load->model('Store');
 		$test = $this->Store->submit_order($data);
 		$this->cart->destroy();
