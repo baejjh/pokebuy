@@ -6,8 +6,10 @@ class Admins extends CI_Controller
 	{
     	parent::__construct();
     	$this->load->model('admin_info');
-    	$data['loggedin'] = $this->session->userdata('loggedin');
-  		$this->load->view('template/admin_header', $data);
+    	if(!empty($this->session->userdata('loggedin'))) {
+    		$data['loggedin'] = $this->session->userdata('loggedin');
+  			$this->load->view('template/admin_header', $data);
+  		}
   	}
 
 //Guest enters the link from the store, they get directed to the register page:
@@ -94,6 +96,9 @@ class Admins extends CI_Controller
 //GO BACK TO THE DASHBOARD
 	public function redirect_to_dashboard()
 	{
+		if(empty($this->session->userdata('loggedin'))) {
+			redirect('admin');
+		}
 		$this->load->view('admin/dashboard'); //problem: $email on dashboard is undefined
 	}
 
@@ -102,6 +107,9 @@ class Admins extends CI_Controller
 //GO BACK TO THE ORDERS
 	public function redirect_to_orders()
 	{
+		if(empty($this->session->userdata('loggedin'))) {
+			redirect('admin');
+		}
 		//retrieve status names for dropdown menus
 		$var['statuses'] = $this->admin_info->get_all_status();
 		$var['orders'] = $this->admin_info->get_all_orders();
@@ -138,6 +146,9 @@ class Admins extends CI_Controller
 	}
 	public function redirect_to_products()
 	{
+		if(empty($this->session->userdata('loggedin'))) {
+			redirect('admin');
+		}
 		$this->load->library('pagination');
 //PROBLEM
 //$start_row value keeps returning boolean of false when it should be a number: $this->uri->segment(3);
