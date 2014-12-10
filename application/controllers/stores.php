@@ -51,4 +51,28 @@ class Stores extends CI_Controller {
 		// $display['category'] = $id;
 		$this->load->view('cart', $display);
 	}
+	public function show_cart() {
+		$data['products'] = $this->cart->contents();
+		$this->load->view('cart', $data);
+	}
+
+	public function add_to_cart() {
+		//This is just a tempory hard coded data, until products page is live.  For testing purposes.
+		$data[] = array(
+               'id'      => 'sku_123DEF',
+               'qty'     => 2,
+               'price'   => 29.95,
+               'name'    => 'Headband'
+            );
+		// End of testing code.
+		$this->cart->insert($data);
+	}
+
+	public function delete_from_cart() {
+		$rowid = $this->input->post('rowid');
+		$data = array(
+               'rowid' => $rowid,
+               'qty'   => 0);
+		$this->cart->update($data);
+		redirect('cart');
 }//end of Controller curly

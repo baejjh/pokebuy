@@ -2,7 +2,7 @@
 	<a href="/add_product">Add New Product</a>
 	
 	<!-- pagination starts here -->
-	"<div class='pagination'>" . $this->pagination->create_links(). "</div>";
+	<?= "<div class='pagination'>" . $pagination_links . "</div>"; ?>
 
 	<table id ="admin_products_table">
 	<thead>
@@ -16,7 +16,7 @@
 	<tbody>	
 	<?php foreach($products as $each_product) {?>
 		<tr>
-			<td><?= $each_product['main_image']; ?></td>
+			<td> $each_product['main_image']; </td>
 			<td><?= $each_product['id']; ?></td>
 			<td><?= $each_product['name']; ?></td>
 			<td><?= $each_product['inventory_count']; ?></td>
