@@ -66,7 +66,7 @@ class Store extends CI_Model {
 		$result3 = $this->db->insert_id();
 
 		$query4 = "INSERT INTO orders (billing_address_id, shipping_address_id, billing_customer_id, shipping_customer_id, status_id, subtotal, total, created_at, updated_at) 
-				   VALUES ($result, $result1, $result2, $result3, 1, ".$customer['total'].", ".$customer['total'].", NOW(), NOW())";
+				   VALUES ($result, $result1, $result2, $result3, 2, ".$customer['total'].", ".$customer['total'].", NOW(), NOW())";
 		$this->db->query($query4);
 		$result4 = $this->db->insert_id();
 
