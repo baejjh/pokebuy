@@ -19,6 +19,14 @@ class Admin_info extends CI_Model {
 	public function get_all_products()
 	{
 		return $this->db->query("SELECT * FROM products")->result_array();
+		//need to retrieve images too
+	}
+	public function get_all_products_limit($start_row, $per_page)
+	{
+		$query = "SELECT * FROM products WHERE id >= ? AND id < ?";
+		$values = array($start_row, $per_page);
+		return $this->db->query($query, $values)->result_array();
+		//need to retrieve images too
 	}
 	public function add_new_product($new_product)
 	{
@@ -32,9 +40,27 @@ class Admin_info extends CI_Model {
 		//how does this query work?
 		//from sql: "UPDATE `products` SET `inventory_count`='12' WHERE `id`='4'"
 	}
+	public function organize_by_status($status_name)
+	//need to get it by status id first and then get status name
+	{
+		return $this->db->query(
+			"SELECT orders.id, billing_customer_id, order_date, billing_address_id, total, status_id, status
+			 FROM orders LEFT JOIN statuses
+				ON orders.status_id = statuses.id
+			 WHERE status = ?", $status_name);
+	}
 	public function delete_product_by_id($id)
 	{
 		return $this->db->query("DELETE FROM products WHERE id = ?", $id);
+	}
+	public function get_all_orders()
+	{
+		return $this->db->query("SELECT * FROM orders")->result_array();
+		//need to retrieve images too
+	}
+	public function get_all_status()
+	{
+		return $this->db->query("SELECT * FROM statuses")->result_array();
 	}
 }
 

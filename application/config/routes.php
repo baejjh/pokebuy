@@ -55,6 +55,9 @@ $route['orders']				= "admins/redirect_to_orders";
 $route['products']				= "admins/redirect_to_products";
 $route['logoff'] 				= "admins/admin_logoff";
 
+//orders view
+$route['sort_orders'] 			= "admins/sort_orders_by_status";
+
 //products view
 $route['add_product'] 			= "admins/redirect_to_new_product";
 

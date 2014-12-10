@@ -5,6 +5,7 @@ class Admins extends CI_Controller
 	public function __construct()
 	{
     	parent::__construct();
+    	$this->load->model('admin_info');
   		$this->load->view('template/admin_header');
   	}
 
@@ -33,9 +34,11 @@ class Admins extends CI_Controller
 			$this->session->set_flashdata('errors', validation_errors());
 			redirect('register');
 		}
-		$post_data = $this->input->post();
-		$this->load->model('admin_info');
-		$this->admin_info->admin_register($post_data);
+		else 
+		{
+			$post_data = $this->input->post();
+			$this->admin_info->admin_register($post_data);
+		}
 	}
 
 //When Admin Logs In
@@ -55,8 +58,6 @@ class Admins extends CI_Controller
 		else //if validation is correct
 		{	
 			$user = $post_data["email"];
-
-			$this->load->model('admin_info');
 			$admin = $this->admin_info->check_admin($user);	
 			$this->load->view('admin/dashboard', $admin);		
 		}
@@ -71,29 +72,48 @@ class Admins extends CI_Controller
 //GO BACK TO THE ORDERS
 	public function redirect_to_orders()
 	{
-		$this->load->view('admin/orders');
+		//retrieve status names for dropdown menus
+		$var['statuses'] = $this->admin_info->get_all_status();
+		$var['orders'] = $this->admin_info->get_all_orders();
+		$this->load->view('admin/orders', $var);
 	}
+		public function sort_orders_by_status($status_name)
+		{
+			$var['statuses'] = $this->admin_info->get_all_status();
+			$var['orders'] = $this->admin_info->organize_by_status($status_name);
+			$this->load->view('admin/orders', $var);
+		}
+		public function status_update($id, $status)
+		{
+
+		}
 //GO BACK TO THE PRODUCTS
+	public function show_products()
+	{	
+		//left it open for pagination doodles
+	}
 	public function redirect_to_products()
 	{
-		// $this->load->library('pagination');
-		// $this->db->select('main_image, id, name, inventory_count, quantity_sold');
+		$this->load->library('pagination');
+//PROBLEM
+//$start_row value keeps returning boolean of false when it should be a number: $this->uri->segment(3);
+		$start_row 		= 1; //temporarily set to 1 instead of $this->uri->segment(3)
+		$total_rows		= $this->db->count_all('products'); //both correctly outputs the data size: $this->db->get('products')->num_rows();
+		$per_page 		= 10;			
 
-		// $data['base_url'] 		= base_url() . 'products';
-		// $data['total_rows']		= $this->db->get('products')->num_rows();
-		// $data['per_page'] 		= 30; //display per page    
-		// $data['num_links'] 		= 5; // "5 links shown"
-		// $data['records']			= $this->db->select('main_image, id, name, inventory_count, quantity_sold')->
-		// 	get('products', $data['per_page'], $this->uri->segment(3));
-		// $data['use_page_numbers'] = TRUE; //show the the actual page number rather than $this->uri->segment(*numbers)
+		$config['base_url'] 	= base_url() . 'products';
+		$config['total_rows']	= $total_rows;
+		$config['per_page'] 	= $per_page; //display per page    
+		// $config['use_page_numbers'] = TRUE; //show the the actual page number rather than $this->uri->segment(*numbers)
+		
+		$this->pagination->initialize($config);
+//PROBLEM
+//no links are created!
+		$this->view_data['pagination_links'] 	= $this->pagination->create_links();
+		$this->view_data['products'] 		 	= $this->admin_info->get_all_products_limit($start_row, $per_page);
 
-		// $this->pagination->initialize($data);
-
-		$this->load->model('admin_info');
-		$data['products']=$this->admin_info->get_all_products();//$per_page, $row
-		$this->load->view('admin/products', $data);
-	}
-
+		$this->load->view('admin/products', $this->view_data);
+	} 
 	//As Admin, you can edit, delete, add products inside admin/products view
 		public function edit_product($id)
 		{
@@ -105,7 +125,6 @@ class Admins extends CI_Controller
 		public function delete_product($id)
 		{
 			//you delete, and get all product loaded again before load->view
-			$this->load->model('admin_info');
 			$var = $this->admin_info->delete_product_by_id($user);	
 			$this->load->view('admin/products', $var);	
 		}
