@@ -13,14 +13,15 @@
 <?php if(!empty($categories)) {?>
 		<ul>
 <?php 	foreach($categories as $category) {	?>	
-			<li><a href="/categories/<?php= $category['id'] ?>"><?php= $category['name'] ?></a></li>
+			<li><a href="/categories/<?= $category['id'] ?>"><?= $category['name'] ?></a></li>
 <?php	} ?>
 		</ul>
 <?php } ?>
 </div>
 <div class="products">
 <?php 	if(!empty($products[0]['category'])) { ?>
-	<h1><?php= $products[0]['category'] ?></h1>
+	<h1><?= $products[0]['category'] ?></h1>
+	<a href="/default_controller">Do More Shopping!</a>
 <?php	} ?>
 	<select>
 	    <option value="volvo">Low Price</option>
@@ -32,7 +33,7 @@
   	<div class="each_product">
 		<p><a href="/products_view/<?= $product['id'] ?>">
 			<?= $product['name'] ?></a></p>
-		<p><?= $product['price'] ?></p>
+		<p>$<?= $product['price'] ?></p>
 		 <!-- <p> $product['location'] </p>    <-*image?*    -->
 		 <p><?= $product['description'] ?></p>
 		 <form action="/add_cart/<?= $product['id']?>" method="post">

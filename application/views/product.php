@@ -1,5 +1,7 @@
 	<a href="/default_controller">Go Back</a>
-	<h1><?=$display['name'];?></h1>
+	<?php foreach ($products as $product) { ?>
+		<h1><?=$product['name'];?></h1>
+		<?php } ?>
 	<div class="left_div">
 		<!-- <img src="#" alt="main_photo">
 
@@ -10,7 +12,10 @@
 		<img src="#" alt="side_photo"> -->
 	</div>
 	<div class="right_div">
-		<?=$display['description'];?>
+		<?php foreach ($products as $product) { ?>
+			$<?=$product['price'];?><br>
+			<?=$product['description'];?><br>
+		<?php } ?>
 		<form>
 			<select>
 				<option>$products['quantity'];</option>
