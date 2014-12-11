@@ -81,7 +81,7 @@ class Admin_info extends CI_Model {
 	{
 		$query = "INSERT INTO products
 					(name, description, price, main_image_id, inventory_count, created_at, updated_at, active)
-				  VALUES (?,?,?, 3,?,NOW(),NOW(),1)";
+				  VALUES (?,?,?, 3,?,NOW(),NOW(),0)";
 	    $values = array(
 		    		$new_product['name'],
 		    		$new_product['description'],
@@ -122,7 +122,7 @@ class Admin_info extends CI_Model {
 	public function delete_product_by_id($id)
 	{
 		$query = "UPDATE products
-				  SET active = '0'
+				  SET active = '1'
 				  WHERE id = ?"; //set active status to false
 	    $values = $id;
 	    return $this->db->query($query, $values);
@@ -142,7 +142,7 @@ class Admin_info extends CI_Model {
 	{	
 		$query = "INSERT INTO categories
 					(name, active, created_at, updated_at)
-				  VALUES (?, 1, NOW(), NOW())";
+				  VALUES (?, 0, NOW(), NOW())";
 	    $values = $category_name;
 	    return $this->db->query($query, $values);
 	}
