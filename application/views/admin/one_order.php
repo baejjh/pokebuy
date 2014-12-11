@@ -1,25 +1,27 @@
-	<h1>Welcome, Admin <?= $email; ?></h1> 
 	<div class="dashboard_left">
-		<h1>Order ID: $orders['id'];</h1>
+		<h1>Order ID: <?= $one_order[0]['order_id']; ?></h1>
+		<h2>Order Submitted: <?= $one_order[0]['order_submitted']; ?></h2>
+
+		<h4>Use foreach to display all items in order</h4>
 
 		<ul>
 			<li><h2>Customer Shipping Info</h2></li>
-				<li>Name: $customers['first_name'] . " " . $customers['last_name'];</li>
-				<li>Address: $addresses['address'];</li>
-				<li>$addresses['address2'];</li>
-				<li>City: $addresses['city'];</li>
-				<li>State: $addresses['state'];</li>
-				<li>Zipcode: $addresses['zip_code'];</li>
+			<li>Name: <?= $one_order[0]['shipper_full_name']; ?></li>
+			<li>Address:
+				<?= $one_order[0]['shipper_full_name']; ?>
+				<span class="line_break">
+				<?= $one_order[0]['shipping_address_street'] . " " . $one_order[0]['shipping_address_zip']; ?>
+			</li>
 		</ul>
 
 		<ul>
 			<li><h2>Customer Billing Info</h2></li>
-				<li>Name: $customers['first_name'] . " " . $customers['last_name'];</li>
-				<li>Address: $addresses['address'];</li>
-				<li>$addresses['address2'];</li>
-				<li>City: $addresses['city'];</li>
-				<li>State: $addresses['state'];</li>
-				<li>Zipcode: $addresses['zip_code'];</li>
+			<li>Name: <?= $one_order[0]['biller_full_name']; ?></li>
+			<li>Address:
+				<?= $one_order[0]['biller_full_name']; ?>
+				<span class="line_break">
+				<?= $one_order[0]['billing_address_street'] . " " . $one_order[0]['billing_address_zip']; ?>
+			</li>
 		</ul>
 	</div>
 
@@ -34,32 +36,32 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td>$orders_has_products['product_id'];</td>
-			<td>$products['name'];</td>
-			<td>$orders_has_products['price'];</td>
-			<td>$orders_has_products['quantity_ordered'];</td>
-			<td>$orders['total'];</td>
+			<td><?= $one_order[0]['item_id']; ?></td>
+			<td><?= $one_order[0]['item_name']; ?></td>
+			<td><?= $one_order[0]['item_single_price']; ?></td>
+			<td><?= $one_order[0]['item_quantity']; ?></td>
+			<td><?= $one_order[0]['item_total_price']; ?></td>
 		</tr>
 	</tbody>
 	</table>
 
 	<div class="status">
-		Status: $statuses['status'];
+		Status: <?= $one_order[0]['order_status']; ?>
 	</div>
 
 	<div class="dashboard_total">
 		<table>
 			<tr>
 				<td>Subtotal</td>
-				<td>$orders['subtotal']</td>
+				<td><?= $one_order[0]['order_subtotal']; ?></td>
 			</tr>
 			<tr>
 				<td>Shipping</td>
-				<td>$orders['shipping_price']</td>
+				<td><?= $one_order[0]['order_shipping_cost']; ?></td>
 			</tr>
 			<tr>
 				<td>Total Price</td>
-				<td>$orders['total']</td>
+				<td><?= $one_order[0]['order_total']; ?></td>
 			</tr>
 		</table>
 	</div>

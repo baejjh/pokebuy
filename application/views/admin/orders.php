@@ -1,8 +1,5 @@
 	<h1>Orders</h1>
 		<h2>Sort by status</h2>
-		<h2>Submit staus of one order by id</h2>
-		<h2>Display billing address</h2>
-		<h2>Display Order name</h2>
 		<h2>Search doesn't work</h2>
 
 	<form action="#" method="post">
@@ -24,25 +21,39 @@
 	<table>
 	<thead>
 		<th>Order ID</th>
-		<th>Name</th>
-		<th>Date</th>
+		<th>Buyer's Name</th>
+		<th>Order Last Updated</th>
 		<th>Billing Address</th>
 		<th>Total</th>
 		<th>Status</th>
 	</thead>
 	<tbody>
-		<?php foreach($orders as $one_order) { ?>
+		<?php foreach($orders as $one_order) {?>
 		<tr>
-			<td><a href="order_id/<?= $one_order['id']; ?>"><?= $one_order['id']; ?></a></td>
-			<td><?= $one_order['billing_customer_id']; ?> then pull $customer['first_name']</td>
-			<td><?= $one_order['order_date']; ?></td>
-			<td><?= $one_order['billing_address_id']; ?> then pull full shipping address</td>
-			<td><?= $one_order['total']; ?></td>
+		<!-- Order ID -->
+			<td><a href="submitted_order/<?= $one_order['order_id']; ?>"><?= $one_order['order_id']; ?></a></td>
+
+		<!-- Buyer's Name -->
+			<td><?= $one_order['biller_full_name']; ?></td>
+
+		<!-- Order Last Updated -->
+			<td><?= $one_order['order_submitted']; ?></td>
+
+		<!-- Billing Address -->
+			<td><?= $one_order['billing_address_street']?>
+				<span class="line_break">
+				<?= $one_order['billing_address_city_state'] . " " . $one_order['billing_address_zip']?>
+			</td>
+
+		<!-- Total -->
+			<td><?= "$ " . $one_order['order_total']; ?></td>
+		
+		<!-- Status -->
 			<td>
 				<select>
 				<?php foreach($statuses as $status_type) {?>
 					<option><?= $status_type['status'];?>
-				<?php } ?></option>
+				<?php } ?>
 				</select>
 			</td>
 		</tr>

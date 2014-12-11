@@ -58,7 +58,7 @@ $route['logoff'] 				= "admins/admin_logoff";
 
 //orders view
 $route['sort_orders'] 			= "admins/sort_orders_by_status";
-$route['order_id/(:num)'] 		= "admins/redirect_to_one_order/$1";
+$route['submitted_order/(:num)']= "admins/redirect_to_one_order/$1";
 
 //products view
 $route['add_product'] 			= "admins/redirect_to_new_product";
