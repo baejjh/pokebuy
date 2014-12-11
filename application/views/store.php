@@ -10,9 +10,9 @@
 			<h4>By Product Name</h4>
 				<input type="text" placeholder="Product Name" name="word_search" value="<?= $name?>">
 			<h4>By Category</h4>
-				<?php if(!empty($this->session->userdata('categories')))
+				<?php if(!empty($categories))
 					  	{ ?>
-				<?php 		foreach($this->session->userdata('categories') as $category)
+				<?php 		foreach($categories as $category)
 							{	?>	
 								<input type="radio" name="category" value="<?= $category['id'] ?>"><?= $category['name'] ?><br>
 				<?php 		} ?>
@@ -30,7 +30,7 @@
 	<div class="products_div"> 
 		<?php if(!empty($products))
 		{ 
-			foreach($similar_products as $product)
+			foreach($products as $product)
 			{ ?>
 				<div class="each_product" stuff="<?= $product['id']?>">
 				<img src="<?= $product['location'] ?>" alt="Poke Pics" height="150px" width="150px">
@@ -45,7 +45,7 @@
 		</div>
 	<?php		}
 			} ?>
-	<div class="pagination_div"><?php echo $links ?></div>
+	<div class="pagination_div"><?php if(!empty($links)) {echo $links;} ?></div>
 	</div>
 </div> <!-- div for container -->
 </body>

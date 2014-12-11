@@ -79,6 +79,7 @@ $route['buy/(:num)'] 			= "stores/product_buy/$1";
 $route['add_cart/(:num)'] 		= "stores/add_to_cart/$1";
 $route['search_product'] 		= "stores/sort_orders_by_status";
 $route['order_by'] 				= "stores/sort_orders_by_status";
+$route['order_by/(:num)'] 		= "stores/sort_orders_by_status/$1";
 $route['store/(:num)']			= "stores/index";
 
 // shopping cart
