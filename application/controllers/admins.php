@@ -137,7 +137,7 @@ class Admins extends CI_Controller
 public function sort_orders_by_status()
 	{
 		$word_search = $this->input->post('word_search');
-		$selected_order = $this->input->post('selected_status');
+		$selected_status = $this->input->post('selected_status');
 		if (!isset($word_search)) {
 			$word_search = NULL;
 		}

@@ -36,7 +36,8 @@ class Store extends CI_Model {
 			LEFT JOIN categories 
 			ON product_categories.category_id = categories.id
             LEFT JOIN images
-            ON products.id = images.product_id";
+            ON products.id = images.product_id
+            GROUP BY products.id";
 			return $this->db->query($query)->result_array();
 	}
 	public function get_category_with_search_by_order($selected_order, $word_search, $category) 

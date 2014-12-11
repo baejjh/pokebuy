@@ -30,6 +30,7 @@ class Stores extends CI_Controller {
 		$display['similar_products'] = $this->Store->get_all_for_index();
 		$display['categories'] = $this->Store->get_all_categories();
 		$display['count'] = $this->Store->count_products();
+	
 		$this->load->view('store', $display);
 	}
 	public function category_store($id) {
@@ -132,8 +133,10 @@ class Stores extends CI_Controller {
 		if (!isset($selected_order)) {
 			$selected_order = NULL;
 		}
+		$this->load->model('Store');
 		$display['products'] = $this->Store->get_category_with_search_by_order($selected_order, $word_search, $category);
 		$categories = $this->Store->get_all_categories();
+		$display['links'] = 0; //temp fix to remove undefined variable error on links
 		$this->session->set_userdata('categories', $categories);
 		$this->load->view('store', $display);
 	}

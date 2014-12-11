@@ -30,16 +30,16 @@
 	<div class="products_div"> 
 		<?php if(!empty($products))
 		{ 
-			foreach($products as $product)
+			foreach($similar_products as $product)
 			{ ?>
 				<div class="each_product" stuff="<?= $product['id']?>">
 				<p>	
 					<a class="product_name" href="/view_product/<?= $product['id'] ?>">
 						<?= $product['name'] ?>
 					</a>
+					<img src="<?= $product['location'] ?>" alt="Poke Pics" height="150px" width="150px">
 				</p>
 				<p>$<?= $product['price'] ?></p>
-	 			<!-- <p> $product['main_image_id'] </p>    <-*image?*    -->
 				<p><?= $product['description'] ?></p>
 			 <form action="/add_cart/<?= $product['id']?>" method="post">
 				<input type="submit" value="Buy" class="submit">
