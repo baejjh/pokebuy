@@ -353,7 +353,7 @@ class Admin_info extends CI_Model {
 			        CONCAT_WS(', ',addresses.city,states.abbreviation) AS 'billing_address_city_state',
 			        addresses.zip_code AS 'billing_address_zip',
 			        orders.total AS 'order_total',
-			        statuses.status AS 'order_status'
+			        statuses.id AS 'order_status_id'
 				FROM orders
 				LEFT JOIN customers ON orders.billing_customer_id = customers.id
 				LEFT JOIN addresses ON orders.billing_address_id = addresses.id
