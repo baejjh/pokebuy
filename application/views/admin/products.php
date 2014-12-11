@@ -8,6 +8,10 @@
 				user,
 				products</p>
 		<h4>Add Product works but no image file upload</h4>
+	
+	<!-- Search -->
+	<div class="search_div">
+	<a href="/add_product">Add New Product</a>
 
 	<form action="sort_products" method="post" id="product_sort_form">
 		<input type="text" id="product_search" name="product_search" placeholder="Search Products">
@@ -26,8 +30,7 @@
 		});
 	});
 	</script>
-
-	<a href="/add_product">Add New Product</a>
+	</div>
 
 	<table id ="admin_products_table">
 	<thead>
@@ -56,8 +59,8 @@
 	</tbody>
 	</table>
 
-	<!-- pagination starts here -->
-	<?= "<div class='pagination'>" . $links . "</div>"; ?>
+	<!-- Pagination -->
+	<div class="pagination_div"><?php echo $links ?></div>
 
 
 

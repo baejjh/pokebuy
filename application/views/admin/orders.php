@@ -1,6 +1,8 @@
 	<h1>Orders</h1>
 		<p>Sort by status</p>
 
+	<!-- Search -->
+	<div class="search_div">
 	<form action="sort_orders" method="post" id="order_sort_form">
 		<input type="text" placeholder="Search Zip, Order ID, or Buyer's Name" id="word_search" name="word_search"> <!-- USED TO BE HERE: WHY? value="?= $id?>" -->
 		<select name="selected_status" id="selected_status">
@@ -10,6 +12,7 @@
 		</select>
 		<input type="submit" value="Search Orders">
 	</form>
+	</div>
 	
 	<script type="text/javascript">
 	// alerts whenever button is submitted
@@ -69,7 +72,7 @@
 	</tbody>
 	</table>
 	<!-- Pagination -->
-	<?php if(!empty($links)) {echo $links; } ?> 
+	<div class="pagination_div"><?php if(!empty($links)) {echo $links; } ?></div>
 </div><!-- close content div -->	
 </body>
 </html>

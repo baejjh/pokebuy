@@ -2,6 +2,9 @@
 	margin: 0px auto;
 	font-family: 'Ubuntu', sans-serif;
 }
+body{
+    background: url('http://th04.deviantart.net/fs70/PRE/f/2013/065/b/b/pokemon_wallpaper__be_prepared__line_version_2___by_fpkayton-d5x6s3e.png')
+}
 a{
     text-decoration: none;
 }
@@ -9,7 +12,6 @@ a{
 {
     margin-top: 60px; /* .header's height + padding-top*/
     width:100%;
-    background: url('http://th04.deviantart.net/fs70/PRE/f/2013/065/b/b/pokemon_wallpaper__be_prepared__line_version_2___by_fpkayton-d5x6s3e.png')
 }
 .admin_header_div
 {
@@ -40,6 +42,7 @@ table
  	width: 80%;
     margin: 0px auto;
     padding: 0px auto;
+    background: white;
 }
 	tbody tr:nth-child(odd)
     {
@@ -47,7 +50,7 @@ table
     }
     tbody tr:nth-child(even)
     {
-    background-color: white;
+    background-color: whitesmoke;
     }
 .dashboard_left
 {
@@ -84,21 +87,32 @@ table
 	display: inline-block;
 	vertical-align: top;
 }
-
-.pagination
+.search_div
 {
+    width: 80%;    
     display: block;
-    text-align: center;
+    vertical-align: top;
+    text-align: right;
+    padding: 20px;
 }
-
+.pagination_div
+{
+    width: 100%;    
+    display: block;
+    vertical-align: top;
+    text-align: center;
+    padding: 10px;
+}
 .line_break {
     display: block;
 }
-
 .product_image_size {
     width: 100px;
     height: 100px
 }
+
+
+
 
 /*MODAL STYLE*/
 .modalDialog {
