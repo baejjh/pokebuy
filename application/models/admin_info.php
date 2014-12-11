@@ -80,12 +80,12 @@ class Admin_info extends CI_Model {
 	public function sort_products_by_name_id($product_search)
 	{
 		if ($product_search != NULL) {
-			$where = "WHERE products.id LIKE '%{$product_search}%'
-						  OR products.name LIKE '%{$product_search}%'
-						  OR customers.first_name LIKE '%{$product_search}%'
-						  OR customers.last_name LIKE '%{$product_search}%'
-					  GROUP BY products.id
-           			  ORDER BY products.id ASC"; //old one first
+				$where = "WHERE products.id LIKE '%{$product_search}%'
+							  OR products.name LIKE '%{$product_search}%'
+							  OR customers.first_name LIKE '%{$product_search}%'
+							  OR customers.last_name LIKE '%{$product_search}%'
+						  GROUP BY products.id
+               			  ORDER BY orders.created_at ASC";
 		}
 		else if ($product_search == NULL) {
 			$where = "";
@@ -258,11 +258,11 @@ class Admin_info extends CI_Model {
 				LEFT JOIN states AS shipping_states ON shipping_addresses.state_id = shipping_states.id
 
 				LEFT JOIN statuses ON orders.status_id = statuses.id
-				LEFT JOIN orders_has_products ON orders.id = orders_has_products.id
+				LEFT JOIN orders_has_products ON orders.id = orders_has_products.order_id
 				LEFT JOIN products ON orders_has_products.product_id = products.id
 				LEFT JOIN images_has_products ON products.id = images_has_products.product_id
 				LEFT JOIN images ON images.id = images_has_products.image_id
-				WHERE orders.id = ?", $id)
+				WHERE orders_has_products.order_id = ?", $id)
 		->result_array();
 		//need to retrieve images too
 	}

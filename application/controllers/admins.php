@@ -119,9 +119,8 @@ class Admins extends CI_Controller
 	public function redirect_to_one_order($id)
 	{
 		$var['statuses'] = $this->admin_info->get_all_status_types();
-		$var['one_order'] = $this->admin_info->show_one_order_view($id);
-		// var_dump($var);
-		// die('hi');
+		$var['items_in_order'] = $this->admin_info->show_one_order_view($id);
+
 		$this->load->view('admin/one_order', $var);
 	}
 public function sort_orders_by_status()
@@ -175,7 +174,6 @@ public function sort_orders_by_status()
 	public function sort_products()
 	{
 		$product_search = $this->input->post('product_search');
-
 		$var['products']	 	= $this->admin_info->sort_products_by_name_id($product_search);
 		$var['categories'] 		= $this->admin_info->get_all_categories();
 		
