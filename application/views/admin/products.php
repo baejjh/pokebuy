@@ -55,63 +55,64 @@
 
 
 	<!-- modal for product edit starts here -->
-	<div id="openModal" class="modalDialog">
+<!-- 	<div id="openModal" class="modalDialog">
 	    <div><a href="#close" title="Close" class="close">X</a>
-
-	        <h2>Edit Product</h2>
-	    <form action="edit_product/<?= $each_product['item_id']; ?>" method='post'>
-			<table>
-			<tr>
-				<td><label for="name">Name:</label></td>
-				<td><input type="text" name="name" value="<?= $each_product['item_name']; ?>"></td>
-			</tr>
-			<tr>	
-				<td><label for="description">Description:</label></td>
-				<td><input type="text" name="description" value="<?= $each_product['item_inventory']; ?>"></td>
-			</tr>
-			<tr>
-				<td>Categories</td>
-				<td>
-					<?php foreach ($categories as $category) { ?>
-						<?= $category['category_name']; ?>
-						<!-- probably an img src instead of a href -->
-						<a href="edit_category/<?= $category['category_id']; ?>">edit</a> /
-						<a href="delete_category/<?= $category['category_id']; ?>">delete</a>
-						<span class="line_break">
-					<?php } ?>
-				</td>
-			</tr>
-			<tr>
-				<td>Or Add New Cateory</td>
-				<td>
-				<form action="add_category" method="post">
-					<input type="text" name="new_category" placeholder="Add New Category Name">
-					<input type="button" value="Add New Category" name="new_category">
-				</form>
-				</td>
-			</tr>
-			<tr>
-				<td>Images</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><label for="price">Price:</label></td>
-				<td><input type="text" name="price" value="<?= $each_product['item_price']; ?>">
-			</tr>
-			<tr>
-				<td><label for="inventory_count">Inventory Count:</label></td>
-				<td><input type="text" name="inventory_count" value="<?= $each_product['item_inventory']; ?>"></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="button" value="Edit">
-				<td><input type="button" value="Preview">
-				<td><input type="button" value="Cancel"></td>
-			</tr>
-			</table>
-	 	</form>
-	    </div>
-	</div>
+ -->
+    <h2>Edit Product</h2>
+    <form action="edit_product/<?= $each_product['item_id']; ?>" method='post'>
+		<table>
+		<tr>
+			<td><label for="name">Name:</label></td>
+			<td><input type="text" name="name" value="<?= $each_product['item_name']; ?>"></td>
+		</tr>
+		<tr>	
+			<td><label for="description">Description:</label></td>
+			<td><input type="text" name="description" value="<?= $each_product['item_inventory']; ?>"></td>
+		</tr>
+		<tr>
+			<td>Categories</td>
+			<td>
+				<?php foreach ($categories as $category) { ?>
+					<?= $category['category_name']; ?>
+					<!-- probably an img src instead of a href -->
+					<a href="edit_category/<?= $category['category_id']; ?>">edit</a> /
+					<a href="delete_category/<?= $category['category_id']; ?>">delete</a>
+					<span class="line_break">
+				<?php } ?>
+			</td>
+		</tr>
+		<tr>
+			<td>Or Add New Cateory</td>
+			<td>
+			<form action="add_category" method="post">
+				<input type="text" name="new_category" placeholder="Add New Category Name">
+				<input type="button" value="Add New Category" name="new_category">
+			</form>
+			</td>
+		</tr>
+		<tr>
+			<td>Images</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><label for="price">Price:</label></td>
+			<td><input type="text" name="price" value="<?= $each_product['item_price']; ?>">
+		</tr>
+		<tr>
+			<td><label for="inventory_count">Inventory Count:</label></td>
+			<td><input type="text" name="inventory_count" value="<?= $each_product['item_inventory']; ?>"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="submit" name="edit_product" value="Edit">
+				<input type="submit" name="preview_edit_product" value="Preview">
+				<a href="#close" title="Close" class="close">Cancel</a>
+			</td>
+		</tr>
+		</table>
+	</form>
+<!-- 	    </div>
+	</div> -->
 </div><!-- close content div -->
 </body>
 </html>

@@ -81,7 +81,7 @@ class Admin_info extends CI_Model {
 	{
 		$query = "INSERT INTO products
 					(name, description, price, main_image_id, inventory_count, created_at, updated_at, active)
-				  VALUES (?,?,?, 3,?,NOW(),NOW(),1)";
+				  VALUES (?,?,?, 3,?,NOW(),NOW(),0)";
 	    $values = array(
 		    		$new_product['name'],
 		    		$new_product['description'],
@@ -90,37 +90,39 @@ class Admin_info extends CI_Model {
 	    		  ); 
 	    return $this->db->query($query, $values);
 	}
-	public function edit_product_by_id($id)
+	public function edit_product_by_id($new_info)
 	{
 		// UPDATE:
 		// how does this query work?
 		// from sql:
 		// "UPDATE `products` SET `inventory_count`='12' WHERE `id`='4'"
-		$query= "SELECT products.id AS 'item_id',
-					    products.name AS 'item_name',
-				        products.inventory_count AS 'item_inventory',
-				        products.quantity_sold AS 'item_sold',
-				        products.main_image_id AS 'item_img_id',
-				        products.price AS 'item_price',
-				        categories.name AS 'item_category',
-					    images.location AS 'item_main_img_url',
-				        images.name AS 'item_img_description'
+		$query= "START TRANSACTION;
+				SELECT products.id AS 'item_id',
+						products.name AS 'item_name',
+						products.inventory_count AS 'item_inventory',
+						products.quantity_sold AS 'item_sold',
+						products.main_image_id AS 'item_img_id',
+						products.price AS 'item_price',
+						categories.name AS 'item_category',
+						images.location AS 'item_main_img_url',
+						images.name AS 'item_img_description'
 				FROM products
 				LEFT JOIN images_has_products ON products.id = images_has_products.product_id
 				LEFT JOIN images ON images.id = images_has_products.image_id
 				LEFT JOIN product_categories ON products.id = product_categories.product_id
 				LEFT JOIN categories ON categories.id = product_categories.category_id
-				WHERE products.id = ?";
+				WHERE products.id = 1 FOR UPDATE;
+				UPDATE products SET products.name = ?;";
 		$values = array(
-					$id
+					$new_info
 				  );
 		return $this->db->query($query, $values)->result_array();
 		
 	}
 	public function delete_product_by_id($id)
 	{
-		$query = "INSERT INTO products (active)
-				  VALUES (0)
+		$query = "UPDATE products
+				  SET active = '1'
 				  WHERE id = ?"; //set active status to false
 	    $values = $id;
 	    return $this->db->query($query, $values);
@@ -140,7 +142,7 @@ class Admin_info extends CI_Model {
 	{	
 		$query = "INSERT INTO categories
 					(name, active, created_at, updated_at)
-				  VALUES (?, 1, NOW(), NOW())";
+				  VALUES (?, 0, NOW(), NOW())";
 	    $values = $category_name;
 	    return $this->db->query($query, $values);
 	}

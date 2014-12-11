@@ -23,7 +23,6 @@ class Stores extends CI_Controller {
 		$config['last_link'] = 'last';
 		$config['next_link'] = 'next';
 		$config['prev_link'] = '&lt;';
-		// $config['anchor_class'] = 'pagination_links'; --Not sure what this does
 		$this->pagination->initialize($config); 
 		$start = $this->uri->segment(2);
 		$display['links'] = $this->pagination->create_links();
@@ -70,11 +69,17 @@ class Stores extends CI_Controller {
 		$this->load->view('cart', $data);
 	}
 	public function add_to_cart($id) {
+		$qty;
+		if(!empty($this->input->post('qty'))) {
+			$qty = $this->input->post('qty');
+		} else {
+			$qty = 1;
+		}
 		$this->load->model('Store');
 		$product = $this->Store->product_buy($id);
 		$data[] = array(
 			 	'id'      => $product['id'],
-            	'qty'     => 1,
+            	'qty'     => $qty,
              	'price'   => $product['price'],
               	'name'    => $product['name'],
 				'inventory' => $product['inventory_count']);
@@ -157,12 +162,9 @@ class Stores extends CI_Controller {
 		}
 		$data['products'] = $this->cart->contents();
 		$data['customer'] = $post;
-		// var_dump($data);
-		// die();
 		$this->load->model('Store');
 		$test = $this->Store->submit_order($data);
 		$this->cart->destroy();
-		//Need to either send a message or redirect to success page, will come back to this:
 		redirect('success');
 	}
 	public function order_success() {
