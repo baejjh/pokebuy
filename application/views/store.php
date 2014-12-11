@@ -50,6 +50,7 @@
 	<div class="products_div"> 
 	<div class="pagination_div"><?php echo $links ?></div>
 		</form>
+
 	<?php 	if(!empty($products))
 			{ 
 				foreach($products as $product)
@@ -73,6 +74,7 @@
 		</div>
 	<?php		}
 			} ?>
+			<?php }}?>
 	</div>
 	</body>
 </html>
