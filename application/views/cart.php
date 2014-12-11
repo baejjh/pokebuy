@@ -46,7 +46,7 @@
 	</table>
 	<a href="store">Continue Shopping</a>
 
-	<form action="/submit_order" method="post">
+	<form action="/submit_order" method="post" id="payment-form">
 		<h1>Shipping Information</h1>
 <?php 	if(!empty($errors)) {
 		echo $errors;
@@ -127,8 +127,16 @@
 				<td><input type="text" name="billing_zip_code"></td>
 			</tr>
 		</table>
+		<script
+		    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+		    data-key="pk_test_pBcVNYkh8vhIxl0iLGTGl63k"
+		    data-amount="<?php echo $sum*100 ?>"
+		    data-name="Purcahse Pokemon"
+		    data-description="<?php echo $cart_num ?> Pokemon : ($<?php echo $sum ?>)"
+		    data-image="/128x128.png">
+	    </script>
 		<input type = "hidden" name="total" value="<?php echo $sum ?>">
-		<input type="submit" name="order" value="Order">
+		<!-- <input type="submit" name="order" value="Order"> -->
 	</form>
 </div><!-- close content div -->
 </body>
