@@ -149,8 +149,12 @@ public function sort_orders_by_status()
 		$this->session->set_userdata('statuses', $var);
 		$this->load->view('admin/orders', $var);
 	}
-	public function status_update($id, $status)
+	public function update_order_status()
 	{
+		$var['status_id'] = $this->input->post('status_id');
+		$var['order_id'] = $this->input->post('order_id');
+		$result = $this->admin_info->update_order_status($var);
+		redirect('orders');
 	}
 
 
