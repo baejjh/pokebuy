@@ -1,6 +1,6 @@
 	
 
-	<a href="/default_controller">Go Back</a>
+	<a href="/store">Go Back</a>
 	<div id="product_name">
  			<span data-title="Only $" . <?=$displayed_product['price'];?> . "!">
  				<h1>
