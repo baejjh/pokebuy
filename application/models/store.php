@@ -208,7 +208,17 @@ class Store extends CI_Model {
 	}
 
 	public function pagination($limit, $start) {
-        return $this->db->get("products", $limit, $start)->result_array();
+		$query = "SELECT products.id, products.name, products.price, products.description, products.main_image_id, images.location, categories.name AS category FROM products
+			LEFT JOIN product_categories
+			ON products.id = product_categories.product_id
+			LEFT JOIN categories 
+			ON product_categories.category_id = categories.id
+            LEFT JOIN images
+            ON products.id = images.product_id
+            GROUP BY products.id
+            LIMIT ?,? ";
+         $values = array((int)$start, $limit);
+        return $this->db->query($query, $values)->result_array();
 	}
 
 }

@@ -30,7 +30,7 @@
 	<div class="products_div"> 
 		<?php if(!empty($products))
 		{ 
-			foreach($similar_products as $product)
+			foreach($products as $product)
 			{ ?>
 				<div class="each_product" stuff="<?= $product['id']?>">
 				<p>	
