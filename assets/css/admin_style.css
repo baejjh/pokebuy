@@ -61,6 +61,7 @@ li {
 		color: green;
 		display: inline-block;
 		vertical-align: top;
+        padding: 10px 20px 10px 20px;
 		margin: 0px auto;
 	}
 	.dashboard_total

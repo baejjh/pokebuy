@@ -99,7 +99,7 @@ class Admins extends CI_Controller
 		if(empty($this->session->userdata('loggedin'))) {
 			redirect('admin');
 		}
-		$this->load->view('admin/dashboard'); //problem: $email on dashboard is undefined
+		$this->load->view('admin/dashboard');
 	}
 
 
@@ -175,56 +175,55 @@ class Admins extends CI_Controller
 		$per_page 		= 10*$id;	
 	} 
 	//As Admin, you can edit, delete, add products inside admin/products view
-		public function edit_product($id)
+	public function edit_product($id)
+	{
+		// $new_info = $this->input->post();
+		// $var = $this->admin_info->edit_product_by_id($new_info);
+	}
+	public function delete_product($id)
+	{
+		$this->admin_info->delete_product_by_id($id);
+		$var['products'] = $this->admin_info->get_all_products();
+		$this->load->view('admin/products', $var);	
+	}
+	//When Admin wants to add a product, they get directed to a new page
+	public function redirect_to_new_product()
+	{
+		$this->load->view('admin/new_product');
+	}
+		//New product add page has this function that returns the Admin
+		//back to admin/product upon product submission succcess
+		public function add_new_product()
 		{
-			$var = $this->admin_info->edit_product_by_id($user);
-			var_dump($var);
-		}
-		public function delete_product($id)
-		{
-			$this->admin_info->delete_product_by_id($id);
+			//add new db
+			$this->form_validation->set_rules('name', 'Name', 'trim|required');
+			$this->form_validation->set_rules('description', 'description', 'trim|optional');
+			$this->form_validation->set_rules('price', 'Price', 'trim|required');
+			$this->form_validation->set_rules('inventory_count', 'Inventory Count', 'trim|required');
+			//set rule for image
 
-			$var['products'] = $this->admin_info->get_all_products();
-			$this->load->view('admin/products', $var);	
-		}
-		//When Admin wants to add a product, they get directed to a new page
-		public function redirect_to_new_product()
-		{
-			$this->load->view('admin/new_product');
-		}
-			//New product add page has this function that returns the Admin
-			//back to admin/product upon product submission succcess
-			public function add_new_product()
+			if($this->form_validation->run() === FALSE)
 			{
-				//add new db
-				$this->form_validation->set_rules('name', 'Name', 'trim|required');
-				$this->form_validation->set_rules('description', 'description', 'trim|optional');
-				$this->form_validation->set_rules('price', 'Price', 'trim|required');
-				$this->form_validation->set_rules('inventory_count', 'Inventory Count', 'trim|required');
-				//set rule for image
-
-				if($this->form_validation->run() === FALSE)
+				$this->session->set_flashdata('errors', validation_errors());
+				redirect('new_product');
+			}
+			else 
+			{
+				$post_data = $this->input->post();
+				$this->load->model('Admin_info');
+				$result = $this->Admin_info->add_new_product($post_data);
+				if($result > 0) {
+					$this->session->set_userdata('product_id', $result);
+					$this->session->set_userdata('add_products', TRUE);
+					redirect('products');
+				}
+				else
 				{
-					$this->session->set_flashdata('errors', validation_errors());
+					$this->session->set_flashdata('errors', '<p>There was an error</p>');
 					redirect('new_product');
 				}
-				else 
-				{
-					$post_data = $this->input->post();
-					$this->load->model('Admin_info');
-					$result = $this->Admin_info->add_new_product($post_data);
-					if($result > 0) {
-						$this->session->set_userdata('product_id', $result);
-						$this->session->set_userdata('add_products', TRUE);
-						redirect('products');
-					}
-					else
-					{
-						$this->session->set_flashdata('errors', '<p>There was an error</p>');
-						redirect('new_product');
-					}
-				}
 			}
+		}
 	public function add_category($category_name)
 	{
 		$category_name = $this->input->post();
