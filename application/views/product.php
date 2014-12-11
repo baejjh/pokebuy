@@ -25,8 +25,9 @@
 	<h2>Similar Items</h2>
 		<?php 	foreach ($similar_products as $product) { ?>
 		<div class="similar_item_single_div">
-			<a class="product_name" href="/view_product/<?= $product['id'] ?>"><?= $product['name'] ?></a>
-			<img src="<?= $product['location'];?>" alt=" Pokemon Pics!" id="similar_img"><br>
+			<a class="product_name" href="/view_product/<?= $product['id'] ?>"><?= $product['name'] ?><br>
+				<img src="<?= $product['location'];?>" alt=" Pokemon Pics!" id="similar_img">
+			</a>
 			$<?= $product['price'];?><br>
 			<?= $product['description'];?><br>
 		</div>
@@ -34,4 +35,4 @@
 	</div>
 </div>
 </body>
-</html>git
+</html>gitgit pul
