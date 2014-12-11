@@ -4,10 +4,9 @@
 }
 .content
 {
-    margin-top: 80px; /* .header's height + padding-top*/
+    padding-top: 66px; /* ..shopping_header_div's height + padding-top*/
     width:100%;
-    height: auto;
-	background: radial-gradient(white,#A8ADAE);
+	background: url('http://2.bp.blogspot.com/-osUTAZAKDUQ/UEF5_29R3tI/AAAAAAAAFh4/4i0AuXUDF7U/s1600/Pokemon+wallpaper+hd.png');
 }
 a{
 	text-decoration: none;
@@ -30,9 +29,8 @@ a{
 .shopping_header_div
 {
     color: white;
-    background:green; /*need to echo different colors depending on admin vs. user*/
-/*    height: 60px; *//*should change .content margin-top to this value + padding-top*/
-    width:100%;
+   /* background:red; *//*need to echo different colors depending on admin vs. user*/
+    height: 66px; /*should change .content margin-top to this value + padding-top*/
     position:fixed;
     top: 0px;
     display: block;
@@ -58,6 +56,8 @@ a{
 }
 .each_product
 {
+	opacity: 1;
+	background-color: whitesmoke;
 	display: inline-block;
 	vertical-align: top;
 	min-width: 17%;
@@ -78,28 +78,32 @@ a{
 	border: 1px solid green;
 	float: right;
 }
-<<<<<<< HEAD
 .side_bar_div
 {
-	width: 18%;
+	margin: 20px 0px 100px 10px;
+	width: 15%;
+	padding:10px 0px 0px 10px;
 	height: 500px;
 	border: 1px solid black;
 	border-radius: 5px;	
 	display: inline-block;
 	vertical-align: top;
-	background: #A9ADAE;
+	background: silver;
 }
 .pagination_div
 {
-	width: 18%;	
+	width: 100%;	
 	display: block;
 	vertical-align: top;
+	text-align: center;
 }
 .products_div
 {
+	margin: 20px 0px 100px -5px;
 	width: 80%;
 	display: inline-block;
 	vertical-align: top;
+	text-align: center;
 }
 .product_name{
 /* Set a counter named cnt to 0 */
