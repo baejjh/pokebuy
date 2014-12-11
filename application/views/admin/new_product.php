@@ -1,7 +1,8 @@
-	<?php echo $this->session->flashdata('errors'); ?>
 	<div class="container">
+	<h1>Add a New Product: Pokemon</h1>
+	<h2>You are now an official Pokemon distributor</h2>
+	<?php echo $this->session->flashdata('errors'); ?>
 		<form id="admin_register_form" action="/new_product" method="post" enctype="multipart/form-data">
-			<h3>Add New Product</h3>
 			<table>
 			<tr>
 				<td><label for="name">Name:</label></td>

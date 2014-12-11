@@ -119,12 +119,12 @@ class Admins extends CI_Controller
 	public function redirect_to_one_order($id)
 	{
 		$var['statuses'] = $this->admin_info->get_all_status_types();
-		$var['one_order'] = $this->admin_info->show_one_order_view($id);
-		// var_dump($var);
-		// die('hi');
+		$var['items_in_order'] = $this->admin_info->show_one_order_view($id);
+
 		$this->load->view('admin/one_order', $var);
 	}
-public function sort_orders_by_status() {
+public function sort_orders_by_status()
+	{
 		$word_search = $this->input->post('word_search');
 		$selected_order = $this->input->post('selected_status');
 		if (!isset($word_search)) {
@@ -149,28 +149,31 @@ public function sort_orders_by_status() {
 		if(empty($this->session->userdata('loggedin'))) {
 			redirect('admin');
 		}
-		$this->load->library('pagination');
-	//PROBLEM
-	//$start_row value keeps returning boolean of false when it should be a number: $this->uri->segment(3);
-		$start_row 		= 3; //temporarily set to 1 instead of $this->uri->segment(3)
-		$total_rows		= $this->db->count_all('products'); //both correctly outputs the data size: $this->db->get('products')->num_rows();
-		$per_page 		= 10;	
-
-		//pagination details		
-		$config['base_url'] 	= base_url() . 'products/(:num)';
-		$config['total_rows']	= $total_rows;
-		$config['uri_segment'] 	= $start_row;
-		$config['num_links']	= 4; // how many links are shown before and after now
-		$config['per_page'] 	= $per_page; //display per page    
-		$this->pagination->initialize($config);
-
-		$var['pagination_links']= $this->pagination->create_links();
-		$var['categories']		= $this->admin_info->get_all_categories();
-		$var['products'] 		= $this->admin_info->get_all_products_limit($start_row, $per_page);
+		$config = array();
+		$config['base_url'] = base_url().'/products/';
+		$config['total_rows'] = $this->db->count_all('products');;
+		$config['per_page'] = 10;
+		$config['uri_segment'] = 2;
+		$config['first_link'] = 'first';
+		$config['last_link'] = 'last';
+		$config['next_link'] = 'next';
+		$config['prev_link'] = '&lt;';
+		$this->pagination->initialize($config); 
+		$start = $this->uri->segment(2);
+		$var['links'] = $this->pagination->create_links();
+		$var['products'] = $this->admin_info->get_all_products_limit($config["per_page"], $start);
+		$var['categories'] = $this->admin_info->get_all_categories();
+		$var['count'] = $config['total_rows'];
+		$this->load->view('admin/products', $var);
+	} 
+	public function sort_products()
+	{
+		$product_search = $this->input->post('product_search');
+		$var['products']	 	= $this->admin_info->sort_products_by_name_id($product_search);
 		$var['categories'] 		= $this->admin_info->get_all_categories();
 		
 		$this->load->view('admin/products', $var);
-	} 
+	}
 
 
 
@@ -201,7 +204,7 @@ public function sort_orders_by_status() {
 			$this->admin_info->get_all_products();
 			$this->load->view('admin/products', $var);	
 		}
-
+	}
 
 
 

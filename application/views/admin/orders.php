@@ -1,9 +1,8 @@
 	<h1>Orders</h1>
-		<h2>Sort by status</h2>
-		<h2>Search doesn't work</h2>
+		<p>Sort by status</p>
 
-	<form action="sort_orders" method="post" id="sort_form">
-		<input type="text" placeholder="Search Orders" id="word_search" name="word_search"> <!-- USED TO BE HERE: WHY? value="?= $id?>" -->
+	<form action="sort_orders" method="post" id="order_sort_form">
+		<input type="text" placeholder="Search Zip, Order ID, or Buyer's Name" id="word_search" name="word_search"> <!-- USED TO BE HERE: WHY? value="?= $id?>" -->
 		<select name="selected_status" id="selected_status">
 				<option value="">(Select Order Status)</option>
 			    <option value="Pending">Pending</option>
@@ -17,8 +16,8 @@
 	<script type="text/javascript">
 	// alerts whenever button is submitted
 	$(document).ready(function() {
-		$('#sort_form').submit(function() {
-		    if ($("#word_search").val() === "" || $("#selected_status").val() === "") {
+		$('#order_sort_form').submit(function() {
+		    if ($("#word_search").val() === "" && $("#selected_status").val() === "") {
 		        alert('To search by orders, you must enter or choose a field');
 		        return false;
 		    }
@@ -56,7 +55,7 @@
 				<select>
 					<option><?= $one_order['order_status']; ?></option>
 				<?php foreach($statuses as $status_type) {?>
-					<option>
+					<option
 						<?php if ($one_order['order_status'] === $status_type['status']) { echo "style = 'display:none'"; }?>>
 							<?= $status_type['status']; ?>
 					</option>
@@ -64,10 +63,11 @@
 				</select>
 			</td>
 		</tr>
-		<? } //end the foreach loop of orders ?>
+		<?php } //end the foreach loop of orders ?>
 	</tbody>
 	</table>
-	<!-- *pagination -->
+	<!-- Pagination -->
+	<?php echo $links ?> 
 </div><!-- close content div -->	
 </body>
 </html>

@@ -54,6 +54,7 @@ $route['admin']					= "admins/redirect_to_login";
 $route['dashboard'] 			= "admins/redirect_to_dashboard";
 $route['orders']				= "admins/redirect_to_orders";
 $route['products']				= "admins/redirect_to_products";
+$route['products/(:num)']		= "admins/redirect_to_products/$1";
 $route['logoff'] 				= "admins/admin_logoff";
 
 //orders view
@@ -62,6 +63,7 @@ $route['submitted_order/(:num)']= "admins/redirect_to_one_order/$1";
 
 //products view
 $route['add_product'] 			= "admins/redirect_to_new_product";
+$route['sort_products']			= "admins/sort_products";
 $route['edit_product/(:num)']	= "admins/edit_product";
 
 //new_products view
