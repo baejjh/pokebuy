@@ -45,9 +45,9 @@ class Stores extends CI_Controller {
 		}
 		$this->load->view('store', $display);
 	}
-	public function product_store($id) {
+	public function view_product($id) {
 		$this->load->model('Store');
-		$display['category'] =$this->Store->get_all_in_category();
+		$display['category'] =$this->Store->get_all_in_category($id);
 		$display['products'] = $this->Store->product_buy($id);
 		$this->load->view('product', $display);
 	}
