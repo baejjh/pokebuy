@@ -43,73 +43,86 @@ class Store extends CI_Model {
 	public function get_category_with_search_by_order($selected_order, $word_search, $category, $limit, $start) 
 	{
 		$where = "";
+		$order_by = "";
 		$start = (int)$start;
 		$value = array();
 		if ($selected_order == 'low_price') {
 			if ($word_search != NULL && $category != NULL) {
-				$where = "WHERE category_id = ? AND products.name LIKE '%{$word_search}%' ORDER BY price ASC";
+				$where = "WHERE category_id = ? AND products.name LIKE '%{$word_search}%'";
+				$order_by = "ORDER BY products.price ASC";
 				$value = array($category);
 			}
 			else if ($word_search != NULL && $category == NULL) {
-				$where = "WHERE products.name LIKE '%{$word_search}%' ORDER BY price ASC";
+				$where = "WHERE products.name LIKE '%{$word_search}%'";
+				$order_by = "ORDER BY price ASC";
 			}
 			else if ($word_search == NULL && $category != NULL) {
-				$where = "WHERE category_id = ? ORDER BY price ASC";
+				$where = "WHERE category_id = ?";
+				$order_by = "ORDER BY price ASC";
 				$value = array($category);
 			}
 			else if ($word_search == NULL && $category == NULL) {
-				$where = "ORDER BY price ASC";
+				$order_by = "ORDER BY price ASC";
 			}
 		}
 		else if ($selected_order == 'high_price') {
 			if ($word_search != NULL && $category != NULL) {
-				$where = "WHERE category_id = ? AND products.name LIKE '%{$word_search}%' ORDER BY price DESC";
+				$where = "WHERE category_id = ? AND products.name LIKE '%{$word_search}%'";
+				$order_by = "ORDER BY price DESC";
 				$value = array($category);
 			}
 			else if ($word_search != NULL && $category == NULL) {
-				$where = "WHERE products.name LIKE '%{$word_search}%' ORDER BY price DESC";
+				$where = "WHERE products.name LIKE '%{$word_search}%'";
+				$order_by = "ORDER BY price DESC";
 			}
 			else if ($word_search == NULL && $category != NULL) {
-				$where = "WHERE category_id = ? ORDER BY price DESC";
+				$where = "WHERE category_id = ?";
+				$order_by = "ORDER BY price DESC";
 				$value = array($category);
 			}
 			else if ($word_search == NULL && $category == NULL) {
-				$where = "ORDER BY price DESC";
+				$order_by = "ORDER BY price DESC";
 			}
 		}
 		else if ($selected_order == 'most_popular') {
 			if ($word_search != NULL && $category != NULL) {
-				$where = "WHERE category_id = ? AND products.name LIKE '%{$word_search}%' ORDER BY quantity_sold DESC";
+				$where = "WHERE category_id = ? AND products.name LIKE '%{$word_search}%'";
+				$order_by = "ORDER BY quantity_sold DESC";
 				$value = array($category);
 			}
 			else if ($word_search != NULL && $category == NULL) {
-				$where = "WHERE products.name LIKE '%{$word_search}%' ORDER BY quantity_sold DESC";
+				$where = "WHERE products.name LIKE '%{$word_search}%'";
+				$order_by = "ORDER BY quantity_sold DESC";
 			}
 			else if ($word_search == NULL && $category != NULL) {
-				$where = "WHERE category_id = ? ORDER BY quantity_sold DESC";
+				$where = "WHERE category_id = ?";
+				$order_by = "ORDER BY quantity_sold DESC";
 				$value = array($category);
 			}
 			else if ($word_search == NULL && $category == NULL) {
-				$where = "ORDER BY quantity_sold DESC";
+				$order_by = "ORDER BY quantity_sold DESC";
 			}
 		}
 		else if ($selected_order == NULL) {
 			if ($word_search != NULL && $category != NULL) {
-				$where = "WHERE category_id = ? AND products.name LIKE '%{$word_search}%' ORDER BY price DESC";
+				$where = "WHERE category_id = ? AND products.name LIKE '%{$word_search}%'";
+				$order_by = "ORDER BY price DESC";
 				$value = array($category);
 			}
 			else if ($word_search != NULL && $category == NULL) {
-				$where = "WHERE products.name LIKE '%{$word_search}%' ORDER BY price DESC";
+				$where = "WHERE products.name LIKE '%{$word_search}%'";
+				$order_by = "ORDER BY price DESC";
 			}
 			else if ($word_search == NULL && $category != NULL) {
-				$where = "WHERE category_id = ? ORDER BY price DESC";
+				$where = "WHERE category_id = ?";
+				$order_by = "ORDER BY price DESC";
 				$value = array($category);
 			}
 			else if ($word_search == NULL && $category == NULL) {
-				$where = "ORDER BY price DESC";
+				$order_by = "ORDER BY price DESC";
 			}
 		}
-		$where .= " LIMIT $start, $limit";
+		$where .= " GROUP BY products.id $order_by LIMIT $start, $limit";
 		$query = "SELECT products.id, products.name, products.price, products.description, products.main_image_id, categories.name 
 			AS category, images.location FROM products
 			LEFT JOIN product_categories
