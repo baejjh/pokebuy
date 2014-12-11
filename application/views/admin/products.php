@@ -6,9 +6,7 @@
 			<p>Cannot delete or update a parent row: a foreign key constraint fails
 			WHEN DELETE BUTTON IS ClICKED AND DIRECTED, there are undefined variables of:
 				user,
-				pagination_links,
 				products</p>
-		<h4>Pagination doesn't work</h4>
 		<h4>Add Product works but no image file upload</h4>
 		<h4>Search doesn't work</h4>
 
@@ -59,7 +57,7 @@
 	</table>
 
 	<!-- pagination starts here -->
-	<?= "<div class='pagination'>" . $pagination_links . "</div>"; ?>
+	<?= "<div class='pagination'>" . $links . "</div>"; ?>
 
 
 
