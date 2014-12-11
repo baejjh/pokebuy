@@ -53,6 +53,7 @@ $route['admin']					= "admins/redirect_to_login";
 // header
 $route['dashboard'] 			= "admins/redirect_to_dashboard";
 $route['orders']				= "admins/redirect_to_orders";
+$route['orders/(:num)']			= "admins/redirect_to_orders/$1";
 $route['products']				= "admins/redirect_to_products";
 $route['products/(:num)']		= "admins/redirect_to_products/$1";
 $route['logoff'] 				= "admins/admin_logoff";
