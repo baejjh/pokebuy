@@ -2,21 +2,29 @@
 		<h2>Sort by status</h2>
 		<h2>Search doesn't work</h2>
 
-	<form action="#" method="post">
-		<input type="text" placeholder="Search Orders">
-		<input type="button" value="Search by Order Name">
+	<form action="sort_orders" method="post" id="sort_form">
+		<input type="text" placeholder="Search Orders" id="word_search" name="word_search"> <!-- USED TO BE HERE: WHY? value="?= $id?>" -->
+		<select name="selected_status" id="selected_status">
+				<option value="">(Select Order Status)</option>
+			    <option value="Pending">Pending</option>
+			    <option value="Ordered">Ordered</option>
+			    <option value="Shipped">Shipped</option>
+			    <option value="Returned">Returned</option>
+		</select>
+		<input type="submit" value="Search Orders">
 	</form>
 	
-	<form action="sort_orders" method="post">
-		<select>
-			<?php foreach($statuses as $status_type)
-				{ ?>
-					<option>
-						<?= $status_type['status'];
-				} ?>
-					</option>
-		</select>
-	</form>
+	<script type="text/javascript">
+	// alerts whenever button is submitted
+	$(document).ready(function() {
+		$('#sort_form').submit(function() {
+		    if ($("#word_search").val() === "" || $("#selected_status").val() === "") {
+		        alert('To search by orders, you must enter or choose a field');
+		        return false;
+		    }
+		});
+	});
+	</script>
 
 	<table>
 	<thead>
@@ -32,28 +40,27 @@
 		<tr>
 		<!-- Order ID -->
 			<td><a href="submitted_order/<?= $one_order['order_id']; ?>"><?= $one_order['order_id']; ?></a></td>
-
 		<!-- Buyer's Name -->
 			<td><?= $one_order['biller_full_name']; ?></td>
-
 		<!-- Order Last Updated -->
 			<td><?= $one_order['order_submitted']; ?></td>
-
 		<!-- Billing Address -->
 			<td><?= $one_order['billing_address_street']?>
 				<span class="line_break">
 				<?= $one_order['billing_address_city_state'] . " " . $one_order['billing_address_zip']?>
 			</td>
-
 		<!-- Total -->
-			<td><?= "$ " . $one_order['order_total']; ?></td>
-		
+			<td><?= "$ " . $one_order['order_total']; ?></td>		
 		<!-- Status -->
 			<td>
 				<select>
+					<option><?= $one_order['order_status']; ?></option>
 				<?php foreach($statuses as $status_type) {?>
-					<option><?= $status_type['status'];?>
-				<?php } ?>
+					<option>
+						<?php if ($one_order['order_status'] === $status_type['status']) { echo "style = 'display:none'"; }?>>
+							<?= $status_type['status']; ?>
+					</option>
+				<?php } //endforeach ?>
 				</select>
 			</td>
 		</tr>

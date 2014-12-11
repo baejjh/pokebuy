@@ -124,10 +124,18 @@ class Admins extends CI_Controller
 		// die('hi');
 		$this->load->view('admin/one_order', $var);
 	}
-	public function sort_orders_by_status($status_name)
-	{
-		$var['statuses'] = $this->admin_info->get_all_status();
-		$var['orders'] = $this->admin_info->organize_by_status($status_name);
+public function sort_orders_by_status() {
+		$word_search = $this->input->post('word_search');
+		$selected_order = $this->input->post('selected_status');
+		if (!isset($word_search)) {
+			$word_search = NULL;
+		}
+		if (!isset($selected_status)) {
+			$selected_status = NULL;
+		}
+		$var['orders'] = $this->admin_info->get_orders_by_search_status($selected_status, $word_search);
+		$var['statuses'] = $this->admin_info->get_all_status_types();
+		$this->session->set_userdata('statuses', $var);
 		$this->load->view('admin/orders', $var);
 	}
 	public function status_update($id, $status)
@@ -142,8 +150,8 @@ class Admins extends CI_Controller
 			redirect('admin');
 		}
 		$this->load->library('pagination');
-//PROBLEM
-//$start_row value keeps returning boolean of false when it should be a number: $this->uri->segment(3);
+	//PROBLEM
+	//$start_row value keeps returning boolean of false when it should be a number: $this->uri->segment(3);
 		$start_row 		= 3; //temporarily set to 1 instead of $this->uri->segment(3)
 		$total_rows		= $this->db->count_all('products'); //both correctly outputs the data size: $this->db->get('products')->num_rows();
 		$per_page 		= 10;	
@@ -159,86 +167,81 @@ class Admins extends CI_Controller
 		$var['pagination_links']= $this->pagination->create_links();
 		$var['categories']		= $this->admin_info->get_all_categories();
 		$var['products'] 		= $this->admin_info->get_all_products_limit($start_row, $per_page);
-
+		$var['categories'] 		= $this->admin_info->get_all_categories();
+		
 		$this->load->view('admin/products', $var);
 	} 
-	public function product_pagination($id)
-	{
-//NOTHING REALLY WORKS.........
-		if(empty($this->session->userdata('loggedin'))) {
-			redirect('admin');
-		}
-		$this->load->library('pagination');
 
-		$start_row 		= $id;
-		$total_rows		= $this->db->count_all('products');
-		$per_page 		= 10*$id;	
-	} 
-	//As Admin, you can edit, delete, add products inside admin/products view
+
+
+
+//As Admin, you can edit, delete, add products inside admin/products view
 	public function edit_product($id)
 	{
-		// $new_info = $this->input->post();
-		// $var = $this->admin_info->edit_product_by_id($new_info);
-	}
-	public function delete_product($id)
-	{
-		$this->admin_info->delete_product_by_id($id);
-		$var['products'] = $this->admin_info->get_all_products();
-		$this->load->view('admin/products', $var);	
-	}
-	//When Admin wants to add a product, they get directed to a new page
+		$new_info = $this->input->post();
+		$selected_order = $this->input->post('selected_status');
+		if ('edit_category') {
+			// $this->admin_info->edit_product_by_id($new_info);
+			// $this->admin_info->edit_categories_by_id($category_id, $category_new_name);
+			// redirect('products#openModal');
+			$this->load->view('admin/products', $var);	
+		}
+		else if ('delete_category') {
+			$this->admin_info->delete_category_by_id($id);
+			$this->load->view('admin/products', $var);	
+		}
+		else if ('add_category') {
+			$this->admin_info->add_new_category($new_info);
+			redirect('products#openModal');
+		}
+		else if ('edit_product') {
+			$this->load->view('admin/products', $var);	
+		}
+		else if ('preview_edit_product') {
+			$this->admin_info->get_all_products();
+			$this->load->view('admin/products', $var);	
+		}
+
+
+
+
+//When Admin wants to add a product, they get directed to a new page
 	public function redirect_to_new_product()
 	{
 		$this->load->view('admin/new_product');
 	}
 		//New product add page has this function that returns the Admin
 		//back to admin/product upon product submission succcess
-		public function add_new_product()
-		{
-			//add new db
-			$this->form_validation->set_rules('name', 'Name', 'trim|required');
-			$this->form_validation->set_rules('description', 'description', 'trim|optional');
-			$this->form_validation->set_rules('price', 'Price', 'trim|required');
-			$this->form_validation->set_rules('inventory_count', 'Inventory Count', 'trim|required');
-			//set rule for image
+	public function add_new_product()
+	{
+		//add new db
+		$this->form_validation->set_rules('name', 'Name', 'trim|required');
+		$this->form_validation->set_rules('description', 'description', 'trim|optional');
+		$this->form_validation->set_rules('price', 'Price', 'trim|required');
+		$this->form_validation->set_rules('inventory_count', 'Inventory Count', 'trim|required');
+		//set rule for image
 
-			if($this->form_validation->run() === FALSE)
+		if($this->form_validation->run() === FALSE)
+		{
+			$this->session->set_flashdata('errors', validation_errors());
+			redirect('new_product');
+		}
+		else 
+		{
+			$post_data = $this->input->post();
+			$this->load->model('Admin_info');
+			$result = $this->Admin_info->add_new_product($post_data);
+			if($result > 0) {
+				$this->session->set_userdata('product_id', $result);
+				$this->session->set_userdata('add_products', TRUE);
+				redirect('products');
+			}
+			else
 			{
-				$this->session->set_flashdata('errors', validation_errors());
+				$this->session->set_flashdata('errors', '<p>There was an error</p>');
 				redirect('new_product');
 			}
-			else 
-			{
-				$post_data = $this->input->post();
-				$this->load->model('Admin_info');
-				$result = $this->Admin_info->add_new_product($post_data);
-				if($result > 0) {
-					$this->session->set_userdata('product_id', $result);
-					$this->session->set_userdata('add_products', TRUE);
-					redirect('products');
-				}
-				else
-				{
-					$this->session->set_flashdata('errors', '<p>There was an error</p>');
-					redirect('new_product');
-				}
-			}
 		}
-	public function add_category($category_name)
-	{
-		$category_name = $this->input->post();
-		$this->admin_info->add_new_category($category_name);
-		redirect('products#openModal');
-	}
-	public function edit_category($category_id, $category_new_name)
-	{
-		$this->admin_info->edit_categories_by_id($category_id, $category_new_name);
-		redirect('products#openModal');
-	}
-	public function delete_category()
-	{
-		$this->admin_info->delete_category_by_id($id);
-		redirect('products#openModal');
 	}
 
 //BACK TO THE STORE AFTER A LOGOFF

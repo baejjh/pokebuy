@@ -244,5 +244,89 @@ class Admin_info extends CI_Model {
 	   		 	ON orders.status_id = statuses.id
 			 WHERE status = ?", $status_name);
 	}
+	public function get_orders_by_search_status($selected_status, $word_search) 
+	{
+		$where = "";
+		if ($selected_status == 'Pending') {
+			if ($word_search != NULL) {
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%'
+							  AND customers.first_name LIKE '%{$word_search}%'
+							  OR customers.last_name LIKE '%{$word_search}%'
+							  OR orders.id LIKE '%{$word_search}%'
+							  OR addresses.zip_code LIKE '%{$word_search}%'
+               			  ORDER BY orders.created_at ASC"; //old one first
+			}
+			else if ($word_search == NULL) {
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at ASC";
+			}
+		}
+		else if ($selected_status == 'Ordered') {
+			if ($word_search != NULL) {
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%'
+							  AND customers.first_name LIKE '%{$word_search}%'
+							  OR customers.last_name LIKE '%{$word_search}%'
+							  OR orders.id LIKE '%{$word_search}%'
+							  OR addresses.zip_code LIKE '%{$word_search}%'
+               			  ORDER BY orders.created_at ASC"; //old one first
+			}
+			else if ($word_search == NULL) {
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at ASC";
+			}
+		}
+		else if ($selected_status == 'Shipped') {
+			if ($word_search != NULL) {
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%'
+							  AND customers.first_name LIKE '%{$word_search}%'
+							  OR customers.last_name LIKE '%{$word_search}%'
+							  OR orders.id LIKE '%{$word_search}%'
+							  OR addresses.zip_code LIKE '%{$word_search}%'
+               			  ORDER BY orders.created_at ASC"; //old one first
+			}
+			else if ($word_search == NULL) {
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at ASC";
+			}
+		}
+		else if ($selected_status == 'Returned') {
+			if ($word_search != NULL) {
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%'
+							  AND customers.first_name LIKE '%{$word_search}%'
+							  OR customers.last_name LIKE '%{$word_search}%'
+							  OR orders.id LIKE '%{$word_search}%'
+							  OR addresses.zip_code LIKE '%{$word_search}%'
+               			  ORDER BY orders.created_at ASC"; //old one first
+			}
+			else if ($word_search == NULL) {
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at ASC";
+			}
+		}
+		else if ($selected_status == NULL) {
+			if ($word_search != NULL) {
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%'
+							  AND customers.first_name LIKE '%{$word_search}%'
+							  OR customers.last_name LIKE '%{$word_search}%'
+							  OR orders.id LIKE '%{$word_search}%'
+							  OR addresses.zip_code LIKE '%{$word_search}%'
+               			  ORDER BY orders.created_at ASC"; //old one first
+			}
+			else if ($word_search == NULL) {
+				$where = "";
+			}
+		}
+		$query = "SELECT orders.id AS 'order_id',
+				    CONCAT_WS(' ',customers.first_name,customers.last_name) AS 'biller_full_name',
+			        orders.created_at AS 'order_submitted',
+			        CONCAT_WS(' ',addresses.address,addresses.address2) AS 'billing_address_street',
+			        CONCAT_WS(', ',addresses.city,states.abbreviation) AS 'billing_address_city_state',
+			        addresses.zip_code AS 'billing_address_zip',
+			        orders.total AS 'order_total',
+			        statuses.status AS 'order_status'
+				FROM orders
+				LEFT JOIN customers ON orders.billing_customer_id = customers.id
+				LEFT JOIN addresses ON orders.billing_address_id = addresses.id
+				LEFT JOIN states ON states.id = addresses.state_id
+				LEFT JOIN statuses ON orders.status_id = statuses.id
+				{$where} ";
+		return $this->db->query($query)->result_array();
+	}
 }
 ?>

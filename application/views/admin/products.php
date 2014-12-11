@@ -59,7 +59,7 @@
 	    <div><a href="#close" title="Close" class="close">X</a>
  -->
     <h2>Edit Product</h2>
-    <form action="edit_product/<?= $each_product['item_id']; ?>" method='post'>
+    <form action="change_product/<?= $each_product['item_id']; ?>" method='post'>
 		<table>
 		<tr>
 			<td><label for="name">Name:</label></td>
@@ -72,13 +72,14 @@
 		<tr>
 			<td>Categories</td>
 			<td>
-				<?php foreach ($categories as $category) { ?>
-					<?= $category['category_name']; ?>
-					<!-- probably an img src instead of a href -->
-					<a href="edit_category/<?= $category['category_id']; ?>">edit</a> /
-					<a href="delete_category/<?= $category['category_id']; ?>">delete</a>
-					<span class="line_break">
-				<?php } ?>
+				<select>
+				<?php 		foreach($categories as $category)
+							{	?>	
+								<option name="category" value="<?= $category['category_id'] ?>"><?= $category['category_name'] ?></option>
+				<?php 		} ?>
+				</select>
+				<input type="submit" name="edit_category" value="Edit">
+				<input type="submit" name="delete_category" value="Delete">
 			</td>
 		</tr>
 		<tr>
@@ -86,7 +87,7 @@
 			<td>
 			<form action="add_category" method="post">
 				<input type="text" name="new_category" placeholder="Add New Category Name">
-				<input type="button" value="Add New Category" name="new_category">
+				<input type="button" value="Add New Category" name="add_new_category">
 			</form>
 			</td>
 		</tr>

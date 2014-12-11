@@ -99,8 +99,7 @@ class Stores extends CI_Controller {
 		$display['name'] = $this->input->post('name');
 		$this->load->view('store', $display);
 	}
-	public function order_by() {
-		$this->load->model('Store');
+	public function sort_orders_by_status() {
 		$word_search = $this->input->post('word_search');
 		$category = $this->input->post('category');
 		$selected_order = $this->input->post('selected_order');

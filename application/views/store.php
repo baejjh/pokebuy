@@ -19,6 +19,7 @@
 		</select>
 		<input type="submit">
 	</form>
+	
 	<a href="/default_controller">I want ALL the POKéMON! Go Back!</a>
 </div>
 <?php echo $links ?>
