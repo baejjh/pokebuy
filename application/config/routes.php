@@ -63,6 +63,9 @@ $route['submitted_order/(:num)']= "admins/redirect_to_one_order/$1";
 //products view
 $route['add_product'] 			= "admins/redirect_to_new_product";
 $route['products/(:num)']		= "admins/product_pagination/$1";
+$route['add_category']			= "admins/add_category";
+$route['edit_category']			= "admins/edit_category";
+$route['delete_category']		= "admins/delete_category";
 
 //new_products view
 $route['new_product'] 			= "admins/add_new_product";

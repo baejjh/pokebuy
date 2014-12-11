@@ -29,7 +29,7 @@
 	<tbody>	
 	<?php foreach($products as $each_product) {?>
 		<tr>
-			<td><img src="<?= $each_product['item_main_img_url']; ?>" alt="<?= $each_product['item_img_description']; ?>"></td>
+			<td><img src="<?= $each_product['item_main_img_url']; ?>" alt="<?= $each_product['item_img_description']; ?>" class="product_image_size"></td>
 			<td><?= $each_product['item_id']; ?></td>
 			<td><?= $each_product['item_name']; ?></td>
 			<td><?= $each_product['item_inventory']; ?></td>
@@ -59,33 +59,36 @@
 	    <div><a href="#close" title="Close" class="close">X</a>
 
 	        <h2>Edit Product</h2>
-	    <form action="edit_product/<?= $each_product['id']; ?>" method='post'>
+	    <form action="edit_product/<?= $each_product['item_id']; ?>" method='post'>
 			<table>
 			<tr>
 				<td><label for="name">Name:</label></td>
-				<td><input type="text" name="name" value="<?= $each_product['name']; ?>"></td>
+				<td><input type="text" name="name" value="<?= $each_product['item_name']; ?>"></td>
 			</tr>
 			<tr>	
 				<td><label for="description">Description:</label></td>
-				<td><input type="text" name="description" value="<?= $each_product['inventory_count']; ?>"></td>
+				<td><input type="text" name="description" value="<?= $each_product['item_inventory']; ?>"></td>
 			</tr>
 			<tr>
 				<td>Categories</td>
 				<td>
-					<select>
 					<?php foreach ($categories as $category) { ?>
-						<option><?= $category['name']; ?> - 
+						<?= $category['category_name']; ?>
 						<!-- probably an img src instead of a href -->
-							<a href="edit_category/<?= $category['id']; ?>">edit</a> /
-							<a href="delete_category/<?= $category['id']; ?>">delete</a>
-						</option>
+						<a href="edit_category/<?= $category['category_id']; ?>">edit</a> /
+						<a href="delete_category/<?= $category['category_id']; ?>">delete</a>
+						<span class="line_break">
 					<?php } ?>
-					</select>
 				</td>
 			</tr>
 			<tr>
 				<td>Or Add New Cateory</td>
-				<td><input type="text" name="new_category" placeholder="Add New Category Name"></td>
+				<td>
+				<form action="add_category" method="post">
+					<input type="text" name="new_category" placeholder="Add New Category Name">
+					<input type="button" value="Add New Category" name="new_category">
+				</form>
+				</td>
 			</tr>
 			<tr>
 				<td>Images</td>
@@ -93,11 +96,11 @@
 			</tr>
 			<tr>
 				<td><label for="price">Price:</label></td>
-				<td><input type="text" name="price" value="<?= $each_product['price']; ?>">
+				<td><input type="text" name="price" value="<?= $each_product['item_price']; ?>">
 			</tr>
 			<tr>
 				<td><label for="inventory_count">Inventory Count:</label></td>
-				<td><input type="text" name="inventory_count" value="<?= $each_product['inventory_count']; ?>"></td>
+				<td><input type="text" name="inventory_count" value="<?= $each_product['item_inventory']; ?>"></td>
 			</tr>
 			<tr>
 				<td></td>

@@ -157,6 +157,7 @@ class Admins extends CI_Controller
 		$this->pagination->initialize($config);
 
 		$var['pagination_links']= $this->pagination->create_links();
+		$var['categories']		= $this->admin_info->get_all_categories();
 		$var['products'] 		= $this->admin_info->get_all_products_limit($start_row, $per_page);
 
 		$this->load->view('admin/products', $var);
@@ -172,31 +173,12 @@ class Admins extends CI_Controller
 		$start_row 		= $id;
 		$total_rows		= $this->db->count_all('products');
 		$per_page 		= 10*$id;	
-
-		//pagination details		
-		$config['base_url'] 	= base_url() . 'products/(:num)';
-		$config['total_rows']	= $total_rows;
-		$config['uri_segment'] 	= $start_row;
-		$config['num_links']	= 4; // how many links are shown before and after now
-		$config['per_page'] 	= $per_page; //display per page    
-		$this->pagination->initialize($config);
-
-		$var['pagination_links']= $this->pagination->create_links();
-		$var['products'] 		= $this->admin_info->get_all_products_limit($start_row, $per_page);
-
-		$this->load->view('admin/products', $var);
 	} 
 	//As Admin, you can edit, delete, add products inside admin/products view
 		public function edit_product($id)
 		{
-			//MODAL INFO GOES HERE
-			
-			//$var = $this->admin_info->edit_product_by_id($user);
-			//redirect('admin/products');
-
-			// $this->load->model('admin_info');
-			// $var['products'] = $this->admin_info->edit_product_by_id($user);	
-			// $this->load->view('admin/products', $var);	
+			$var = $this->admin_info->edit_product_by_id($user);
+			var_dump($var);
 		}
 		public function delete_product($id)
 		{
@@ -243,8 +225,22 @@ class Admins extends CI_Controller
 					}
 				}
 			}
-
-
+	public function add_category($category_name)
+	{
+		$category_name = $this->input->post();
+		$this->admin_info->add_new_category($category_name);
+		redirect('products#openModal');
+	}
+	public function edit_category($category_id, $category_new_name)
+	{
+		$this->admin_info->edit_categories_by_id($category_id, $category_new_name);
+		redirect('products#openModal');
+	}
+	public function delete_category()
+	{
+		$this->admin_info->delete_category_by_id($id);
+		redirect('products#openModal');
+	}
 
 //BACK TO THE STORE AFTER A LOGOFF
 	public function admin_logoff()
