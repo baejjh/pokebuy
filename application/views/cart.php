@@ -24,7 +24,7 @@
 						<input type="submit" value="Update Quantity">
 					</form>
 				</td>
-				<td><?php echo $product['subtotal'] ?></td>
+				<td><?php echo number_format($product['subtotal'], 2) ?></td>
 				<td> 
 					<form action="delete" method="post">
 						<input type="submit" name="delete" value="Delete Item From Cart">
@@ -39,14 +39,14 @@
 			<tr>
 				<th id="total" colspan="3" >Subtotal (Before Shipping and Tax):</th>
 <?php 		if(!empty($products)) { ?>
-				<th><?php echo $sum ?></th>
+				<th><?php echo number_format($sum, 2) ?></th>
 <?php 		} ?>
 			</tr>
 		</tfoot>
 	</table>
 	<a href="store">Continue Shopping</a>
 
-	<form action="/submit_order" method="post">
+	<form action="/submit_order" method="post" id="payment-form">
 		<h1>Shipping Information</h1>
 <?php 	if(!empty($errors)) {
 		echo $errors;
@@ -127,8 +127,31 @@
 				<td><input type="text" name="billing_zip_code"></td>
 			</tr>
 		</table>
+		<!-- Stripe form -->
+		<span class="payment-errors"></span>
+	  	<div class="form-row">
+	    	<label>
+	      		<span>Card Number</span>
+	      		<input type="text" size="20" data-stripe="number"/>
+	    	</label>
+	  	</div>
+	  	<div class="form-row">
+	    	<label>
+	      		<span>CVC</span>
+	     		<input type="text" size="4" data-stripe="cvc"/>
+	    	</label>
+	  	</div>
+	  	<div class="form-row">
+	    	<label>
+	      		<span>Expiration (MM/YYYY)</span>
+	      		<input type="text" size="2" data-stripe="exp-month"/>
+	    	</label>
+	    	<span> / </span>
+	   		<input type="text" size="4" data-stripe="exp-year"/>
+	  	</div>
+	  	<!-- End of stripe form -->
+  		<button type="submit">Submit Payment</button>
 		<input type = "hidden" name="total" value="<?php echo $sum ?>">
-		<input type="submit" name="order" value="Order">
 	</form>
 </div><!-- close content div -->
 </body>

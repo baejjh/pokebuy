@@ -10,6 +10,7 @@ class Stores extends CI_Controller {
   	}	
 	public function index()
 	{
+		$display['page_title'] = 'Store1';
 		$this->load->model('Store');
 		$display['products'] = $this->Store->get_all_products();
 		$display['categories'] = $this->Store->get_all_categories();
@@ -132,7 +133,10 @@ class Stores extends CI_Controller {
 		$test = $this->Store->submit_order($data);
 		$this->cart->destroy();
 		//Need to either send a message or redirect to success page, will come back to this:
-		redirect('cart');
+		redirect('success');
+	}
+	public function order_success() {
+		$this->load->view('success');
 	}
 
 }//end of Controller curly
