@@ -83,6 +83,11 @@ li {
     display: block;
 }
 
+.product_image_size {
+    width: 100px;
+    height: 100px
+}
+
 /*MODAL STYLE*/
 .modalDialog {
     position: fixed;

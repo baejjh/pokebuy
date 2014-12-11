@@ -29,7 +29,7 @@
 	<tbody>	
 	<?php foreach($products as $each_product) {?>
 		<tr>
-			<td><img src="<?= $each_product['item_main_img_url']; ?>" alt="<?= $each_product['item_img_description']; ?>"></td>
+			<td><img src="<?= $each_product['item_main_img_url']; ?>" alt="<?= $each_product['item_img_description']; ?>" class="product_image_size"></td>
 			<td><?= $each_product['item_id']; ?></td>
 			<td><?= $each_product['item_name']; ?></td>
 			<td><?= $each_product['item_inventory']; ?></td>
