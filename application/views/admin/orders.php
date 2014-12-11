@@ -69,7 +69,7 @@
 	</tbody>
 	</table>
 	<!-- Pagination -->
-	<?php echo $links ?> 
+	<?php if(!empty($links)) {echo $links; } ?> 
 </div><!-- close content div -->	
 </body>
 </html>
