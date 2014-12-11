@@ -47,7 +47,7 @@
 		</div>
 	<?php		}
 			} ?>
-	<div class="pagination_div"><?php echo $links ?></div>
+	<div class="pagination_div"><?php if(!empty($links)) {echo $links;} ?></div>
 	</div>
 </div> <!-- div for container -->
 </body>

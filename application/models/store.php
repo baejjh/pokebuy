@@ -109,13 +109,14 @@ class Store extends CI_Model {
 			}
 		}
 		$query = "SELECT products.id, products.name, products.price, products.description, products.main_image_id, categories.name 
-			AS category FROM products
+			AS category, images.location FROM products
 			LEFT JOIN product_categories
 			ON products.id = product_categories.product_id
 			LEFT JOIN categories 
 			ON product_categories.category_id = categories.id
             LEFT JOIN images
-            ON products.id = images.product_id {$where}";
+            ON products.id = images.product_id 
+            $where";
 		return $this->db->query($query, $value)->result_array();
 	}
 	public function get_all_products(){
