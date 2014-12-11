@@ -25,15 +25,13 @@
 	</div>
 	<h2>Similar Items</h2>
 	<div class="bottom_div">
-		<!-- <div class="each_product">
-<?php 	for($i=0; $i<6; $i++)
-		{ ?>
-			<?=$products['name'];?><br>
-			$<?=$products['price'];?><br>
-			<?=$products['description'];?><br>
+<?php 	foreach ($category as $product) { ?>
+			<?=$product['name'];?><br>
+			$<?=$product['price'];?><br>
+			<?=$product['description'];?><br>
 <?php 	} ?>
-		</div> -->
+		</div>
 	</div>
-</div><!-- close content div -->
+</div>
 </body>
 </html>

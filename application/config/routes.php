@@ -74,11 +74,12 @@ $route['delete_product/(:num)'] = "admins/delete_product/$1";
 
 //stores
 $route['categories/(:num)'] 	= "stores/order_by/$1";
-$route['view_product/(:num)'] 	= "stores/order_by/$1";
+$route['view_product/(:num)'] 	= "stores/view_product/$1";
 $route['buy/(:num)'] 			= "stores/product_buy/$1";
 $route['add_cart/(:num)'] 		= "stores/add_to_cart/$1";
 $route['search_product'] 		= "stores/order_by";
 $route['order_by'] 				= "stores/order_by";
+$route['store/(:num)']			= "stores/index";
 
 // shopping cart
 $route['cart']					= "stores/show_cart";
