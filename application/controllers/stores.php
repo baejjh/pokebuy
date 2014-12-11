@@ -10,6 +10,7 @@ class Stores extends CI_Controller {
   	}	
 	public function index()
 	{
+		$display['page_title'] = 'Store1';
 		$this->load->model('Store');
 		$display['products'] = $this->Store->get_all_products();
 		$display['categories'] = $this->Store->get_all_categories();
