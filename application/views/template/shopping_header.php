@@ -10,7 +10,7 @@
 <body>
 <div class="content">
 	<ul class="shopping_header_div">
-		<li>Dojo De Poké: Get 'Dat POKéMON.</li>
+		<li><h1>Dojo De Poké: Get 'Dat POKéMON<h1></li>
 		<li><a href="/cart">Shopping Cart (
 <?php 	if(!empty($cart_num)) {
 			echo $cart_num;
@@ -18,3 +18,4 @@
 			echo 'Empty';
 		} ?>)</a></li>
 	</ul>
+	</div>

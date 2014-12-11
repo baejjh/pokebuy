@@ -19,10 +19,13 @@ a{
     width:100%;
     position:fixed;
     top: 0px;
+    display: block;
 }
 .admin_header_div li
 {
     padding: 17px 20px 0px 0px;
+    display: inline-block;
+    list-style-type: none;
 }
 .admin_header_div a:link, .admin_header_div a:visited
 {
@@ -38,13 +41,9 @@ table
     margin: 0px auto;
 }
 	tbody tr:nth-child(odd)
-	{
+    {
    background-color: silver;
-}
-li {
-	display: inline-block;
-	list-style-type: none;
-}
+    }
 .dashboard_left
 {
 	outline: 1px solid;
