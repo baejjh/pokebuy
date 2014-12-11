@@ -13,30 +13,20 @@ class Stores extends CI_Controller {
 		$this->load->model('Store');
 		$count = $this->Store->count_products();
 
-		//TESTING -KS
 		$config = array();
 		$config['base_url'] = base_url().'/store/';
 		$config['total_rows'] = $count['count(id)'];
-		$config['per_page'] = 20;
-		// $config['uri_segment'] = 3;
-		// $config['num_links'] = 2;
+		$config['per_page'] = 10;
+		$config['uri_segment'] = 2;
 		$config['first_link'] = 'first';
 		$config['last_link'] = 'last';
 		$config['next_link'] = 'next';
 		$config['prev_link'] = '&lt;';
-		// $config['display_pages'] = FALSE;
-		// $config['anchor_class'] = 'pagination_links';
+		// $config['anchor_class'] = 'pagination_links'; --Not sure what this does
 		$this->pagination->initialize($config); 
-		$page = ($this->uri->segment(2))? $this->uri->segment(2): 0;
-		var_dump($page);
-		// die();
+		$start = $this->uri->segment(2);
 		$display['links'] = $this->pagination->create_links();
-		// END
-		// var_dump($config);
-		// die();
-		$display['products'] = $this->Store->pagination($config["per_page"], $page);
-		// var_dump($display);
-		// die();
+		$display['products'] = $this->Store->pagination($config["per_page"], $start);
 		$display['categories'] = $this->Store->get_all_categories();
 		$display['count'] = $this->Store->count_products();
 		$this->load->view('store', $display);
@@ -53,20 +43,20 @@ class Stores extends CI_Controller {
 		// // more more pagination tips http://www.storycon.us/ci3/libraries/pagination.html
 		// $this->load->library('pagination');
 
-		$this->load->model('Store');
-		$config['base_url'] = base_url().'store/';
-		$config['total_rows'] = $this->Store->count_products();
-		$config['per_page'] = 10; 
-		// $config['num_links'] = 2;
-		$config['first_link'] = 'first';
-		$config['last_link'] = 'last';
-		$config['next_link'] = 'next';
-		$config['prev_link'] = '&lt;';
-		// $config['display_pages'] = FALSE;
-		// $config['anchor_class'] = 'pagination_links';
-		$this->pagination->initialize($config); 
-		// echo $this->pagination->create_links();
-		//end of pagination code
+		// $this->load->model('Store');
+		// $config['base_url'] = base_url().'store/';
+		// $config['total_rows'] = $this->Store->count_products();
+		// $config['per_page'] = 10; 
+		// // $config['num_links'] = 2;
+		// $config['first_link'] = 'first';
+		// $config['last_link'] = 'last';
+		// $config['next_link'] = 'next';
+		// $config['prev_link'] = '&lt;';
+		// // $config['display_pages'] = FALSE;
+		// // $config['anchor_class'] = 'pagination_links';
+		// $this->pagination->initialize($config); 
+		// // echo $this->pagination->create_links();
+		// //end of pagination code
 
 		// $this->load->model('Store');
 		$this->Store->get_all_in_category();

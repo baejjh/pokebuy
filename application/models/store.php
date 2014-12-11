@@ -93,16 +93,7 @@ class Store extends CI_Model {
 	}
 
 	public function pagination($limit, $start) {
-        $this->db->limit($limit, $start);
         return $this->db->get("products", $limit, $start)->result_array();
- 
-        // if ($query->num_rows() > 0) {
-        //     foreach ($query->result() as $row) {
-        //         $data[] = $row;
-        //     }
-        //     return $data;
-        // }
-        // return false;
 	}
 
 }
