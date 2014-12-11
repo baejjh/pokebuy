@@ -9,9 +9,9 @@
 
 <body>
 	<div class="content">
-		<ul class="admin_header">	
-			<li><a href="/dashboard">Dashboard</a></li>
-			<li><a href="/orders">Orders</a></li>
-			<li><a href="/products">Products</a></li>
-			<li><a href="/logoff">Log Off</a></li>
+		<ul class="admin_header_div">	
+			<li><a href="/dashboard"><h3>Dashboard</h3></a></li>
+			<li><a href="/orders"><h3>Orders</h3></a></li>
+			<li><a href="/products"><h3>Products</h3></a></li>
+			<li><a href="/logoff"><h3>Log Off</h3></a></li>
 		</ul>

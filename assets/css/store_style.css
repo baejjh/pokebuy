@@ -6,7 +6,29 @@
 }
 body
 {
+	margin-top: 60px;
 	width: 1200px;
+}
+.shopping_header_div
+{
+    color: white;
+    background:lime; /*need to echo different colors depending on admin vs. user*/
+    height: 60px; /*should change .content margin-top to this value + padding-top*/
+    width:100%;
+    position:fixed;
+    top: 0px;
+}
+.shopping_header_div li
+{
+    padding: 17px 20px 0px 0px;
+}
+.shopping_header_div a:link, .shopping_header_div a:visited
+{
+    color:white;
+}
+.shopping_header_div a:hover, .shopping_header_div a:active
+{
+    color:green;
 }
 .each_product
 {

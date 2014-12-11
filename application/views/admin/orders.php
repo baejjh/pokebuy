@@ -1,6 +1,5 @@
 	<h1>Orders</h1>
-		<h2>Sort by status</h2>
-		<h2>Search doesn't work</h2>
+		<p>Sort by status</p>
 
 	<form action="sort_orders" method="post" id="order_sort_form">
 		<input type="text" placeholder="Search Zip, Order ID, or Buyer's Name" id="word_search" name="word_search"> <!-- USED TO BE HERE: WHY? value="?= $id?>" -->
