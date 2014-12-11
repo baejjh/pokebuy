@@ -2,7 +2,6 @@
 	<h2>Your Special Inventory of Pokemons to edit, add, and deactivate from the storefront</h2>
 		
 		<h4>Edit function doesn't work</h4>
-		<h4>Delete doesn't work</h4>	
 			<p>Cannot delete or update a parent row: a foreign key constraint fails
 			WHEN DELETE BUTTON IS ClICKED AND DIRECTED, there are undefined variables of:
 				user,

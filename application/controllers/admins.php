@@ -217,7 +217,11 @@ public function sort_orders_by_status()
 		}
 	}
 
-
+	public function delete_product($id) {
+		$this->load->model('Admin_info');
+		$result = $this->Admin_info->delete_product_by_id($id);
+		var_dump($result);
+	}
 
 
 //When Admin wants to add a product, they get directed to a new page

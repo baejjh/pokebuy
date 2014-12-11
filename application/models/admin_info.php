@@ -68,6 +68,7 @@ class Admin_info extends CI_Model {
 				LEFT JOIN images ON products.id = images.product_id
 				LEFT JOIN product_categories ON products.id = product_categories.product_id
 				LEFT JOIN categories ON categories.id = product_categories.category_id
+				WHERE products.active IS NULL
 				GROUP BY products.id
 				LIMIT ?, ?";
 		$values = array((int)$start, $limit);
