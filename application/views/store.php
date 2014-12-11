@@ -1,42 +1,51 @@
-	<div class="side_bar">
-		<form action="/search_product/" method="post">
-			<input type="text" placeholder="Product Name" name="name">
-			<input type="submit" value="Search">
-		</form>
-		<h2>Categories</h2>
-<?php if(!empty($categories)) {?>
-			<ul>
-<?php 	foreach($categories as $category) {	?>	
-				<li><a href="/categories/<?= $category['id'] ?>"><?= $category['name'] ?></a></li>
-<?php	} ?>
-			</ul>
-<?php } ?>
-	</div>
-<?php echo $links ?>
-	<div class="products">
-<?php 	if(!empty($products[0]['category'])) { ?>
-		<h1><?= $products[0]['category'] ?></h1>
-		<a href="/default_controller">Do More Shopping!</a>
-<?php	} ?>
-		<select>
-		    <option value="volvo">Low Price</option>
-		    <option value="saab">High Price</option>
-		    <option value="mercedes">Most Popular</option>
+
+		<?php if(!isset($name)){ $name = ''; } ?>
+<div class="side_bar">
+	<form action="/order_by" method="post">
+		<input type="text" placeholder="Product Name" name="word_search" value="<?= $name?>">
+			<h2>Categories</h2>
+<?php if(!empty($this->session->userdata('categories')))
+	  	{ ?>
+<?php 		foreach($this->session->userdata('categories') as $category)
+			{	?>	
+				<input type="radio" name="category" value="<?= $category['id'] ?>"><?= $category['name'] ?><br>
+<?php 		} ?>
+<?php 	} ?>
+		<select name="selected_order">
+			<option value="">(Order Selection)</option>
+		    <option value="low_price">Lowest Price First</option>
+		    <option value="high_price">Highest Price</option>
+		    <option value="most_popular">Most Popular</option>
 		</select>
-	<?php 	if(!empty($products)) { 
-			foreach($products as $product) { ?>
-	  	<div class="each_product">
-			<p><a href="/products_view/<?= $product['id'] ?>">
-				<?= $product['name'] ?></a></p>
-			<p>$<?= $product['price'] ?></p>
-			 <!-- <p> $product['location'] </p>    <-*image?*    -->
-			 <p><?= $product['description'] ?></p>
-			 <form action="/add_cart/<?= $product['id']?>" method="post">
-				<input type="submit" value="Buy">
-			 </form>
-		</div>
-	<?php		}
-			} ?>
+		<input type="submit">
+	</form>
+	<a href="/default_controller">I want ALL the POKéMON! Go Back!</a>
+</div>
+<div class="products"> 
+	</form>
+<?php 	if(!empty($products))
+		{ 
+			foreach($products as $product)
+			{ ?>
+  				<div class="each_product" stuff="<?= $product['id']?>">
+					<p>	
+						<a href="/view_product/<?= $product['id'] ?>">
+							<?= $product['name'] ?>
+						</a>
+					</p>
+					<p>
+						$<?= $product['price'] ?>
+					</p>
+		 <!-- <p> $product['main_image_id'] </p>    <-*image?*    -->
+		 <p>
+		 	<?= $product['description'] ?>
+		 </p>
+		 <form action="/add_cart/<?= $product['id']?>" method="post">
+			<input type="submit" value="Buy">
+		 </form>
+	</div>
+<?php		}
+		} ?>
 </div>
 </body>
 </html>

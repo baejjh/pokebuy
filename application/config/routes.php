@@ -73,12 +73,12 @@ $route['edit_product/(:num)'] 	= "admins/edit_product/$1";
 $route['delete_product/(:num)'] = "admins/delete_product/$1";
 
 //stores
-$route['categories/(:num)'] 	= "stores/category_store/$1";
-$route['products_view/(:num)'] 	= "stores/product_store/$1";
+$route['categories/(:num)'] 	= "stores/order_by/$1";
+$route['view_product/(:num)'] 	= "stores/order_by/$1";
 $route['buy/(:num)'] 			= "stores/product_buy/$1";
 $route['add_cart/(:num)'] 		= "stores/add_to_cart/$1";
-$route['search_product'] 		= "stores/search_product";
-$route['store/(:num)']			= "stores/index";
+$route['search_product'] 		= "stores/order_by";
+$route['order_by'] 				= "stores/order_by";
 
 // shopping cart
 $route['cart']					= "stores/show_cart";
