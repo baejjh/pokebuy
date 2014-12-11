@@ -8,12 +8,27 @@ class Stores extends CI_Controller {
     	$display['cart_num'] = $this->cart->total_items();
   		$this->load->view('template/shopping_header', $display);
   	}	
-	public function index()
+	public function index($page = 0)
 	{
-		$display['page_title'] = 'Store1';
 		$this->load->model('Store');
-		$display['products'] = $this->Store->get_all_products();
+		$count = $this->Store->count_products();
+
+		$config = array();
+		$config['base_url'] = base_url().'/store/';
+		$config['total_rows'] = $count['count(id)'];
+		$config['per_page'] = 10;
+		$config['uri_segment'] = 2;
+		$config['first_link'] = 'first';
+		$config['last_link'] = 'last';
+		$config['next_link'] = 'next';
+		$config['prev_link'] = '&lt;';
+		// $config['anchor_class'] = 'pagination_links'; --Not sure what this does
+		$this->pagination->initialize($config); 
+		$start = $this->uri->segment(2);
+		$display['links'] = $this->pagination->create_links();
+		$display['products'] = $this->Store->pagination($config["per_page"], $start);
 		$display['categories'] = $this->Store->get_all_categories();
+		$display['count'] = $this->Store->count_products();
 		$this->load->view('store', $display);
 	}
 	public function category_store($id) {
@@ -26,22 +41,24 @@ class Stores extends CI_Controller {
 		// // pagination, with explanation @ https://ellislab.com/codeigniter/user-guide/libraries/pagination.html
 		// //  more pagination tips https://github.com/soyosolution/CodeIgniter-pagination-library
 		// // more more pagination tips http://www.storycon.us/ci3/libraries/pagination.html
-		$this->load->library('pagination');
-		$config['base_url'] = 'http://localhost:8888/stores/category_store';
-		$config['total_rows'] = 50;
-		$config['per_page'] = 10; 
-		$config['num_links'] = 2;
-		$config['first_link'] = 'first';
-		$config['last_link'] = 'last';
-		$config['next_link'] = 'next';
-		$config['prev_link'] = '&lt;';
-		$config['display_pages'] = FALSE;
-		// $config['anchor_class'] = 'pagination_links';
-		$this->pagination->initialize($config); 
-		// echo $this->pagination->create_links();
-		//end of pagination code
+		// $this->load->library('pagination');
 
-		$this->load->model('Store');
+		// $this->load->model('Store');
+		// $config['base_url'] = base_url().'store/';
+		// $config['total_rows'] = $this->Store->count_products();
+		// $config['per_page'] = 10; 
+		// // $config['num_links'] = 2;
+		// $config['first_link'] = 'first';
+		// $config['last_link'] = 'last';
+		// $config['next_link'] = 'next';
+		// $config['prev_link'] = '&lt;';
+		// // $config['display_pages'] = FALSE;
+		// // $config['anchor_class'] = 'pagination_links';
+		// $this->pagination->initialize($config); 
+		// // echo $this->pagination->create_links();
+		// //end of pagination code
+
+		// $this->load->model('Store');
 		$this->Store->get_all_in_category();
 		$display['category'] = $id;
 		$display['products'] = $this->Store->product_buy($id);
@@ -137,6 +154,15 @@ class Stores extends CI_Controller {
 	}
 	public function order_success() {
 		$this->load->view('success');
+	}
+	public function pagination() {
+		$config['base_url'] = 'http://example.com/index.php/test/page/';
+		$config['total_rows'] = 200;
+		$config['per_page'] = 20; 
+
+		$this->pagination->initialize($config); 
+
+		echo $this->pagination->create_links();
 	}
 
 }//end of Controller curly
