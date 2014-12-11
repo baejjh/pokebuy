@@ -281,9 +281,9 @@ class Admin_info extends CI_Model {
 	public function get_orders_by_search_status($selected_status, $word_search) 
 	{
 		$where = "";
-		if ($selected_status == 'Pending') {
+		if ($selected_status == '1') {
 			if ($word_search != NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%'
+				$where = "WHERE statuses.id = $selected_status
 							  AND customers.first_name LIKE '%{$word_search}%'
 							  OR customers.last_name LIKE '%{$word_search}%'
 							  OR orders.id LIKE '%{$word_search}%'
@@ -291,12 +291,12 @@ class Admin_info extends CI_Model {
                			  ORDER BY orders.created_at ASC"; //old one first
 			}
 			else if ($word_search == NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at DESC";
+				$where = "WHERE statuses.id = $selected_status ORDER BY orders.created_at DESC";
 			}
 		}
-		else if ($selected_status == 'Ordered') {
+		else if ($selected_status == '2') {
 			if ($word_search != NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%'
+				$where = "WHERE statuses.id = $selected_status
 							  AND customers.first_name LIKE '%{$word_search}%'
 							  OR customers.last_name LIKE '%{$word_search}%'
 							  OR orders.id LIKE '%{$word_search}%'
@@ -304,12 +304,12 @@ class Admin_info extends CI_Model {
                			  ORDER BY orders.created_at ASC"; //old one first
 			}
 			else if ($word_search == NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at DESC";
+				$where = "WHERE statuses.id = $selected_status ORDER BY orders.created_at DESC";
 			}
 		}
-		else if ($selected_status == 'Shipped') {
+		else if ($selected_status == '3') {
 			if ($word_search != NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%'
+				$where = "WHERE statuses.id = $selected_status
 							  AND customers.first_name LIKE '%{$word_search}%'
 							  OR customers.last_name LIKE '%{$word_search}%'
 							  OR orders.id LIKE '%{$word_search}%'
@@ -317,12 +317,12 @@ class Admin_info extends CI_Model {
                			  ORDER BY orders.created_at ASC"; //old one first
 			}
 			else if ($word_search == NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at DESC";
+				$where = "WHERE statuses.id = $selected_status ORDER BY orders.created_at DESC";
 			}
 		}
-		else if ($selected_status == 'Returned') {
+		else if ($selected_status == '4') {
 			if ($word_search != NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%'
+				$where = "WHERE statuses.id = $selected_status
 							  AND customers.first_name LIKE '%{$word_search}%'
 							  OR customers.last_name LIKE '%{$word_search}%'
 							  OR orders.id LIKE '%{$word_search}%'
@@ -330,12 +330,12 @@ class Admin_info extends CI_Model {
                			  ORDER BY orders.created_at ASC"; //old one first
 			}
 			else if ($word_search == NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at DESC";
+				$where = "WHERE statuses.id = $selected_status ORDER BY orders.created_at DESC";
 			}
 		}
 		else if ($selected_status == NULL) {
 			if ($word_search != NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%'
+				$where = "WHERE statuses.id = $selected_status
 							  AND customers.first_name LIKE '%{$word_search}%'
 							  OR customers.last_name LIKE '%{$word_search}%'
 							  OR orders.id LIKE '%{$word_search}%'
@@ -353,13 +353,13 @@ class Admin_info extends CI_Model {
 			        CONCAT_WS(', ',addresses.city,states.abbreviation) AS 'billing_address_city_state',
 			        addresses.zip_code AS 'billing_address_zip',
 			        orders.total AS 'order_total',
-			        statuses.status AS 'order_status'
+			        statuses.id AS 'order_status_id'
 				FROM orders
 				LEFT JOIN customers ON orders.billing_customer_id = customers.id
 				LEFT JOIN addresses ON orders.billing_address_id = addresses.id
 				LEFT JOIN states ON states.id = addresses.state_id
 				LEFT JOIN statuses ON orders.status_id = statuses.id
-				{$where} ";
+				$where ";
 		return $this->db->query($query)->result_array();
 	}
 

@@ -4,11 +4,9 @@
 	<form action="sort_orders" method="post" id="order_sort_form">
 		<input type="text" placeholder="Search Zip, Order ID, or Buyer's Name" id="word_search" name="word_search"> <!-- USED TO BE HERE: WHY? value="?= $id?>" -->
 		<select name="selected_status" id="selected_status">
-				<option value="">(Select Order Status)</option>
-			    <option value="Pending">Pending</option>
-			    <option value="Ordered">Ordered</option>
-			    <option value="Shipped">Shipped</option>
-			    <option value="Returned">Returned</option>
+		<?php foreach($statuses as $status_type) { ?>
+			    <option value="<?= $status_type['id'] ?>"><?= $status_type['status'] ?></option>
+		<?php } ?>
 		</select>
 		<input type="submit" value="Search Orders">
 	</form>
@@ -71,7 +69,7 @@
 	</tbody>
 	</table>
 	<!-- Pagination -->
-	<?php echo $links ?> 
+	<?php if(!empty($links)) {echo $links; } ?> 
 </div><!-- close content div -->	
 </body>
 </html>
