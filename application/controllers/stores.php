@@ -26,7 +26,7 @@ class Stores extends CI_Controller {
 		$display['links'] = $this->pagination->create_links();
 		$display['products'] = $this->Store->pagination($config["per_page"], $start);
 		$display['categories'] = $this->Store->get_all_categories();
-		$display['count'] = $this->Store->count_products();
+		$display['count'] = $count;
 	
 		$this->load->view('store', $display);
 	}
@@ -131,11 +131,31 @@ class Stores extends CI_Controller {
 		if (!isset($selected_order)) {
 			$selected_order = NULL;
 		}
+		// $this->load->model('Store');
+		// $display['products'] = $this->Store->get_category_with_search_by_order($selected_order, $word_search, $category);
+		// $display['categories'] = $this->Store->get_all_categories();
+		// $this->load->view('store', $display);
+		//////////////////////////////////////
 		$this->load->model('Store');
-		$display['products'] = $this->Store->get_category_with_search_by_order($selected_order, $word_search, $category);
+		$count = $this->Store->count_products();
+		$config = array();
+		$config['base_url'] = base_url().'/order_by/';
+		$config['total_rows'] = $count['count(id)'];
+		$config['per_page'] = 10;
+		$config['uri_segment'] = 2;
+		$config['first_link'] = 'first';
+		$config['last_link'] = 'last';
+		$config['next_link'] = 'next';
+		$config['prev_link'] = '&lt;';
+		$this->pagination->initialize($config); 
+		$start = $this->uri->segment(2);
+		$display['links'] = $this->pagination->create_links();
+		$display['products'] = $this->Store->get_category_with_search_by_order($selected_order, $word_search, $category, $config["per_page"], $start);
 		$display['categories'] = $this->Store->get_all_categories();
-		$display['links'] = 0; //temp fix to remove undefined variable error on links
+		$display['count'] = $count;
+	
 		$this->load->view('store', $display);
+
 	}
 	public function submit_order() {
 		$post = $this->input->post();

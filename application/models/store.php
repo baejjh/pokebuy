@@ -40,9 +40,10 @@ class Store extends CI_Model {
             GROUP BY products.id";
 			return $this->db->query($query)->result_array();
 	}
-	public function get_category_with_search_by_order($selected_order, $word_search, $category) 
+	public function get_category_with_search_by_order($selected_order, $word_search, $category, $limit, $start) 
 	{
 		$where = "";
+		$start = (int)$start;
 		$value = array();
 		if ($selected_order == 'low_price') {
 			if ($word_search != NULL && $category != NULL) {
@@ -108,6 +109,7 @@ class Store extends CI_Model {
 				$where = "ORDER BY price DESC";
 			}
 		}
+		$where .= " LIMIT $start, $limit";
 		$query = "SELECT products.id, products.name, products.price, products.description, products.main_image_id, categories.name 
 			AS category, images.location FROM products
 			LEFT JOIN product_categories
@@ -218,7 +220,7 @@ class Store extends CI_Model {
             ON products.id = images.product_id
             GROUP BY products.id
             LIMIT ?,? ";
-         $values = array((int)$start, $limit);
+        $values = array((int)$start, $limit);
         return $this->db->query($query, $values)->result_array();
 	}
 
