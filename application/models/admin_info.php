@@ -65,8 +65,7 @@ class Admin_info extends CI_Model {
 					    images.location AS 'item_main_img_url',
 				        images.name AS 'item_img_description'
 				FROM products
-				LEFT JOIN images_has_products ON products.id = images_has_products.product_id
-				LEFT JOIN images ON images.id = images_has_products.image_id
+				LEFT JOIN images ON products.id = images.product_id
 				LEFT JOIN product_categories ON products.id = product_categories.product_id
 				LEFT JOIN categories ON categories.id = product_categories.category_id
 				GROUP BY products.id
