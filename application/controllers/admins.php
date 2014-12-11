@@ -189,10 +189,6 @@ public function sort_orders_by_status()
 		
 		$this->load->view('admin/products', $var);
 	}
-
-
-
-
 //As Admin, you can edit, delete, add products inside admin/products view
 	public function edit_product($id)
 	{
@@ -220,6 +216,7 @@ public function sort_orders_by_status()
 			$this->load->view('admin/products', $var);	
 		}
 	}
+
 
 
 
