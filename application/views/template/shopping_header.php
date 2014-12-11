@@ -12,7 +12,7 @@
 <body>
 <div class="content">
 	<ul class="shopping_header_div">
-		<li><a href="/default_controller"><h1>Dojo De Poké: Get 'Dat POKéMON<h1></a></li>
+		<li><a href="/store"><h1>Dojo De Poké: Get 'Dat POKéMON<h1></a></li>
 		<li><a href="/cart">Shopping Cart (
 <?php 	if(!empty($cart_num)) {
 			echo $cart_num;
