@@ -28,6 +28,17 @@ class Store extends CI_Model {
 		$value = array($id);
 		return $this->db->query($query, $value)->result_array();
 	}
+	public function get_all_for_index()
+	{
+		$query = "SELECT products.id, products.name, products.price, products.description, products.main_image_id, images.location, categories.name AS category FROM products
+			LEFT JOIN product_categories
+			ON products.id = product_categories.product_id
+			LEFT JOIN categories 
+			ON product_categories.category_id = categories.id
+            LEFT JOIN images
+            ON products.id = images.product_id";
+			return $this->db->query($query)->result_array();
+	}
 	public function get_category_with_search_by_order($selected_order, $word_search, $category) 
 	{
 		$where = "";
@@ -102,11 +113,11 @@ class Store extends CI_Model {
 			ON products.id = product_categories.product_id
 			LEFT JOIN categories 
 			ON product_categories.category_id = categories.id
-			{$where} ";
+            LEFT JOIN images
+            ON products.id = images.product_id {$where}";
 		return $this->db->query($query, $value)->result_array();
 	}
-	public function get_all_products() 
-	{
+	public function get_all_products(){
 		$result['count'] = $this->db->query("SELECT count(id) FROM products");
 		$query = "SELECT * FROM products";
 		$result = $this->db->query($query)->result_array();
