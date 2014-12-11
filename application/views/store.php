@@ -21,6 +21,7 @@
 	</form>
 	<a href="/default_controller">I want ALL the POKéMON! Go Back!</a>
 </div>
+<?php echo $links ?>
 <div class="products"> 
 	</form>
 <?php 	if(!empty($products))
