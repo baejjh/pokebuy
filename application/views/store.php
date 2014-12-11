@@ -10,9 +10,9 @@
 			<h4>By Product Name</h4>
 				<input type="text" placeholder="Product Name" name="word_search" value="<?= $name?>">
 			<h4>By Category</h4>
-				<?php if(!empty($this->session->userdata('categories')))
+				<?php if(!empty($categories))
 					  	{ ?>
-				<?php 		foreach($this->session->userdata('categories') as $category)
+				<?php 		foreach($categories as $category)
 							{	?>	
 								<input type="radio" name="category" value="<?= $category['id'] ?>"><?= $category['name'] ?><br>
 				<?php 		} ?>

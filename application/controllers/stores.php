@@ -115,6 +115,7 @@ class Stores extends CI_Controller {
 		$this->load->model('Store');
 		$display['products'] = $this->Store->get_product_by_name($name, selectiontype);
 		$display['name'] = $this->input->post('name');
+		$display['categories'] = $this->Store->get_all_categories();
 		$this->load->view('store', $display);
 	}
 	public function sort_orders_by_status() {
@@ -132,9 +133,8 @@ class Stores extends CI_Controller {
 		}
 		$this->load->model('Store');
 		$display['products'] = $this->Store->get_category_with_search_by_order($selected_order, $word_search, $category);
-		$categories = $this->Store->get_all_categories();
+		$display['categories'] = $this->Store->get_all_categories();
 		$display['links'] = 0; //temp fix to remove undefined variable error on links
-		$this->session->set_userdata('categories', $categories);
 		$this->load->view('store', $display);
 	}
 	public function submit_order() {
