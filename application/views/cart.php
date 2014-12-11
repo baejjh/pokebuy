@@ -24,7 +24,7 @@
 						<input type="submit" value="Update Quantity">
 					</form>
 				</td>
-				<td><?php echo $product['subtotal'] ?></td>
+				<td><?php echo number_format($product['subtotal'], 2) ?></td>
 				<td> 
 					<form action="delete" method="post">
 						<input type="submit" name="delete" value="Delete Item From Cart">
@@ -39,7 +39,7 @@
 			<tr>
 				<th id="total" colspan="3" >Subtotal (Before Shipping and Tax):</th>
 <?php 		if(!empty($products)) { ?>
-				<th><?php echo $sum ?></th>
+				<th><?php echo number_format($sum, 2) ?></th>
 <?php 		} ?>
 			</tr>
 		</tfoot>
