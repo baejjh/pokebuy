@@ -1,6 +1,5 @@
-
 		<?php if(!isset($name)){ $name = ''; } ?>
-<div class="side_bar">
+<div class="side_bar_div">
 	<form action="/order_by" method="post">
 		<input type="text" placeholder="Product Name" name="word_search" value="<?= $name?>">
 			<h2>Categories</h2>
@@ -47,8 +46,33 @@
 			<input type="submit" value="Buy" class="submit">
 		 </form>
 	</div>
-<?php		}
-		} ?>
-</div>
-</body>
+
+	<div class="products_div"> 
+	<div class="pagination_div"><?php echo $links ?></div>
+		</form>
+	<?php 	if(!empty($products))
+			{ 
+				foreach($products as $product)
+				{ ?>
+	  				<div class="each_product" stuff="<?= $product['id']?>">
+						<p>	
+							<a href="/view_product/<?= $product['id'] ?>">
+								<?= $product['name'] ?>
+							</a>
+						</p>
+						<p>
+							$<?= $product['price'] ?>
+						</p>
+			 <!-- <p> $product['main_image_id'] </p>    <-*image?*    -->
+			 <p>
+			 	<?= $product['description'] ?>
+			 </p>
+			 <form action="/add_cart/<?= $product['id']?>" method="post">
+				<input type="submit" value="Buy">
+			 </form>
+		</div>
+	<?php		}
+			} ?>
+	</div>
+	</body>
 </html>
