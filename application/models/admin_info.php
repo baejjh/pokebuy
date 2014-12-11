@@ -8,7 +8,6 @@ class Admin_info extends CI_Model {
 	}
 
 
-
 //ADMIN
 	public function admin_register($admin)
 	{
@@ -40,6 +39,7 @@ class Admin_info extends CI_Model {
 				        products.inventory_count AS 'item_inventory',
 				        products.quantity_sold AS 'item_sold',
 				        products.main_image_id AS 'item_img_id',
+				      	products.price AS 'item_price',
 				        categories.name AS 'item_category',
 					    images.location AS 'item_main_img_url',
 				        images.name AS 'item_img_description'
@@ -60,6 +60,7 @@ class Admin_info extends CI_Model {
 				        products.inventory_count AS 'item_inventory',
 				        products.quantity_sold AS 'item_sold',
 				        products.main_image_id AS 'item_img_id',
+				        products.price AS 'item_price',
 				        categories.name AS 'item_category',
 					    images.location AS 'item_main_img_url',
 				        images.name AS 'item_img_description'
@@ -89,14 +90,32 @@ class Admin_info extends CI_Model {
 	    		  ); 
 	    return $this->db->query($query, $values);
 	}
-	public function edit_product_by_id($_____)
+	public function edit_product_by_id($id)
 	{
-		$query = "UPDATE products
-					(name, description, price, inventory_count, main_image, created_at, updated_at)
-				  VALUES (?,?,?,?,?,?,?)
-				  WHERE id = ?";
-		//how does this query work?
-		//from sql: "UPDATE `products` SET `inventory_count`='12' WHERE `id`='4'"
+		// UPDATE:
+		// how does this query work?
+		// from sql:
+		// "UPDATE `products` SET `inventory_count`='12' WHERE `id`='4'"
+		$query= "SELECT products.id AS 'item_id',
+					    products.name AS 'item_name',
+				        products.inventory_count AS 'item_inventory',
+				        products.quantity_sold AS 'item_sold',
+				        products.main_image_id AS 'item_img_id',
+				        products.price AS 'item_price',
+				        categories.name AS 'item_category',
+					    images.location AS 'item_main_img_url',
+				        images.name AS 'item_img_description'
+				FROM products
+				LEFT JOIN images_has_products ON products.id = images_has_products.product_id
+				LEFT JOIN images ON images.id = images_has_products.image_id
+				LEFT JOIN product_categories ON products.id = product_categories.product_id
+				LEFT JOIN categories ON categories.id = product_categories.category_id
+				WHERE products.id = ?";
+		$values = array(
+					$id
+				  );
+		return $this->db->query($query, $values)->result_array();
+		
 	}
 	public function delete_product_by_id($id)
 	{
@@ -108,8 +127,17 @@ class Admin_info extends CI_Model {
 	}
 
 //CATEGORIES
-	public function add_new_category($category_name)
+	public function get_all_categories()
 	{
+		return $this->db
+		->query("SELECT
+					categories.name AS 'category_name',
+					categories.id AS 'category_id'
+				 FROM categories")
+		->result_array();
+	}
+	public function add_new_category($category_name)
+	{	
 		$query = "INSERT INTO categories
 					(name, active, created_at, updated_at)
 				  VALUES (?, 1, NOW(), NOW())";
