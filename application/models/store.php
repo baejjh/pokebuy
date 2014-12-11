@@ -3,11 +3,13 @@
 class Store extends CI_Model {
 	public function get_all_images()
 	{
-		return $this->db->query("SELECT images.location, products.id, products.name FROM images LEFT JOIN products ON images.id = products.id ORDER BY products.id;")->result_array();
+		return $this->db->query("SELECT images.location, products.id, products.name FROM images LEFT JOIN products ON images.id = products.id ORDER BY products.id")->result_array();
 	}
-	public function get_image_by_product_id($image_id)
+	public function get_image_by_product_id($id)
 	{
-		return $this->db->query("SELECT images.location, products.id, products.name FROM images LEFT JOIN products ON images.id = products.id WHERE products.id = {$image_id} ORDER BY products.id;")->result_array();
+		$query = "SELECT * FROM images WHERE images.id = ?";
+		$value = array($id);
+		return $this->db->query($query, $value)->result_array();
 	}
 	public function get_all_categories()
 	{
@@ -15,11 +17,13 @@ class Store extends CI_Model {
 	}
 	public function get_all_in_category($id)
 	{
-		$query = "SELECT products.id, products.name, products.price, products.description, products.main_image_id, categories.name AS category FROM products
+		$query = "SELECT products.id, products.name, products.price, products.description, products.main_image_id, images.location, categories.name AS category FROM products
 			LEFT JOIN product_categories
 			ON products.id = product_categories.product_id
 			LEFT JOIN categories 
 			ON product_categories.category_id = categories.id
+            LEFT JOIN images
+            ON products.id = images.product_id
 			WHERE category_id = ?";
 		$value = array($id);
 		return $this->db->query($query, $value)->result_array();

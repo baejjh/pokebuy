@@ -7,6 +7,25 @@
     margin-top: 80px; /* .header's height + padding-top*/
     width:100%;
     height: auto;
+	background: radial-gradient(white,#A8ADAE);
+}
+a{
+	text-decoration: none;
+	color: black;
+	border: 1px black;
+	border-radius: 3px;
+	color:	white;
+	text-shadow: 2px 2px 4px #000000;
+}
+.submit{
+	padding: 10px 20px;
+	border: 1px solid black;
+	box-shadow: 0px 2px 2px #000000;
+}
+.submit_search{
+	background: #CBD0D1;
+	border: none;
+	border-radius: 3px;
 }
 .shopping_header_div
 {
@@ -41,33 +60,34 @@
 {
 	display: inline-block;
 	vertical-align: top;
-	width: 17%;
-	height: 200px;
+	min-width: 17%;
+	min-height: 200px;
 	border: 1px solid red;
 	padding: 5px;
 }
-.header_content
-{
-	border: 1px solid purple;
-	display: block;
+.header_content{
+	border-radius: 5px;
+	display: inline-block;
+	background: #A9ADAE;
 }
-.title
-{
+.title{
 	border: 1px solid blue;
 	float: left;
 }
-.cart_amount
-{
+.cart_amount{
 	border: 1px solid green;
 	float: right;
 }
+<<<<<<< HEAD
 .side_bar_div
 {
 	width: 18%;
 	height: 500px;
-	border: 1px solid black;	
+	border: 1px solid black;
+	border-radius: 5px;	
 	display: inline-block;
 	vertical-align: top;
+	background: #A9ADAE;
 }
 .pagination_div
 {
@@ -80,4 +100,49 @@
 	width: 80%;
 	display: inline-block;
 	vertical-align: top;
+}
+.product_name{
+/* Set a counter named cnt to 0 */
+	counter-reset: cnt;
+	position:relative;
+	text-align:center;
+	padding:20px 0;
+	width:420px;
+	height: 160px;
+	margin: 0 auto;
+}
+.product_name span{
+	display:inline-block;
+	padding:2px 6px;
+	background-color:#78CCD2;
+	color:#186C72;
+	border-radius:4px;
+	margin:3px;
+	cursor:default;
+}
+.product_name span::after{
+	/* Every time this rule is executed, the counter value is increased by 1 */
+	counter-increment: cnt;
+	/* Add the counter value as part of the content */
+	content:" #" counter(cnt);
+	display:inline-block;
+	padding:4px;
+}
+.product_name span::before{
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+	content:attr(data-title);
+	color:#666;
+	opacity:0;
+	/* Animate the transitions */
+	-webkit-transition:opacity 0.4s;
+	transition:opacity 0.4s;
+}
+.product_name span:hover::before{
+	opacity:1;
+}
+.bottom_div{
+	display: inline-block;
 }

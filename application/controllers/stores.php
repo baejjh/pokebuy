@@ -45,17 +45,25 @@ class Stores extends CI_Controller {
 	}
 	public function view_product($id) {
 		$this->load->model('Store');
-		$display['category'] = $this->Store->get_all_in_category($id);
-		$display['products'] = $this->Store->product_buy($id);
-		$display['products']['images'] = $this->Store->get_all_images();
-		$image_id = $display['products']['images'][$id]['id'];
-		$display['products']['image'] = $this->Store->get_image_by_product_id($image_id);
+		$display['similar_products'] = $this->Store->get_all_in_category($id);
+		// /var_dump($display);
+		// die('here');
+		$display['displayed_product'] = $this->Store->product_buy($id);
+		// echo "<pre>";
+		// print_r($display['product']);
+		// die('here');
+		// $display['similar_products']['images'] = $this->Store->get_all_images();
+		// var_dump($display);
+		// die('here');
+		// $image_id = $display['similar_products']['images'][$id]['id'];
+		$display['displayed_product']['image'] = $this->Store->get_image_by_product_id($id);
+		// echo "<pre>";	
+		// print_r($display);
+		// die('here');
 		$this->load->view('product', $display);
+		// var_dump($display);
+		// die('here');
 	}
-	// public function get_image(){
-	// 	$this->load->model('Store');
-	// 	$display
-	// }
 	public function product_buy($id) {
 		$this->load->model('Store');
 		$display['id'] = $this->Store->product_buy($id);
