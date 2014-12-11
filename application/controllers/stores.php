@@ -12,7 +12,7 @@ class Stores extends CI_Controller {
 	{
 		$this->load->model('Store');
 		$display['products'] = $this->Store->get_all_products();
-		$categories = $this->Store->get_all_categories();
+		// $categories = $this->Store->get_all_categories();
 		$count = $this->Store->count_products();
 		$config = array();
 		$config['base_url'] = base_url().'/store/';
@@ -27,6 +27,7 @@ class Stores extends CI_Controller {
 		$start = $this->uri->segment(2);
 		$display['links'] = $this->pagination->create_links();
 		$display['products'] = $this->Store->pagination($config["per_page"], $start);
+		$display['similar_products'] = $this->Store->get_all_for_index();
 		$display['categories'] = $this->Store->get_all_categories();
 		$display['count'] = $this->Store->count_products();
 		$this->load->view('store', $display);

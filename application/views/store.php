@@ -25,15 +25,16 @@
 <?php echo $links ?>
 <div class="products"> 
 	</form>
-<?php 	if(!empty($products))
+<?php 	if(!empty($similar_products))
 		{ 
-			foreach($products as $product)
+			foreach($similar_products as $product)
 			{ ?>
   				<div class="each_product" stuff="<?= $product['id']?>">
 					<p>	
 						<a class="product_name" href="/view_product/<?= $product['id'] ?>">
 							<?= $product['name'] ?>
 						</a>
+						<img src="<?= $product['location'];?>" alt="Pokemon Pics!" height="150px" width="150px">
 					</p>
 					<p>
 						$<?= $product['price'] ?>
