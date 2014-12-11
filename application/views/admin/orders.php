@@ -2,7 +2,7 @@
 		<h2>Sort by status</h2>
 		<h2>Search doesn't work</h2>
 
-	<form action="sort_orders" method="post" id="sort_form">
+	<form action="sort_orders" method="post" id="order_sort_form">
 		<input type="text" placeholder="Search Zip, Order ID, or Buyer's Name" id="word_search" name="word_search"> <!-- USED TO BE HERE: WHY? value="?= $id?>" -->
 		<select name="selected_status" id="selected_status">
 				<option value="">(Select Order Status)</option>
@@ -17,7 +17,7 @@
 	<script type="text/javascript">
 	// alerts whenever button is submitted
 	$(document).ready(function() {
-		$('#sort_form').submit(function() {
+		$('#order_sort_form').submit(function() {
 		    if ($("#word_search").val() === "" && $("#selected_status").val() === "") {
 		        alert('To search by orders, you must enter or choose a field');
 		        return false;

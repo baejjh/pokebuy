@@ -174,12 +174,11 @@ public function sort_orders_by_status()
 	} 
 	public function sort_products()
 	{
-		$word_search = $this->input->post('word_search');
-		if (!isset($word_search)) {
-			$word_search = NULL;
-		}
-		$var['products']	 	= $this->admin_info->get_orders_by_search_status($word_search);
+		$product_search = $this->input->post('product_search');
+
+		$var['products']	 	= $this->admin_info->sort_products_by_name_id($product_search);
 		$var['categories'] 		= $this->admin_info->get_all_categories();
+		
 		$this->load->view('admin/products', $var);
 	}
 

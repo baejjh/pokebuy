@@ -77,20 +77,18 @@ class Admin_info extends CI_Model {
 		return $this->db->query($query, $values)->result_array();
 		//need to retrieve images too
 	}
-	public function sort_products_by_name_id()
+	public function sort_products_by_name_id($product_search)
 	{
-		if ($selected_status == NULL)
-		{
-			if ($word_search != NULL) {
-				$where = "WHERE products.id LIKE '%{$word_search}%'
-							  OR products.name LIKE '%{$word_search}%'
-							  OR customers.first_name LIKE '%{$word_search}%'
-							  OR customers.last_name LIKE '%{$word_search}%'
-               			  ORDER BY orders.created_at ASC"; //old one first
-			}
-			else if ($word_search == NULL) {
-				$where = "";
-			}
+		if ($product_search != NULL) {
+			$where = "WHERE products.id LIKE '%{$product_search}%'
+						  OR products.name LIKE '%{$product_search}%'
+						  OR customers.first_name LIKE '%{$product_search}%'
+						  OR customers.last_name LIKE '%{$product_search}%'
+					  GROUP BY products.id
+           			  ORDER BY products.id ASC"; //old one first
+		}
+		else if ($product_search == NULL) {
+			$where = "";
 		}
 		$query = "SELECT products.id AS 'item_id',
 					    products.name AS 'item_name',
@@ -102,11 +100,13 @@ class Admin_info extends CI_Model {
 					    images.location AS 'item_main_img_url',
 				        images.name AS 'item_img_description'
 				FROM products
+                LEFT JOIN orders_has_products ON products.id = orders_has_products.product_id
+                LEFT JOIN orders ON orders.id = orders_has_products.product_id
+                LEFT JOIN customers ON orders.billing_customer_id = customers.id
 				LEFT JOIN images_has_products ON products.id = images_has_products.product_id
 				LEFT JOIN images ON images.id = images_has_products.image_id
 				LEFT JOIN product_categories ON products.id = product_categories.product_id
 				LEFT JOIN categories ON categories.id = product_categories.category_id
-				GROUP BY products.id
 				{$where} ";
 		return $this->db->query($query)->result_array();
 	}
