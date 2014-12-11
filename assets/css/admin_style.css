@@ -42,17 +42,19 @@ li {
 }
 .dashboard_left
 {
-		display: inline-block;
-		vertical-align: top;
-		margin: 0px auto;
-	}
-	.dashboard_right
-	{
-	display: inline-block;
-		vertical-align: top;
-		width: 60%;
-		margin: 0px auto;
-	}
+	outline: 1px solid;
+    display: inline-block;
+	vertical-align: top;
+    width: 35%;
+	margin: 0px auto;
+}
+.dashboard_right
+{
+    display: inline-block;
+	vertical-align: top;
+	width: 55%;
+	margin: 0px auto;
+}
 	.status
 	{
 		background-color: lime;
