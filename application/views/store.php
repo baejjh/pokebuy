@@ -4,6 +4,7 @@
 <script type="text/javascript">
 </script> -->
 <!-- End of code in that statement -->
+<?php var_dump($products) ?>
 <div class="side_bar">
 	<form action="/search_product/" method="post">
 		<input type="text" placeholder="Product Name" name="name">
@@ -18,11 +19,12 @@
 		</ul>
 <?php } ?>
 </div>
+<?php echo $links ?>
 <div class="products">
-<?php 	if(!empty($products[0]['category'])) { ?>
-	<h1><?= $products[0]['category'] ?></h1>
+<!--<?php 	if(!empty($products[0]['category'])) { ?> -->
+	<h1><!--<?= $products[0]['category'] ?>--></h1>
 	<a href="/default_controller">Do More Shopping!</a>
-<?php	} ?>
+<!--<?php	} ?>-->
 	<select>
 	    <option value="volvo">Low Price</option>
 	    <option value="saab">High Price</option>

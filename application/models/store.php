@@ -19,8 +19,10 @@ class Store extends CI_Model {
 	}
 	public function get_all_products() 
 	{
+		$result['count'] = $this->db->query("SELECT count(id) FROM products");
 		$query = "SELECT * FROM products";
-		return $this->db->query($query)->result_array();
+		$result = $this->db->query($query)->result_array();
+		return $result;
 	}
 	public function product_buy($id) 
 	{
@@ -84,6 +86,23 @@ class Store extends CI_Model {
 		}
 
 		return;
+	}
+
+	public function count_products() {
+		return $this->db->query("SELECT count(id) FROM products")->row_array();
+	}
+
+	public function pagination($limit, $start) {
+        $this->db->limit($limit, $start);
+        return $this->db->get("products", $limit, $start)->result_array();
+ 
+        // if ($query->num_rows() > 0) {
+        //     foreach ($query->result() as $row) {
+        //         $data[] = $row;
+        //     }
+        //     return $data;
+        // }
+        // return false;
 	}
 
 }
