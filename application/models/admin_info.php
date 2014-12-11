@@ -53,7 +53,7 @@ class Admin_info extends CI_Model {
 			            ->result_array();
 		//need to retrieve images too
 	}
-	public function get_all_products_limit($per_page)
+	public function get_all_products_limit($start_row, $per_page)
 	{
 		$query= "SELECT products.id AS 'item_id',
 					    products.name AS 'item_name',

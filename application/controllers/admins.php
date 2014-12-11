@@ -156,9 +156,8 @@ class Admins extends CI_Controller
 		$this->pagination->initialize($config);
 
 		$var['pagination_links']= $this->pagination->create_links();
-		$var['products'] 		= $this->admin_info->get_all_products_limit($per_page);
-		// var_dump($var);
-		// die();
+		$var['products'] 		 	= $this->admin_info->get_all_products_limit($start_row, $per_page);
+
 		$this->load->view('admin/products', $var);
 	} 
 	//As Admin, you can edit, delete, add products inside admin/products view
