@@ -17,10 +17,10 @@
 		    <option value="high_price">Highest Price</option>
 		    <option value="most_popular">Most Popular</option>
 		</select>
-		<input type="submit">
+		<input type="submit" class="submit_search">
 	</form>
 	
-	<a href="/default_controller">I want ALL the POKéMON! Go Back!</a>
+	<a href="/default_controller">Go Back!<br>I want ALL the POKéMON!</a>
 </div>
 <?php echo $links ?>
 <div class="products"> 
@@ -31,7 +31,7 @@
 			{ ?>
   				<div class="each_product" stuff="<?= $product['id']?>">
 					<p>	
-						<a href="/view_product/<?= $product['id'] ?>">
+						<a class="product_name" href="/view_product/<?= $product['id'] ?>">
 							<?= $product['name'] ?>
 						</a>
 					</p>
@@ -43,7 +43,7 @@
 		 	<?= $product['description'] ?>
 		 </p>
 		 <form action="/add_cart/<?= $product['id']?>" method="post">
-			<input type="submit" value="Buy">
+			<input type="submit" value="Buy" class="submit">
 		 </form>
 	</div>
 <?php		}
