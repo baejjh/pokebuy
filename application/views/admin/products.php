@@ -1,19 +1,33 @@
 	<h1>Products</h1>
-		<h2>Add Product works but no image file upload</h2>
-		<h2>Edit function doesn't work</h2>
-		<h2>Delete doesn't work</h2>	
+	<h2>Your Special Inventory of Pokemons to edit, add, and deactivate from the storefront</h2>
+		
+		<h4>Edit function doesn't work</h4>
+		<h4>Delete doesn't work</h4>	
 			<p>Cannot delete or update a parent row: a foreign key constraint fails
 			WHEN DELETE BUTTON IS ClICKED AND DIRECTED, there are undefined variables of:
 				user,
 				pagination_links,
 				products</p>
-		<h2>Pagination doesn't work</h2>
-		<h2>Search doesn't work</h2>
+		<h4>Pagination doesn't work</h4>
+		<h4>Add Product works but no image file upload</h4>
+		<h4>Search doesn't work</h4>
 
-	<form action="#" method="post">
-		<input type="text" placeholder="Search Products">
+	<form action="sort_products" method="post" id="sort_form">
+		<input type="text" id="word_search" name="word_search" placeholder="Search Products">
 		<input type="button" value="Search by Product Name">
 	</form>
+
+	<script type="text/javascript">
+	// alerts whenever button is submitted
+	$(document).ready(function() {
+		$('#sort_form').submit(function() {
+		    if ($("#word_search").val()) {
+		        alert('You cannot search an empty field');
+		        return false;
+		    }
+		});
+	});
+	</script>
 
 	<a href="/add_product">Add New Product</a>
 
@@ -55,9 +69,9 @@
 
 
 	<!-- modal for product edit starts here -->
-<!-- 	<div id="openModal" class="modalDialog">
+	<div id="openModal" class="modalDialog">
 	    <div><a href="#close" title="Close" class="close">X</a>
- -->
+
     <h2>Edit Product</h2>
     <form action="change_product/<?= $each_product['item_id']; ?>" method='post'>
 		<table>
@@ -112,8 +126,8 @@
 		</tr>
 		</table>
 	</form>
-<!-- 	    </div>
-	</div> -->
+	    </div>
+	</div>
 </div><!-- close content div -->
 </body>
 </html>

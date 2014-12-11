@@ -77,6 +77,39 @@ class Admin_info extends CI_Model {
 		return $this->db->query($query, $values)->result_array();
 		//need to retrieve images too
 	}
+	public function sort_products_by_name_id()
+	{
+		if ($selected_status == NULL)
+		{
+			if ($word_search != NULL) {
+				$where = "WHERE products.id LIKE '%{$word_search}%'
+							  OR products.name LIKE '%{$word_search}%'
+							  OR customers.first_name LIKE '%{$word_search}%'
+							  OR customers.last_name LIKE '%{$word_search}%'
+               			  ORDER BY orders.created_at ASC"; //old one first
+			}
+			else if ($word_search == NULL) {
+				$where = "";
+			}
+		}
+		$query = "SELECT products.id AS 'item_id',
+					    products.name AS 'item_name',
+				        products.inventory_count AS 'item_inventory',
+				        products.quantity_sold AS 'item_sold',
+				        products.main_image_id AS 'item_img_id',
+				      	products.price AS 'item_price',
+				        categories.name AS 'item_category',
+					    images.location AS 'item_main_img_url',
+				        images.name AS 'item_img_description'
+				FROM products
+				LEFT JOIN images_has_products ON products.id = images_has_products.product_id
+				LEFT JOIN images ON images.id = images_has_products.image_id
+				LEFT JOIN product_categories ON products.id = product_categories.product_id
+				LEFT JOIN categories ON categories.id = product_categories.category_id
+				GROUP BY products.id
+				{$where} ";
+		return $this->db->query($query)->result_array();
+	}
 	public function add_new_product($new_product)
 	{
 		$query = "INSERT INTO products
@@ -116,8 +149,7 @@ class Admin_info extends CI_Model {
 		$values = array(
 					$new_info
 				  );
-		return $this->db->query($query, $values)->result_array();
-		
+		return $this->db->query($query, $values)->result_array();		
 	}
 	public function delete_product_by_id($id)
 	{
@@ -257,7 +289,7 @@ class Admin_info extends CI_Model {
                			  ORDER BY orders.created_at ASC"; //old one first
 			}
 			else if ($word_search == NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at ASC";
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at DESC";
 			}
 		}
 		else if ($selected_status == 'Ordered') {
@@ -270,7 +302,7 @@ class Admin_info extends CI_Model {
                			  ORDER BY orders.created_at ASC"; //old one first
 			}
 			else if ($word_search == NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at ASC";
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at DESC";
 			}
 		}
 		else if ($selected_status == 'Shipped') {
@@ -283,7 +315,7 @@ class Admin_info extends CI_Model {
                			  ORDER BY orders.created_at ASC"; //old one first
 			}
 			else if ($word_search == NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at ASC";
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at DESC";
 			}
 		}
 		else if ($selected_status == 'Returned') {
@@ -296,7 +328,7 @@ class Admin_info extends CI_Model {
                			  ORDER BY orders.created_at ASC"; //old one first
 			}
 			else if ($word_search == NULL) {
-				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at ASC";
+				$where = "WHERE statuses.status LIKE '%{$selected_status}%' ORDER BY orders.created_at DESC";
 			}
 		}
 		else if ($selected_status == NULL) {

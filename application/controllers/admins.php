@@ -124,7 +124,8 @@ class Admins extends CI_Controller
 		// die('hi');
 		$this->load->view('admin/one_order', $var);
 	}
-public function sort_orders_by_status() {
+public function sort_orders_by_status()
+	{
 		$word_search = $this->input->post('word_search');
 		$selected_order = $this->input->post('selected_status');
 		if (!isset($word_search)) {
@@ -171,6 +172,16 @@ public function sort_orders_by_status() {
 		
 		$this->load->view('admin/products', $var);
 	} 
+	public function sort_products()
+	{
+		$word_search = $this->input->post('word_search');
+		if (!isset($word_search)) {
+			$word_search = NULL;
+		}
+		$var['products']	 	= $this->admin_info->get_orders_by_search_status($word_search);
+		$var['categories'] 		= $this->admin_info->get_all_categories();
+		$this->load->view('admin/products', $var);
+	}
 
 
 
@@ -201,7 +212,7 @@ public function sort_orders_by_status() {
 			$this->admin_info->get_all_products();
 			$this->load->view('admin/products', $var);	
 		}
-
+	}
 
 
 
