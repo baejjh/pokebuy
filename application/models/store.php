@@ -231,6 +231,7 @@ class Store extends CI_Model {
 			ON product_categories.category_id = categories.id
             LEFT JOIN images
             ON products.id = images.product_id
+            WHERE products.active IS NULL
             GROUP BY products.id
             LIMIT ?,? ";
         $values = array((int)$start, $limit);
