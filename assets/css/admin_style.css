@@ -2,6 +2,9 @@
 	margin: 0px auto;
 	font-family: 'Ubuntu', sans-serif;
 }
+body{
+    background: url('http://th04.deviantart.net/fs70/PRE/f/2013/065/b/b/pokemon_wallpaper__be_prepared__line_version_2___by_fpkayton-d5x6s3e.png')
+}
 a{
     text-decoration: none;
 }
@@ -9,7 +12,6 @@ a{
 {
     margin-top: 60px; /* .header's height + padding-top*/
     width:100%;
-    background: url('http://th04.deviantart.net/fs70/PRE/f/2013/065/b/b/pokemon_wallpaper__be_prepared__line_version_2___by_fpkayton-d5x6s3e.png')
 }
 .admin_header_div
 {

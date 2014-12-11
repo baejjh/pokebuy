@@ -6,6 +6,9 @@
 {
     padding-top: 66px; /* ..shopping_header_div's height + padding-top*/
     width:100%;
+}
+body
+{
 	background: url('http://2.bp.blogspot.com/-osUTAZAKDUQ/UEF5_29R3tI/AAAAAAAAFh4/4i0AuXUDF7U/s1600/Pokemon+wallpaper+hd.png');
 }
 a{
