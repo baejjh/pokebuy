@@ -63,10 +63,11 @@
 				</select>
 			</td>
 		</tr>
-		<? } //end the foreach loop of orders ?>
+		<?php } //end the foreach loop of orders ?>
 	</tbody>
 	</table>
-	<!-- *pagination -->
+	<!-- Pagination -->
+	<?php echo $links ?> 
 </div><!-- close content div -->	
 </body>
 </html>

@@ -53,7 +53,7 @@ class Admin_info extends CI_Model {
 			            ->result_array();
 		//need to retrieve images too
 	}
-	public function get_all_products_limit($start_row, $per_page)
+	public function get_all_products_limit($limit, $start)
 	{
 		$query= "SELECT products.id AS 'item_id',
 					    products.name AS 'item_name',
@@ -70,10 +70,8 @@ class Admin_info extends CI_Model {
 				LEFT JOIN product_categories ON products.id = product_categories.product_id
 				LEFT JOIN categories ON categories.id = product_categories.category_id
 				GROUP BY products.id
-				LIMIT $per_page";
-		$values = array(
-					$per_page
-				  );
+				LIMIT ?, ?";
+		$values = array((int)$start, $limit);
 		return $this->db->query($query, $values)->result_array();
 		//need to retrieve images too
 	}
