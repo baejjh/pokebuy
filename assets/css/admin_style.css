@@ -9,7 +9,6 @@ a{
 {
     margin-top: 60px; /* .header's height + padding-top*/
     width:100%;
-    height: auto;
     background: url('http://th04.deviantart.net/fs70/PRE/f/2013/065/b/b/pokemon_wallpaper__be_prepared__line_version_2___by_fpkayton-d5x6s3e.png')
 }
 .admin_header_div
@@ -40,10 +39,15 @@ table
 {
  	width: 80%;
     margin: 0px auto;
+    padding: 0px auto;
 }
 	tbody tr:nth-child(odd)
     {
-   background-color: silver;
+    background-color: silver;
+    }
+    tbody tr:nth-child(even)
+    {
+    background-color: white;
     }
 .dashboard_left
 {
