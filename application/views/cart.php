@@ -44,7 +44,7 @@
 			</tr>
 		</tfoot>
 	</table>
-	<a href="store">Continue Shopping</a>
+	<div class="pagination_div"><a href="store">Continue Shopping</a></div>
 
 	<form action="/submit_order" method="post" id="payment-form" class="customer_info">
 	<table>
