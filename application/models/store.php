@@ -1,7 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Store extends CI_Model {
-	
+	public function get_all_images()
+	{
+		return $this->db->query("SELECT images.location, products.id, products.name FROM images LEFT JOIN products ON images.id = products.id ORDER BY products.id;")->result_array();
+	}
+	public function get_image_by_product_id($image_id)
+	{
+		return $this->db->query("SELECT images.location, products.id, products.name FROM images LEFT JOIN products ON images.id = products.id WHERE products.id = {$image_id} ORDER BY products.id;")->result_array();
+	}
 	public function get_all_categories()
 	{
 		return $this->db->query("SELECT * FROM categories")->result_array();
