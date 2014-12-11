@@ -33,9 +33,11 @@
 			foreach($products as $product)
 			{ ?>
 				<div class="each_product" stuff="<?= $product['id']?>">
-				<img src="<?= $product['location'] ?>" alt="Poke Pics" height="150px" width="150px">
 				<h3>
-					<a class="product_name" href="/view_product/<?= $product['id'] ?>"><?= $product['name'] ?></a>
+					<a class="product_name" href="/view_product/<?= $product['id'] ?>">
+						<?= $product['name'] ?><br>
+						<img src="<?= $product['location'] ?>" alt="Poke Pics" height="150px" width="150px">
+					</a>
 				</h3>
 				<p>$<?= $product['price'] ?></p>
 				<p><?= $product['description'] ?></p>
