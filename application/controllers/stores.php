@@ -8,12 +8,29 @@ class Stores extends CI_Controller {
     	$display['cart_num'] = $this->cart->total_items();
   		$this->load->view('template/shopping_header', $display);
   	}	
-	public function index()
+	public function index($page = 0)
 	{
 		$this->load->model('Store');
 		$display['products'] = $this->Store->get_all_products();
 		$categories = $this->Store->get_all_categories();
 		$this->session->set_userdata('categories', $categories);
+		$count = $this->Store->count_products();
+		$config = array();
+		$config['base_url'] = base_url().'/store/';
+		$config['total_rows'] = $count['count(id)'];
+		$config['per_page'] = 10;
+		$config['uri_segment'] = 2;
+		$config['first_link'] = 'first';
+		$config['last_link'] = 'last';
+		$config['next_link'] = 'next';
+		$config['prev_link'] = '&lt;';
+		// $config['anchor_class'] = 'pagination_links'; --Not sure what this does
+		$this->pagination->initialize($config); 
+		$start = $this->uri->segment(2);
+		$display['links'] = $this->pagination->create_links();
+		$display['products'] = $this->Store->pagination($config["per_page"], $start);
+		$display['categories'] = $this->Store->get_all_categories();
+		$display['count'] = $this->Store->count_products();
 		$this->load->view('store', $display);
 	}
 	public function category_store($id) {
@@ -30,6 +47,8 @@ class Stores extends CI_Controller {
 	}
 	public function product_store($id) {
 		$this->load->model('Store');
+		$this->Store->get_all_in_category();
+		$display['category'] = $id;
 		$display['products'] = $this->Store->product_buy($id);
 		$this->load->view('product', $display);
 	}
@@ -39,7 +58,10 @@ class Stores extends CI_Controller {
 		$this->load->view('cart', $display);
 	}
 	public function show_cart() {
+		$data['errors'] = $this->session->flashdata('errors');
 		$data['products'] = $this->cart->contents();
+		$this->load->model('Store');
+		$data['states'] = $this->Store->get_states();
 		$this->load->view('cart', $data);
 	}
 	public function add_to_cart($id) {
@@ -97,4 +119,58 @@ class Stores extends CI_Controller {
 		$this->session->set_userdata('categories', $categories);
 		$this->load->view('store', $display);
 	}
+	public function submit_order() {
+		$post = $this->input->post();
+		
+		$this->form_validation->set_rules('first_name', 'First Name', 'required|alpha|min_length[2]');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required|alpha|min_length[2]');
+		$this->form_validation->set_rules('address', 'Address', 'required|min_length[3]');
+		$this->form_validation->set_rules('address2', 'Address 2', 'min_length[2]]');
+		$this->form_validation->set_rules('city', 'City', 'required|min_length[2]');
+		$this->form_validation->set_rules('zip_code', 'Zipcode', 'required|min_length[5]|max_length[10]');
+
+		if(empty($post['billing'])) {
+			$this->form_validation->set_rules('billing_first_name', 'Billing First Name', 'required|alpha|min_length[2]');
+			$this->form_validation->set_rules('billing_last_name', 'Billing Last Name', 'required|alpha|min_length[2]');
+			$this->form_validation->set_rules('billing_address', 'Billing Address', 'required|min_length[3]');
+			$this->form_validation->set_rules('billing_address2', 'Billing Address 2', 'min_length[2]');
+			$this->form_validation->set_rules('billing_city', 'Billing City', 'required|min_length[2]');
+			$this->form_validation->set_rules('billing_zip_code', 'Billing Zipcode', 'required|min_length[5]|max_length[10]');
+			$post['billing'] = 'different';
+		} else {
+			$post['billing_first_name'] = $post['first_name'];
+			$post['billing_last_name'] = $post['last_name'];
+			$post['billing_address'] = $post['address'];
+			$post['billing_address2'] = $post['address2'];
+			$post['billing_city'] = $post['city'];
+			$post['billing_state'] = $post['state'];
+			$post['billing_zip_code'] = $post['zip_code'];
+		}
+		if($this->form_validation->run() === FALSE) {
+			$this->session->set_flashdata('errors', validation_errors());
+			redirect('cart');
+		}
+		$data['products'] = $this->cart->contents();
+		$data['customer'] = $post;
+		// var_dump($data);
+		// die();
+		$this->load->model('Store');
+		$test = $this->Store->submit_order($data);
+		$this->cart->destroy();
+		//Need to either send a message or redirect to success page, will come back to this:
+		redirect('success');
+	}
+	public function order_success() {
+		$this->load->view('success');
+	}
+	public function pagination() {
+		$config['base_url'] = 'http://example.com/index.php/test/page/';
+		$config['total_rows'] = 200;
+		$config['per_page'] = 20; 
+
+		$this->pagination->initialize($config); 
+
+		echo $this->pagination->create_links();
+	}
+
 }//end of Controller curly

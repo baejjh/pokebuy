@@ -111,39 +111,31 @@ class Admins extends CI_Controller
 			redirect('admin');
 		}
 		//retrieve status names for dropdown menus
-		$var['statuses'] = $this->admin_info->get_all_status();
-		$var['orders'] = $this->admin_info->get_all_orders();
+		$var['statuses'] = $this->admin_info->get_all_status_types();
+		$var['orders'] = $this->admin_info->show_all_orders();
+		
 		$this->load->view('admin/orders', $var);
 	}
-		public function redirect_to_one_order($id)
-		{
-			$var['one_order'] = $this->admin_info->get_order_by_id();
-			//THIS FUNCTION NEEDS TO CALL:
-				$var['statuses'] = 
-				$var['billing'] = 
-				$var['orders_has_products'] = 
-				$var['customers'] = 
-				$var['addresses'] =
-
-			$this->load->view('admin/one_order', $var);
-		}
-		public function sort_orders_by_status($status_name)
-		{
-			$var['statuses'] = $this->admin_info->get_all_status();
-			$var['orders'] = $this->admin_info->organize_by_status($status_name);
-			$this->load->view('admin/orders', $var);
-		}
-		public function status_update($id, $status)
-		{
-		}
-
+	public function redirect_to_one_order($id)
+	{
+		$var['statuses'] = $this->admin_info->get_all_status_types();
+		$var['one_order'] = $this->admin_info->show_one_order_view($id);
+		// var_dump($var);
+		// die('hi');
+		$this->load->view('admin/one_order', $var);
+	}
+	public function sort_orders_by_status($status_name)
+	{
+		$var['statuses'] = $this->admin_info->get_all_status();
+		$var['orders'] = $this->admin_info->organize_by_status($status_name);
+		$this->load->view('admin/orders', $var);
+	}
+	public function status_update($id, $status)
+	{
+	}
 
 
 //GO BACK TO THE PRODUCTS
-	public function show_products()
-	{	
-		//left it open for pagination doodles
-	}
 	public function redirect_to_products()
 	{
 		if(empty($this->session->userdata('loggedin'))) {
@@ -152,28 +144,47 @@ class Admins extends CI_Controller
 		$this->load->library('pagination');
 //PROBLEM
 //$start_row value keeps returning boolean of false when it should be a number: $this->uri->segment(3);
-		$start_row 		= 1; //temporarily set to 1 instead of $this->uri->segment(3)
+		$start_row 		= 3; //temporarily set to 1 instead of $this->uri->segment(3)
 		$total_rows		= $this->db->count_all('products'); //both correctly outputs the data size: $this->db->get('products')->num_rows();
-		$per_page 		= 10;			
+		$per_page 		= 10;	
 
-		$config['base_url'] 	= base_url() . 'products';
+		//pagination details		
+		$config['base_url'] 	= base_url() . 'products/(:num)';
 		$config['total_rows']	= $total_rows;
+		$config['uri_segment'] 	= $start_row;
+		$config['num_links']	= 4; // how many links are shown before and after now
 		$config['per_page'] 	= $per_page; //display per page    
-		// $config['use_page_numbers'] = TRUE; //show the the actual page number rather than $this->uri->segment(*numbers)
-		
 		$this->pagination->initialize($config);
-//PROBLEM
-//no links are created! 
-		$this->view_data['pagination_links'] 	= $this->pagination->create_links();
-		$this->view_data['products'] 		 	= $this->admin_info->get_all_products_limit($start_row, $per_page);
-		$this->view_data['categories'] 			= $this->admin_info->get_all_categories();
 
-		//conditions need to be set i.e.- if modal is opened
-		// $this->view_data['categories'] 			= $this->admin_info->edit_categories_by_id($id, $new_name);
-		// $this->view_data['categories'] 			= $this->admin_info->delete_category_by_id($id);
-		// $this->view_data['categories'] 			= $this->admin_info->add_new_category($category_name);
+		$var['pagination_links']= $this->pagination->create_links();
+		$var['products'] 		= $this->admin_info->get_all_products_limit($start_row, $per_page);
 
-		$this->load->view('admin/products', $this->view_data);
+		$this->load->view('admin/products', $var);
+	} 
+	public function product_pagination($id)
+	{
+//NOTHING REALLY WORKS.........
+		if(empty($this->session->userdata('loggedin'))) {
+			redirect('admin');
+		}
+		$this->load->library('pagination');
+
+		$start_row 		= $id;
+		$total_rows		= $this->db->count_all('products');
+		$per_page 		= 10*$id;	
+
+		//pagination details		
+		$config['base_url'] 	= base_url() . 'products/(:num)';
+		$config['total_rows']	= $total_rows;
+		$config['uri_segment'] 	= $start_row;
+		$config['num_links']	= 4; // how many links are shown before and after now
+		$config['per_page'] 	= $per_page; //display per page    
+		$this->pagination->initialize($config);
+
+		$var['pagination_links']= $this->pagination->create_links();
+		$var['products'] 		= $this->admin_info->get_all_products_limit($start_row, $per_page);
+
+		$this->load->view('admin/products', $var);
 	} 
 	//As Admin, you can edit, delete, add products inside admin/products view
 		public function edit_product($id)

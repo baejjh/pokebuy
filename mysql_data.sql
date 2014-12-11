@@ -31,12 +31,12 @@ CREATE TABLE `addresses` (
   `city` varchar(45) DEFAULT NULL,
   `state_id` int(11) NOT NULL,
   `zip_code` varchar(10) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`,`state_id`),
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
   KEY `fk_addresses_states1_idx` (`state_id`),
   CONSTRAINT `fk_addresses_states1` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `addresses` (
 
 LOCK TABLES `addresses` WRITE;
 /*!40000 ALTER TABLE `addresses` DISABLE KEYS */;
-INSERT INTO `addresses` VALUES (1,'123 rainbow drive',NULL,'Oahu',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(2,'123 rainbow drive',NULL,'Honolulu',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(3,'123 rainbow drive',NULL,'Big Island',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(4,'123 rainbow drive',NULL,'Maui',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(5,'123 rainbow drive',NULL,'Kauai',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(6,'123 rainbow drive',NULL,'Molokai',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(7,'123 rainbow drive',NULL,'Niihau',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(8,'123 rainbow drive',NULL,'Lanai',11,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(9,'321 Rainy Daze Rd.',NULL,'Seattle',46,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(10,'321 Rainy Daze Rd.',NULL,'Tri-Citeis',46,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(11,'321 Rainy Daze Rd.',NULL,'Spokane',46,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(12,'321 Rainy Daze Rd.',NULL,'Olympia',46,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14'),(13,'321 Rainy Daze Rd.',NULL,'Vancouver',46,NULL,'2014-12-09 10:22:14','2014-12-09 10:22:14');
+INSERT INTO `addresses` VALUES (44,'123 Main St','','New York',31,'55555','2014-12-10 14:42:09','2014-12-10 14:42:09'),(45,'567 Street','','Los Angeles',5,'44444','2014-12-10 14:47:49','2014-12-10 14:47:49');
 /*!40000 ALTER TABLE `addresses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,6 +87,7 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
+  `active` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -99,7 +100,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Fire','2014-12-08 13:54:39','2014-12-08 13:54:39'),(2,'Water','2014-12-08 13:54:39','2014-12-08 13:54:39'),(3,'Normal','2014-12-08 13:54:39','2014-12-08 13:54:39'),(4,'Fighting','2014-12-08 13:54:39','2014-12-08 13:54:39'),(5,'Ground','2014-12-08 13:54:39','2014-12-08 13:54:39'),(6,'Bug','2014-12-08 13:54:39','2014-12-08 13:54:39'),(7,'Poison','2014-12-08 13:54:39','2014-12-08 13:54:39'),(8,'Grass','2014-12-08 13:54:39','2014-12-08 13:54:39'),(9,'Flying','2014-12-08 13:54:39','2014-12-08 13:54:39'),(10,'Fairy','2014-12-08 13:54:39','2014-12-08 13:54:39'),(11,'Electric','2014-12-08 13:54:39','2014-12-08 13:54:39');
+INSERT INTO `categories` VALUES (1,'Fire',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39'),(2,'Water',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39'),(3,'Normal',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39'),(4,'Fighting',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39'),(5,'Ground',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39'),(6,'Bug',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39'),(7,'Poison',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39'),(8,'Grass',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39'),(9,'Flying',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39'),(10,'Fairy',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39'),(11,'Electric',NULL,'2014-12-08 13:54:39','2014-12-08 13:54:39');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +118,7 @@ CREATE TABLE `customers` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +127,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (21,'Peter','Parker','2014-12-10 14:42:09','2014-12-10 14:42:09'),(22,'Tony','Strak','2014-12-10 14:47:49','2014-12-10 14:47:49');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,11 +166,12 @@ DROP TABLE IF EXISTS `images_has_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `images_has_products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`image_id`,`product_id`),
+  PRIMARY KEY (`id`),
   KEY `fk_images_has_products_products1_idx` (`product_id`),
   KEY `fk_images_has_products_images1_idx` (`image_id`),
   CONSTRAINT `fk_images_has_products_images1` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -186,32 +189,6 @@ LOCK TABLES `images_has_products` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `notes`
---
-
-DROP TABLE IF EXISTS `notes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `notes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) DEFAULT NULL,
-  `description` varchar(500) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `notes`
---
-
-LOCK TABLES `notes` WRITE;
-/*!40000 ALTER TABLE `notes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `notes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `orders`
 --
 
@@ -220,29 +197,24 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `billing_customer_id` int(11) NOT NULL,
-  `billing_address_id` int(11) NOT NULL,
-  `order_date` datetime DEFAULT NULL,
+  `shipping_customer_id` int(11) NOT NULL,
+  `shipping_address_id` int(11) NOT NULL,
+  `billing_customer_id` int(11) DEFAULT NULL,
+  `billing_address_id` int(11) DEFAULT NULL,
   `status_id` int(11) NOT NULL,
   `subtotal` decimal(10,2) DEFAULT NULL,
   `shipping_price` decimal(10,2) DEFAULT NULL,
   `total` decimal(10,2) DEFAULT NULL,
-  `shipping_customer_id` int(11) NOT NULL,
-  `shipping_address_id` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_orders_customers_idx` (`billing_customer_id`),
   KEY `fk_orders_statuses1_idx` (`status_id`),
-  KEY `fk_orders_addresses1_idx` (`billing_address_id`),
-  KEY `fk_orders_customers1_idx` (`shipping_customer_id`),
-  KEY `fk_orders_addresses2_idx` (`shipping_address_id`),
-  CONSTRAINT `fk_orders_statuses1` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_addresses1` FOREIGN KEY (`billing_address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_addresses2` FOREIGN KEY (`shipping_address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_customers` FOREIGN KEY (`billing_customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_customers1` FOREIGN KEY (`shipping_customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_orders_customers_idx` (`shipping_customer_id`),
+  KEY `fk_orders_addresses1_idx` (`shipping_address_id`),
+  CONSTRAINT `fk_orders_addresses1` FOREIGN KEY (`shipping_address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_customers` FOREIGN KEY (`shipping_customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_statuses1` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,6 +223,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,21,44,NULL,NULL,2,145.75,NULL,145.75,'2014-12-10 14:42:09','2014-12-10 14:42:09'),(2,22,45,NULL,NULL,2,1070.43,NULL,1070.43,'2014-12-10 14:47:49','2014-12-10 14:47:49');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,18 +235,19 @@ DROP TABLE IF EXISTS `orders_has_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders_has_products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   `quantity_ordered` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`order_id`,`product_id`),
+  PRIMARY KEY (`id`),
   KEY `fk_orders_has_products_products1_idx` (`product_id`),
   KEY `fk_orders_has_products_orders1_idx` (`order_id`),
-  CONSTRAINT `fk_orders_has_products_orders1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_has_products_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_orders_has_products_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_has_products_orders1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,6 +256,7 @@ CREATE TABLE `orders_has_products` (
 
 LOCK TABLES `orders_has_products` WRITE;
 /*!40000 ALTER TABLE `orders_has_products` DISABLE KEYS */;
+INSERT INTO `orders_has_products` VALUES (1,1,1,9.99,2,'2014-12-10 14:42:09','2014-12-10 14:42:09'),(2,1,5,99.99,1,'2014-12-10 14:42:09','2014-12-10 14:42:09'),(3,1,12,12.89,2,'2014-12-10 14:42:09','2014-12-10 14:42:09'),(4,2,25,12.22,3,'2014-12-10 14:47:49','2014-12-10 14:47:49'),(5,2,39,33.78,1,'2014-12-10 14:47:49','2014-12-10 14:47:49'),(6,2,41,999.99,1,'2014-12-10 14:47:49','2014-12-10 14:47:49');
 /*!40000 ALTER TABLE `orders_has_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,11 +300,12 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `description` text,
+  `description` varchar(45) DEFAULT NULL,
   `price` decimal(7,2) DEFAULT NULL,
   `inventory_count` int(11) DEFAULT NULL,
   `quantity_sold` int(11) DEFAULT NULL,
   `main_image_id` int(11) NOT NULL,
+  `active` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -344,7 +320,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Bulbasaur',NULL,9.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(2,'Ivysaur',NULL,22.67,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(3,'Venusaur',NULL,77.89,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(4,'Charmander',NULL,88.00,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(5,'Charmeleon',NULL,99.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(6,'Charizard',NULL,123.23,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(7,'Squirtle',NULL,987.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(8,'Wartortle',NULL,234.45,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(9,'Blastoise',NULL,678.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(10,'Caterpie',NULL,0.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(11,'Metapod',NULL,11.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(12,'Butterfree',NULL,12.89,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(13,'Weedle',NULL,0.98,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(14,'Kakuna',NULL,9.90,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(15,'Beedrill',NULL,12.90,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(16,'Pidgey',NULL,23.23,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(17,'Pidgeotto',NULL,34.09,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(18,'Pidgeot',NULL,45.56,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(19,'Rattata',NULL,23.09,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(20,'Raticate',NULL,34.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(21,'Spearow',NULL,56.56,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(22,'Fearow',NULL,0.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(23,'Ekans',NULL,34.44,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(24,'Arbok',NULL,67.77,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(25,'Pikachu',NULL,12.22,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(26,'Raichu',NULL,23.33,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(27,'Sandshrew',NULL,33.44,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(28,'Sandslash',NULL,44.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(29,'Nidoran',NULL,22.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(30,'Nidorina',NULL,99.00,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(31,'Nidoqueen',NULL,1.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(32,'Nidoran',NULL,88.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(33,'Nidorino',NULL,33.56,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(34,'Nidoking',NULL,56.90,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(35,'Clefairy',NULL,123.23,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(36,'Clefable',NULL,234.34,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(37,'Vulpix',NULL,45.55,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(38,'Ninetales',NULL,66.90,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(39,'Jigglypuff',NULL,33.78,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(40,'Wigglypuff',NULL,44.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(41,'Zubat',NULL,999.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(42,'Golbat',NULL,22.22,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(43,'Oddish',NULL,77.88,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(44,'Gloom',NULL,99.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(45,'Vileplume',NULL,14.45,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(46,'Paras',NULL,556.65,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(47,'Parasect',NULL,89.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(48,'Venonat',NULL,34.34,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(49,'Venomoth',NULL,54.45,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(50,'Diglett',NULL,76.89,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(51,'Dugtrio',NULL,65.65,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(52,'Meowth',NULL,54.54,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(53,'Persian',NULL,999.99,10,0,0,'2014-12-08 14:06:52','2014-12-08 14:06:52');
+INSERT INTO `products` VALUES (1,'Bulbasaur',NULL,9.99,8,2,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(2,'Ivysaur',NULL,22.67,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(3,'Venusaur',NULL,77.89,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(4,'Charmander',NULL,88.00,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(5,'Charmeleon',NULL,99.99,9,1,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(6,'Charizard',NULL,123.23,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(7,'Squirtle',NULL,987.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(8,'Wartortle',NULL,234.45,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(9,'Blastoise',NULL,678.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(10,'Caterpie',NULL,0.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(11,'Metapod',NULL,11.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(12,'Butterfree',NULL,12.89,8,2,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(13,'Weedle',NULL,0.98,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(14,'Kakuna',NULL,9.90,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(15,'Beedrill',NULL,12.90,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(16,'Pidgey',NULL,23.23,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(17,'Pidgeotto',NULL,34.09,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(18,'Pidgeot',NULL,45.56,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(19,'Rattata',NULL,23.09,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(20,'Raticate',NULL,34.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(21,'Spearow',NULL,56.56,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(22,'Fearow',NULL,0.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(23,'Ekans',NULL,34.44,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(24,'Arbok',NULL,67.77,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(25,'Pikachu',NULL,12.22,7,3,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(26,'Raichu',NULL,23.33,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(27,'Sandshrew',NULL,33.44,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(28,'Sandslash',NULL,44.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(29,'Nidoran',NULL,22.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(30,'Nidorina',NULL,99.00,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(31,'Nidoqueen',NULL,1.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(32,'Nidoran',NULL,88.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(33,'Nidorino',NULL,33.56,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(34,'Nidoking',NULL,56.90,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(35,'Clefairy',NULL,123.23,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(36,'Clefable',NULL,234.34,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(37,'Vulpix',NULL,45.55,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(38,'Ninetales',NULL,66.90,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(39,'Jigglypuff',NULL,33.78,9,1,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(40,'Wigglypuff',NULL,44.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(41,'Zubat',NULL,999.99,9,1,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(42,'Golbat',NULL,22.22,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(43,'Oddish',NULL,77.88,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(44,'Gloom',NULL,99.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(45,'Vileplume',NULL,14.45,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(46,'Paras',NULL,556.65,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(47,'Parasect',NULL,89.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(48,'Venonat',NULL,34.34,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(49,'Venomoth',NULL,54.45,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(50,'Diglett',NULL,76.89,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(51,'Dugtrio',NULL,65.65,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(52,'Meowth',NULL,54.54,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52'),(53,'Persian',NULL,999.99,10,0,0,NULL,'2014-12-08 14:06:52','2014-12-08 14:06:52');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,4 +390,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-09 10:29:47
+-- Dump completed on 2014-12-10 14:49:10

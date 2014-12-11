@@ -1,9 +1,4 @@
-<!-- Not sure where to place this, does it go in the header? - KS -->
-<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-</script>
-<script type="text/javascript">
-</script> -->
-<!-- End of code in that statement -->
+
 		<?php if(!isset($name)){ $name = ''; } ?>
 <div class="side_bar">
 	<form action="/order_by" method="post">
@@ -22,8 +17,6 @@
 		    <option value="high_price">Highest Price</option>
 		    <option value="most_popular">Most Popular</option>
 		</select>
-		<!-- <input type="hidden" name="current_category" value="<?=$products['category']?>">
-		<input type="hidden" name="current_search" value="<?=$products['category']?>"> -->
 		<input type="submit">
 	</form>
 	<a href="/default_controller">I want ALL the POKéMON! Go Back!</a>

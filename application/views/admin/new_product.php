@@ -19,7 +19,6 @@
 				<td><label for="inventory_count">Inventory Count:</label></td>
 				<td><input type="text" name="inventory_count"></td>
 			</tr>
-			<?php } ?>
 			<tr>
 				<td></td>
 				<td><input type="submit" value="Add New Product"></td>

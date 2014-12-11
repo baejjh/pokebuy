@@ -58,10 +58,11 @@ $route['logoff'] 				= "admins/admin_logoff";
 
 //orders view
 $route['sort_orders'] 			= "admins/sort_orders_by_status";
-$route['order_id/(:num)'] 		= "admins/redirect_to_one_order/$1";
+$route['submitted_order/(:num)']= "admins/redirect_to_one_order/$1";
 
 //products view
 $route['add_product'] 			= "admins/redirect_to_new_product";
+$route['products/(:num)']		= "admins/product_pagination/$1";
 
 //new_products view
 $route['new_product'] 			= "admins/add_new_product";
@@ -81,6 +82,8 @@ $route['cart']					= "stores/show_cart";
 $route['add_cart/(:num)'] 		= "stores/add_to_cart/$1";
 $route['delete']				= "stores/delete_from_cart";
 $route['update_quantity']		= "stores/update_cart_quantity";
+$route['submit_order']			= "stores/submit_order";
+$route['success']				= "stores/order_success";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
