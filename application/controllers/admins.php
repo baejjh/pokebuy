@@ -110,10 +110,21 @@ class Admins extends CI_Controller
 		if(empty($this->session->userdata('loggedin'))) {
 			redirect('admin');
 		}
-		//retrieve status names for dropdown menus
+		$config = array();
+		$config['base_url'] = base_url().'/orders/';
+		$config['total_rows'] = $this->db->count_all('orders');;
+		$config['per_page'] = 10;
+		$config['uri_segment'] = 2;
+		$config['first_link'] = 'first';
+		$config['last_link'] = 'last';
+		$config['next_link'] = 'next';
+		$config['prev_link'] = '&lt;';
+		$this->pagination->initialize($config); 
+		$start = $this->uri->segment(2);
+		$var['links'] = $this->pagination->create_links();
+		$var['orders'] = $this->admin_info->show_all_orders($config["per_page"], $start);
 		$var['statuses'] = $this->admin_info->get_all_status_types();
-		$var['orders'] = $this->admin_info->show_all_orders();
-		
+		$var['count'] = $config['total_rows'];
 		$this->load->view('admin/orders', $var);
 	}
 	public function redirect_to_one_order($id)
