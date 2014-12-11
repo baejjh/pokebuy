@@ -13,7 +13,6 @@ class Stores extends CI_Controller {
 		$this->load->model('Store');
 		$display['products'] = $this->Store->get_all_products();
 		$categories = $this->Store->get_all_categories();
-		$this->session->set_userdata('categories', $categories);
 		$count = $this->Store->count_products();
 		$config = array();
 		$config['base_url'] = base_url().'/store/';
@@ -47,10 +46,17 @@ class Stores extends CI_Controller {
 	}
 	public function view_product($id) {
 		$this->load->model('Store');
-		$display['category'] =$this->Store->get_all_in_category($id);
+		$display['category'] = $this->Store->get_all_in_category($id);
 		$display['products'] = $this->Store->product_buy($id);
+		$display['products']['images'] = $this->Store->get_all_images();
+		$image_id = $display['products']['images'][$id]['id'];
+		$display['products']['image'] = $this->Store->get_image_by_product_id($image_id);
 		$this->load->view('product', $display);
 	}
+	// public function get_image(){
+	// 	$this->load->model('Store');
+	// 	$display
+	// }
 	public function product_buy($id) {
 		$this->load->model('Store');
 		$display['id'] = $this->Store->product_buy($id);

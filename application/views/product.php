@@ -3,13 +3,14 @@
 				<?=$products['name'];?>
 			</h1>
 	<div class="left_div">
-		<!-- <img src="#" alt="main_photo">
+		<?php var_dump($display)?>
+		<?= $display['products']['image'] ?>
 
 		<img src="#" alt="side_photo">
 		<img src="#" alt="side_photo">
 		<img src="#" alt="side_photo">
 		<img src="#" alt="side_photo">
-		<img src="#" alt="side_photo"> -->
+		<img src="#" alt="side_photo">
 	</div>
 	<div class="right_div">
 			$<?=$products['price'];?><br>
