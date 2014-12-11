@@ -149,7 +149,32 @@ class Admins extends CI_Controller
 		$per_page 		= 10;	
 
 		//pagination details		
-		$config['base_url'] 	= base_url() . 'products';
+		$config['base_url'] 	= base_url() . 'products/(:num)';
+		$config['total_rows']	= $total_rows;
+		$config['uri_segment'] 	= $start_row;
+		$config['num_links']	= 4; // how many links are shown before and after now
+		$config['per_page'] 	= $per_page; //display per page    
+		$this->pagination->initialize($config);
+
+		$var['pagination_links']= $this->pagination->create_links();
+		$var['products'] 		= $this->admin_info->get_all_products_limit($start_row, $per_page);
+
+		$this->load->view('admin/products', $var);
+	} 
+	public function product_pagination($id)
+	{
+//NOTHING REALLY WORKS.........
+		if(empty($this->session->userdata('loggedin'))) {
+			redirect('admin');
+		}
+		$this->load->library('pagination');
+
+		$start_row 		= $id;
+		$total_rows		= $this->db->count_all('products');
+		$per_page 		= 10*$id;	
+
+		//pagination details		
+		$config['base_url'] 	= base_url() . 'products/(:num)';
 		$config['total_rows']	= $total_rows;
 		$config['uri_segment'] 	= $start_row;
 		$config['num_links']	= 4; // how many links are shown before and after now
