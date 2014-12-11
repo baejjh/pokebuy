@@ -144,19 +144,20 @@ class Admins extends CI_Controller
 		$this->load->library('pagination');
 //PROBLEM
 //$start_row value keeps returning boolean of false when it should be a number: $this->uri->segment(3);
-		$start_row 		= 1; //temporarily set to 1 instead of $this->uri->segment(3)
+		$start_row 		= 3; //temporarily set to 1 instead of $this->uri->segment(3)
 		$total_rows		= $this->db->count_all('products'); //both correctly outputs the data size: $this->db->get('products')->num_rows();
 		$per_page 		= 10;	
 
 		//pagination details		
 		$config['base_url'] 	= base_url() . 'products';
 		$config['total_rows']	= $total_rows;
+		$config['uri_segment'] 	= $start_row;
+		$config['num_links']	= 4; // how many links are shown before and after now
 		$config['per_page'] 	= $per_page; //display per page    
-		$config['use_page_numbers'] = TRUE; //show the the actual page number rather than $this->uri->segment(*numbers)
 		$this->pagination->initialize($config);
 
 		$var['pagination_links']= $this->pagination->create_links();
-		$var['products'] 		 	= $this->admin_info->get_all_products_limit($start_row, $per_page);
+		$var['products'] 		= $this->admin_info->get_all_products_limit($start_row, $per_page);
 
 		$this->load->view('admin/products', $var);
 	} 
