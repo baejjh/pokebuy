@@ -46,116 +46,129 @@
 	</table>
 	<a href="store">Continue Shopping</a>
 
-	<form action="/submit_order" method="post" id="payment-form">
+	<form action="/submit_order" method="post" id="payment-form" class="customer_info">
+	<table>
 		<h1>Shipping Information</h1>
 <?php 	if(!empty($errors)) {
 		echo $errors;
 } ?>
-		<table>
-			<tr>
-				<td>First Name</td>
-				<td><input type="text" name="first_name"></td>
-			</tr>
-			<tr>
-				<td>Last Name</td>
-				<td><input type="text" name="last_name"></td>
-			</tr>
-			<tr>
-				<td>Address</td>
-				<td><input type="text" name="address"></td>
-			</tr>
-			<tr>
-				<td>Address 2</td>
-				<td><input type="text" name="address2"></td>
-			</tr>
-			<tr>
-				<td>City</td>
-				<td><input type="text" name="city"></td>
-			</tr>
-			<tr>
-				<td>State</td>
-				<td>
-					<select name="state">
+		<tr>
+			<td>First Name</td>
+			<td><input type="text" name="first_name"></td>
+		</tr>
+		<tr>
+			<td>Last Name</td>
+			<td><input type="text" name="last_name"></td>
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td><input type="text" name="address"></td>
+		</tr>
+		<tr>
+			<td>Address 2</td>
+			<td><input type="text" name="address2"></td>
+		</tr>
+		<tr>
+			<td>City</td>
+			<td><input type="text" name="city"></td>
+		</tr>
+		<tr>
+			<td>State</td>
+			<td>
+				<select name="state">
 <?php 				foreach($states as $state) { ?>
-						<option value="<?php echo $state['id'] ?>"><?php echo $state['abbreviation'] ?></option>
+					<option value="<?php echo $state['id'] ?>"><?php echo $state['abbreviation'] ?></option>
 <?php 				} ?>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Zipcode</td>
-				<td><input type="text" name="zip_code"></td>
-			</tr>
-		</table>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Zipcode</td>
+			<td><input type="text" name="zip_code"></td>
+		</tr>
+	</table>
 
-		<p>Billing address is the same as shipping: <input type="checkbox" name="billing" value="same"></p>
+	<p>Billing address is the same as shipping:
+	<input type="checkbox" name="same_ship_bill_address" id="same_ship_bill_address"></p>
 
-		<h1>Billing Information</h1>
-		<table>
-			<tr>
-				<td>First Name</td>
-				<td><input type="text" name="billing_first_name"></td>
-			</tr>
-			<tr>
-				<td>Last Name</td>
-				<td><input type="text" name="billing_last_name"></td>
-			</tr>
-			<tr>
-				<td>Address</td>
-				<td><input type="text" name="billing_address"></td>
-			</tr>
-			<tr>
-				<td>Address 2</td>
-				<td><input type="text" name="billing_address2"></td>
-			</tr>
-			<tr>
-				<td>City</td>
-				<td><input type="text" name="billing_city"></td>
-			</tr>
-			<tr>
-				<td>State</td>
-				<td>
-					<select name="billing_state">
+	<h1>Billing Information</h1>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			//if button clicked
+			$('#same_ship_bill_address').is(":checked", function() {
+				console.log('check');
+			    html('<table class="customer_info_hidden">');
+			//if button not clicked    
+				else html('<table class="customer_info"');
+			});
+		});
+	</script>
+		<tr>
+			<td>First Name</td>
+			<td><input type="text" name="billing_first_name"></td>
+		</tr>
+		<tr>
+			<td>Last Name</td>
+			<td><input type="text" name="billing_last_name"></td>
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td><input type="text" name="billing_address"></td>
+		</tr>
+		<tr>
+			<td>Address 2</td>
+			<td><input type="text" name="billing_address2"></td>
+		</tr>
+		<tr>
+			<td>City</td>
+			<td><input type="text" name="billing_city"></td>
+		</tr>
+		<tr>
+			<td>State</td>
+			<td>
+				<select name="billing_state">
 <?php 	foreach($states as $state) { ?>
-						<option value="<?php echo $state['id'] ?>"><?php echo $state['abbreviation'] ?></option>
+					<option value="<?php echo $state['id'] ?>"><?php echo $state['abbreviation'] ?></option>
 <?php 	} ?>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Zipcode</td>
-				<td><input type="text" name="billing_zip_code"></td>
-			</tr>
-		</table>
-		<!-- Stripe form -->
-		<span class="payment-errors"></span>
-	  	<div class="form-row">
-	    	<label>
-	      		<span>Card Number</span>
-	      		<input type="text" size="20" data-stripe="number"/>
-	    	</label>
-	  	</div>
-	  	<div class="form-row">
-	    	<label>
-	      		<span>CVC</span>
-	     		<input type="text" size="4" data-stripe="cvc"/>
-	    	</label>
-	  	</div>
-	  	<div class="form-row">
-	    	<label>
-	      		<span>Expiration (MM/YYYY)</span>
-	      		<input type="text" size="2" data-stripe="exp-month"/>
-	    	</label>
-	    	<span> / </span>
-	   		<input type="text" size="4" data-stripe="exp-year"/>
-	  	</div>
-	  	<!-- End of stripe form -->
-  		<button type="submit">Submit Payment</button>
-		<input type = "hidden" name="total" value="<?php echo $sum ?>">
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Zipcode</td>
+			<td><input type="text" name="billing_zip_code"></td>
+		</tr>
+	</table>
+
+	<!-- Stripe form -->
+	<span class="payment-errors"></span>
+  	<div class="form-row">
+    	<label>
+      		<span>Card Number</span>
+      		<input type="text" size="20" data-stripe="number"/>
+    	</label>
+  	</div>
+  	<div class="form-row">
+    	<label>
+      		<span>CVC</span>
+     		<input type="text" size="4" data-stripe="cvc"/>
+    	</label>
+  	</div>
+  	<div class="form-row">
+    	<label>
+      		<span>Expiration (MM/YYYY)</span>
+      		<input type="text" size="2" data-stripe="exp-month"/>
+    	</label>
+    	<span> / </span>
+   		<input type="text" size="4" data-stripe="exp-year"/>
+  	</div>
+  	<!-- End of stripe form -->
+		<button type="submit">Submit Payment</button>
+	<input type = "hidden" name="total" value="<?php echo $sum ?>">
 	</form>
 </div><!-- close content div -->
 </body>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 <script type="text/javascript">
 	Stripe.setPublishableKey('pk_test_pBcVNYkh8vhIxl0iLGTGl63k');
 

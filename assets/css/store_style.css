@@ -2,11 +2,6 @@
 	margin: 0px auto;
 	font-family: arial;
 }
-.content
-{
-    padding-top: 66px; /* ..shopping_header_div's height + padding-top*/
-    width:100%;
-}
 body
 {
 	background: url('http://2.bp.blogspot.com/-osUTAZAKDUQ/UEF5_29R3tI/AAAAAAAAFh4/4i0AuXUDF7U/s1600/Pokemon+wallpaper+hd.png');
@@ -32,10 +27,10 @@ a{
 .shopping_header_div
 {
     color: white;
-   /* background:red; *//*need to echo different colors depending on admin vs. user*/
+    background:black; *//*need to echo different colors depending on admin vs. user
     height: 66px; /*should change .content margin-top to this value + padding-top*/
     position:fixed;
-    top: 0px;
+    vertical-align: top;
     display: block;
 }
 .shopping_header_div li
@@ -48,14 +43,13 @@ a{
 	{
 		padding-left:450px;
 	}
-
 .shopping_header_div a:link, .shopping_header_div a:visited
 {
     color:white;
 }
 .shopping_header_div a:hover, .shopping_header_div a:active
 {
-    color:lime;
+    color:grey;
 }
 .each_product
 {
@@ -93,6 +87,16 @@ a{
 	vertical-align: top;
 	background: silver;
 }
+.customer_info
+{
+	background:whitesmoke;
+	width: 40%;
+	text-align: center;
+}
+.customer_info_hidden
+{
+	display: none;
+}
 .pagination_div
 {
 	width: 100%;	
@@ -100,25 +104,36 @@ a{
 	vertical-align: top;
 	text-align: center;
 }
-.products_div
+.products_div /*main store*/
 {
-	margin: 20px 0px 100px -5px;
+	margin-top:20px;
 	width: 80%;
+	outline: 1px solid black;
+	background: whitesmoke;
 	display: inline-block;
 	vertical-align: top;
 	text-align: center;
 }
-.product_name{
+#product_div /*one product display */
+{
+	width: 85%;
+	outline: 1px solid black;
+	background: whitesmoke;
+	display: block;
+	vertical-align: top;
+	text-align: center;
+}
+/*#product_name_div{*/
 /* Set a counter named cnt to 0 */
-	counter-reset: cnt;
+	/*counter-reset: cnt;
 	position:relative;
 	text-align:center;
 	padding:20px 0;
-	width:420px;
-	height: 160px;
+	width:40%;
 	margin: 0 auto;
-}
-.product_name span{
+	display: inline-block;*/
+/*}*/
+/*#product_name span{
 	display:inline-block;
 	padding:2px 6px;
 	background-color:#78CCD2;
@@ -126,30 +141,66 @@ a{
 	border-radius:4px;
 	margin:3px;
 	cursor:default;
-}
-.product_name span::after{
-	/* Every time this rule is executed, the counter value is increased by 1 */
-	counter-increment: cnt;
-	/* Add the counter value as part of the content */
-	content:" #" counter(cnt);
-	display:inline-block;
-	padding:4px;
-}
-.product_name span::before{
-	position:absolute;
-	bottom:0;
-	left:0;
-	width:100%;
-	content:attr(data-title);
-	color:#666;
-	opacity:0;
-	/* Animate the transitions */
-	-webkit-transition:opacity 0.4s;
-	transition:opacity 0.4s;
-}
-.product_name span:hover::before{
-	opacity:1;
-}
-.bottom_div{
+	}
+	#product_name span::after{
+		/* Every time this rule is executed, the counter value is increased by 1 */
+		/*counter-increment: cnt;*/
+		/* Add the counter value as part of the content */
+		/*content:" #" counter(cnt);*/
+		/*display:inline-block;
+		padding:4px;*/
+	/*}*/
+	/*#product_name span::before{
+		position:absolute;
+		bottom:0;
+		left:0;
+		width:100%;
+		content:attr(data-title);
+		color:#666;
+		opacity:0;
+		/* Animate the transitions */
+		/*-webkit-transition:opacity 0.4s;
+		transition:opacity 0.4s;*/
+	/*}*/
+	/*#product_name span:hover::before{
+		opacity:1;
+	}*/
+	#main_img
+	{
+		display: inline-block;
+		vertical-align: top;
+		width: 400px;
+		height:400px;
+	}
+.product_description_div
+{
+	margin-top: 20px;
+	outline: 1px solid;
+	width: 40%;
+	height:200px;
+	border-radius: 10px;
+	background: black;
+	color:white;
 	display: inline-block;
+	vertical-align: top;
+}
+.similar_items_div
+{
+	width: 85%;
+	outline: 1px solid black;
+	background: whitesmoke;
+	display: block;
+	vertical-align: top;
+	text-align: center;
+}
+.similar_item_single_div
+{
+	width: 18%;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+}
+#similar_img
+{
+	width: 100%;
 }

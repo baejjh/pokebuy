@@ -66,6 +66,13 @@ class Stores extends CI_Controller {
 		// var_dump($display);
 		// die('here');
 	}
+	public function to_product($new_id){
+		$this->load->model('Store');
+		$display['similar_products'] = $this->Store->get_all_in_category($new_id);
+		$display['displayed_product'] = $this->Store->product_buy($new_id);
+		$display['displayed_product']['image'] = $this->Store->get_image_by_product_id($new_id);
+		$this->load->view('product', $display);
+	}
 	public function product_buy($id) {
 		$this->load->model('Store');
 		$display['id'] = $this->Store->product_buy($id);

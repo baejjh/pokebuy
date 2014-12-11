@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="/assets/css/store_style.css">
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 </head>
 <html>
 <body>
