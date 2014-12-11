@@ -52,15 +52,19 @@
 			<td><?= "$ " . $one_order['order_total']; ?></td>		
 		<!-- Status -->
 			<td>
-				<select>
-					<option><?= $one_order['order_status']; ?></option>
-				<?php foreach($statuses as $status_type) {?>
-					<option
-						<?php if ($one_order['order_status'] === $status_type['status']) { echo "style = 'display:none'"; }?>>
-							<?= $status_type['status']; ?>
-					</option>
-				<?php } //endforeach ?>
-				</select>
+				<form action="/update_status" method="post">
+					<select name="status_id">
+						<?php foreach($statuses as $status_type) { ?>
+							<option value="<?= $status_type['id'] ?>"
+								<?php if($status_type['id'] == $one_order['order_status_id']) { 
+									echo "selected"; } ?>>
+								<?= $status_type['status'] ?>
+							</option>
+					<?php } //endforeach ?>
+					</select>
+					<input type="hidden" name="order_id" value="<?= $one_order['order_id'] ?>">
+					<input type="submit" value="Update">
+				</form>
 			</td>
 		</tr>
 		<?php } //end the foreach loop of orders ?>

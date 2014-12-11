@@ -214,7 +214,7 @@ class Admin_info extends CI_Model {
 			        CONCAT_WS(', ',addresses.city,states.abbreviation) AS 'billing_address_city_state',
 			        addresses.zip_code AS 'billing_address_zip',
 			        orders.total AS 'order_total',
-			        statuses.status AS 'order_status'
+			        statuses.id AS 'order_status_id'
 				FROM orders
 				LEFT JOIN customers ON orders.billing_customer_id = customers.id
 				LEFT JOIN addresses ON orders.billing_address_id = addresses.id
@@ -361,6 +361,12 @@ class Admin_info extends CI_Model {
 				LEFT JOIN statuses ON orders.status_id = statuses.id
 				{$where} ";
 		return $this->db->query($query)->result_array();
+	}
+
+	public function update_order_status($data) {
+		$query = "UPDATE orders SET status_id=?, updated_at=NOW() WHERE id=?";
+		$values = array($data['status_id'], $data['order_id']);
+		return $this->db->query($query, $values);
 	}
 }
 ?>
