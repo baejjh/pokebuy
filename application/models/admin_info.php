@@ -202,10 +202,12 @@ class Admin_info extends CI_Model {
 	{
 		return $this->db->query("SELECT * FROM statuses")->result_array();
 	}
-	function show_all_orders()
+	function show_all_orders($limit, $start)
 	{
-		return $this->db
-		->query("SELECT orders.id AS 'order_id',
+		// var_dump($start);
+		// var_dump($limit);
+		// die();
+		$query = "SELECT orders.id AS 'order_id',
 				    CONCAT_WS(' ',customers.first_name,customers.last_name) AS 'biller_full_name',
 			        orders.created_at AS 'order_submitted',
 			        CONCAT_WS(' ',addresses.address,addresses.address2) AS 'billing_address_street',
@@ -218,8 +220,10 @@ class Admin_info extends CI_Model {
 				LEFT JOIN addresses ON orders.billing_address_id = addresses.id
 				LEFT JOIN states ON states.id = addresses.state_id
 				LEFT JOIN statuses ON orders.status_id = statuses.id
-				GROUP BY orders.id")
-		->result_array();
+				GROUP BY orders.id
+				LIMIT ?,?";
+		$values = array((int)$start, $limit);
+		return $this->db->query($query, $values)->result_array();
 	}
 	public function show_one_order_view($id)
 	{
