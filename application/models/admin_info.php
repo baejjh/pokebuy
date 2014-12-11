@@ -194,24 +194,26 @@ class Admin_info extends CI_Model {
 		return $this->db
 		->query("SELECT orders.id AS 'order_id',
 					orders.created_at AS 'order_submitted',
-				    orders.updated_at AS 'changes_submitted',
+					orders.updated_at AS 'changes_submitted',
 					CONCAT_WS(' ',billing_customers.first_name, billing_customers.last_name) AS 'biller_full_name',
 					CONCAT_WS(' ',billing_addresses.address, billing_addresses.address2) AS 'billing_address_street',
 					CONCAT_WS(', ',billing_addresses.city, billing_states.abbreviation) AS 'billing_address_city_state',
-				    billing_addresses.zip_code AS 'billing_address_zip',
-				    CONCAT_WS(' ',shipping_customers.first_name, shipping_customers.last_name) AS 'shipper_full_name',
-				    CONCAT_WS(' ',shipping_addresses.address, shipping_addresses.address2) AS 'shipping_address_street',
+					billing_addresses.zip_code AS 'billing_address_zip',
+					CONCAT_WS(' ',shipping_customers.first_name, shipping_customers.last_name) AS 'shipper_full_name',
+					CONCAT_WS(' ',shipping_addresses.address, shipping_addresses.address2) AS 'shipping_address_street',
 					CONCAT_WS(', ',shipping_addresses.city, shipping_states.abbreviation) AS 'shipping_address_city_state',
 					shipping_addresses.zip_code AS 'shipping_address_zip',
 					orders.subtotal AS 'order_subtotal',
-				    orders.shipping_price AS 'order_shipping_cost',
-				    orders.total AS 'order_total',
+					orders.shipping_price AS 'order_shipping_cost',
+					orders.total AS 'order_total',
 					statuses.status AS 'order_status',
 					products.id AS 'item_id',
-				    products.name AS 'item_name',
-				    orders_has_products.quantity_ordered AS 'item_quantity',
-				    orders_has_products.price AS 'item_single_price',
-				    orders_has_products.price * orders_has_products.quantity_ordered AS 'item_total_price'
+					products.name AS 'item_name',
+					orders_has_products.quantity_ordered AS 'item_quantity',
+					orders_has_products.price AS 'item_single_price',
+					orders_has_products.price * orders_has_products.quantity_ordered AS 'item_total_price',
+				    images.location AS 'item_main_img_url',
+					images.name AS 'item_img_description'
 				FROM orders
 				LEFT JOIN customers AS billing_customers ON orders.billing_customer_id = billing_customers.id
 				LEFT JOIN addresses AS billing_addresses ON orders.billing_address_id = billing_addresses.id
@@ -224,6 +226,8 @@ class Admin_info extends CI_Model {
 				LEFT JOIN statuses ON orders.status_id = statuses.id
 				LEFT JOIN orders_has_products ON orders.id = orders_has_products.id
 				LEFT JOIN products ON orders_has_products.product_id = products.id
+				LEFT JOIN images_has_products ON products.id = images_has_products.product_id
+				LEFT JOIN images ON images.id = images_has_products.image_id
 				WHERE orders.id = ?", $id)
 		->result_array();
 		//need to retrieve images too
