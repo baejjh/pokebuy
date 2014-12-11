@@ -41,42 +41,13 @@
 				<p>$<?= $product['price'] ?></p>
 	 			<!-- <p> $product['main_image_id'] </p>    <-*image?*    -->
 				<p><?= $product['description'] ?></p>
-				<form action="/add_cart/<?= $product['id']?>" method="post">
-					<input type="submit" value="Buy" class="submit">
-				</form>
-			</div>
-			<? } ?>
-		<? } ?>
-	<div class="pagination_div"><?php echo $links ?></div>
-<<<<<<< HEAD
-		</form>
-
-	<?php 	if(!empty($products))
-			{ 
-				foreach($products as $product)
-				{ ?>
-	  				<div class="each_product" stuff="<?= $product['id']?>">
-						<p>	
-							<a href="/view_product/<?= $product['id'] ?>">
-								<?= $product['name'] ?>
-							</a>
-						</p>
-						<p>
-							$<?= $product['price'] ?>
-						</p>
-			 <!-- <p> $product['main_image_id'] </p>    <-*image?*    -->
-			 <p>
-			 	<?= $product['description'] ?>
-			 </p>
 			 <form action="/add_cart/<?= $product['id']?>" method="post">
-				<input type="submit" value="Buy">
+				<input type="submit" value="Buy" class="submit">
 			 </form>
 		</div>
 	<?php		}
 			} ?>
-			<?php }}?>
-=======
->>>>>>> 78455e6db09656fca81343c43384eeef4ab0925a
+	<div class="pagination_div"><?php echo $links ?></div>
 	</div>
 </div> <!-- div for container -->
 </body>
