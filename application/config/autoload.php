@@ -54,7 +54,7 @@ $autoload['packages'] = array();
 
 $autoload['libraries'] = array('upload', 'database',
 							   'cart', 'form_validation',
-							   'pagination');
+								'pagination', 'session');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Helper Files
